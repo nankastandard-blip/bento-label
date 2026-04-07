@@ -249,7 +249,10 @@ document.addEventListener('DOMContentLoaded', () => {
             phone2: document.getElementById('phone2'),
             usePlaMark: document.getElementById('use-pla-mark'),
             useJancode: document.getElementById('use-jancode'),
-            jancodeValue: document.getElementById('jancode-value')
+            jancodeValue: document.getElementById('jancode-value'),
+            // かんたん印刷用
+            quickPreset: document.getElementById('quick-preset-select'),
+            quickStoreName: document.getElementById('quick-store-name')
         },
         preview: {
             name: document.getElementById('preview-name'),
@@ -290,11 +293,15 @@ document.addEventListener('DOMContentLoaded', () => {
             deletePreset: document.getElementById('delete-preset-btn'),
             autoFill: document.getElementById('auto-fill-btn'),
             copyStoreProfile: document.getElementById('copy-store-profile-btn'),
-            deleteStoreProfile: document.getElementById('delete-store-profile-btn')
+            deleteStoreProfile: document.getElementById('delete-store-profile-btn'),
+            // かんたん印刷用
+            quickPrintBtn: document.getElementById('quick-print-btn'),
+            quickPrintCount: document.getElementById('quick-print-count'),
+            quickCountMinus: document.getElementById('quick-count-minus'),
+            quickCountPlus: document.getElementById('quick-count-plus')
         }
     };
-
-    // ==== テンプレート（プリセット）管理 ====
+    // ==== タブ切り替え処理は setupEventListeners で行います ====
     const defaultTemplates = {
         't200_1': { name: '豚汁', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '味噌、豚肉、大根、人参、ごぼう、こんにゃく、ねぎ／調味料（アミノ酸等）、（一部に大豆・豚肉を含む）', price: '200', calories: '150', protein: '8.5', fat: '9.2', carb: '7.8', salt: '1.8', useJancode: false, jancodeValue: '', usePlaMark: true },
         't200_2': { name: 'おにぎり（鮭）', category: 'おにぎり', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '塩飯（米（国産）、塩）、鮭フレーク、海苔（国産）／調味料（アミノ酸等）、着色料（紅麹）、（一部にさけ・大豆を含む）', price: '200', calories: '180', protein: '4.2', fat: '1.1', carb: '38.5', salt: '1.2', useJancode: false, jancodeValue: '', usePlaMark: true },
@@ -431,9 +438,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const priceStr = data.price ? `[¥${data.price}] ` : '';
             option.textContent = `${priceStr}${data.name || '(無名)'}`;
             select.appendChild(option);
+            
+            // かんたん印刷用セレクトにも追加
+            if (elements.inputs.quickPreset) {
+                const quickOption = option.cloneNode(true);
+                elements.inputs.quickPreset.appendChild(quickOption);
+            }
         });
         
         select.value = userTemplates[currentVal] ? currentVal : '';
+        if (elements.inputs.quickPreset) {
+            elements.inputs.quickPreset.value = select.value;
+        }
         
         const isDefault = select.value === '';
         if(elements.buttons.deletePreset) {
@@ -490,6 +506,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const isOnlyOne = Object.keys(names).length <= 1;
             elements.buttons.deleteStoreProfile.style.opacity = isOnlyOne ? '0.5' : '1';
             elements.buttons.deleteStoreProfile.style.pointerEvents = isOnlyOne ? 'none' : 'auto';
+        }
+        
+        if (elements.inputs.quickStoreName) {
+            elements.inputs.quickStoreName.textContent = names[currentVal] || '';
         }
     };
 
@@ -590,6 +610,69 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const setupEventListeners = () => {
+        // ==== タブ切り替え処理 ====
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // タブボタンのActive切り替え
+                tabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // コンテンツのActive切り替え
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === btn.dataset.target) {
+                        content.classList.add('active');
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // 印刷ボタンリストに かんたん印刷ボタン を追加
+        if (elements.buttons.quickPrintBtn && !elements.buttons.printBtns.includes(elements.buttons.quickPrintBtn)) {
+            elements.buttons.printBtns.push(elements.buttons.quickPrintBtn);
+        }
+        
+        // かんたん印刷側のイベントリスナー
+        if (elements.inputs.quickPreset) {
+            elements.inputs.quickPreset.addEventListener('change', (e) => {
+                elements.inputs.preset.value = e.target.value;
+                elements.inputs.preset.dispatchEvent(new Event('change'));
+            });
+        }
+        
+        if (elements.inputs.quickPrintCount) {
+            elements.inputs.quickPrintCount.addEventListener('input', (e) => {
+                elements.buttons.printCountH.value = e.target.value;
+                if(elements.buttons.printCountF) elements.buttons.printCountF.value = e.target.value;
+            });
+        }
+        
+        if (elements.buttons.quickCountMinus) {
+            elements.buttons.quickCountMinus.addEventListener('click', () => {
+                let val = parseInt(elements.inputs.quickPrintCount.value) || 1;
+                if(val > 1) {
+                    elements.inputs.quickPrintCount.value = val - 1;
+                    elements.inputs.quickPrintCount.dispatchEvent(new Event('input'));
+                }
+            });
+        }
+        
+        if (elements.buttons.quickCountPlus) {
+            elements.buttons.quickCountPlus.addEventListener('click', () => {
+                let val = parseInt(elements.inputs.quickPrintCount.value) || 1;
+                if(val < 999) {
+                    elements.inputs.quickPrintCount.value = val + 1;
+                    elements.inputs.quickPrintCount.dispatchEvent(new Event('input'));
+                }
+            });
+        }
+
         // フィールド変更
         const storeFields = ['manufacturerTitle', 'manufacturer', 'address', 'phone', 'useSecondStore', 'manufacturerTitle2', 'manufacturer2', 'address2', 'phone2'];
         
