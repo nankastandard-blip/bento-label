@@ -43,12 +43,11 @@
                 <!-- かんたん印刷タブ -->
                 <div id="tab-quick-print" class="tab-content active">
                     <div class="card">
-                        <div class="card-header" style="background-color: #fef08a;">
-                            <h2 style="color: #854d0e;">🖨️ かんたん印刷</h2>
-                        </div>
+
                         <div class="card-body">
-                            <div class="form-group" style="margin-bottom: 2rem; text-align: center; border-radius: 8px; background: #eef2f5; padding: 0.75rem; border: 1px solid #cce1ff;">
-                                <div style="font-size: 0.9rem; color: #666;">店舗: <span id="quick-store-name" style="font-weight: bold; color: var(--primary-color);"></span></div>
+                            <div class="form-group" style="margin-bottom: 2rem; text-align: center; border-radius: 8px; background: #eef2f5; padding: 0.5rem; border: 1px solid #cce1ff; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                                <label style="font-size: 0.85rem; color: #666; margin: 0; white-space: nowrap;">🏢 店舗・販売先:</label>
+                                <select id="quick-store-profile-select" class="form-control" style="width: auto; max-width: 200px; font-size: 0.9rem; font-weight: bold; background: white; padding: 0.2rem 0.5rem; height: auto; border-radius: 4px;"></select>
                             </div>
                             
                             <div class="form-group" style="margin-bottom: 2rem;">
@@ -212,15 +211,6 @@
                                     <button type="button" class="action-btn mic-btn" data-target="ingredients" style="margin: 0; padding: 0.2rem 0.5rem; font-size: 0.85rem; background-color: #f1f3f5; color: #333; border-color: #ddd;" title="音声入力">🎙️ 音声で入力</button>
                                 </label>
                                 <textarea id="ingredients" class="form-control" rows="4" placeholder="例: 御飯（国産米）、サバ塩焼き、卵焼き、きんぴらごぼう、醤油、調味料（アミノ酸等）..." required></textarea>
-                            </div>
-                            
-                            <!-- 保存 -->                            <div class="form-group">
-                                <label for="store-method">保存方法 <span class="required">*</span></label>
-                                <select id="store-method" class="form-control" required>
-                                    <option value="直射日光及び高温多湿を避けて保存してください">常温（直射日光および高温多湿を避けて保存）</option>
-                                    <option value="10℃以下で保存してください">要冷蔵（10℃以下で保存）</option>
-                                    <option value="-18℃以下で保存してください">要冷凍（-18℃以下で保存）</option>
-                                </select>
                             </div>
                             
                             <div class="form-group">

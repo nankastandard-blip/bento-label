@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
             jancodeValue: document.getElementById('jancode-value'),
             // かんたん印刷用
             quickPreset: document.getElementById('quick-preset-select'),
-            quickStoreName: document.getElementById('quick-store-name')
+            quickStoreProfile: document.getElementById('quick-store-profile-select')
         },
         preview: {
             name: document.getElementById('preview-name'),
@@ -430,16 +430,19 @@ document.addEventListener('DOMContentLoaded', () => {
             return nameA.localeCompare(nameB, 'ja');
         });
         
+        // かんたん印刷用セレクトをクリアしてから埋める
+        if (elements.inputs.quickPreset) {
+            elements.inputs.quickPreset.innerHTML = '<option value="">-- メニューを選択 --</option>';
+        }
+        
         sortedKeys.forEach(id => {
             const data = userTemplates[id];
             const option = document.createElement('option');
             option.value = id;
-            // オプション名に金額を表示
             const priceStr = data.price ? `[¥${data.price}] ` : '';
             option.textContent = `${priceStr}${data.name || '(無名)'}`;
             select.appendChild(option);
             
-            // かんたん印刷用セレクトにも追加
             if (elements.inputs.quickPreset) {
                 const quickOption = option.cloneNode(true);
                 elements.inputs.quickPreset.appendChild(quickOption);
@@ -481,24 +484,29 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const updateProfileDropdown = () => {
-        if (!elements.inputs.storeProfile) return;
         const names = getStoreProfileNames();
         const currentVal = getActiveProfileId();
+        const selects = [elements.inputs.storeProfile, elements.inputs.quickStoreProfile];
         
-        elements.inputs.storeProfile.innerHTML = '';
-        Object.keys(names).forEach(key => {
-            const opt = document.createElement('option');
-            opt.value = key;
-            opt.textContent = names[key];
-            elements.inputs.storeProfile.appendChild(opt);
+        selects.forEach(select => {
+            if (!select) return;
+            select.innerHTML = '';
+            Object.keys(names).forEach(key => {
+                const opt = document.createElement('option');
+                opt.value = key;
+                opt.textContent = names[key];
+                select.appendChild(opt);
+            });
+            
+            if(names[currentVal]) {
+                select.value = currentVal;
+            } else {
+                select.value = Object.keys(names)[0];
+            }
         });
         
-        // Ensure valid selection
-        if(names[currentVal]) {
-            elements.inputs.storeProfile.value = currentVal;
-        } else {
-            elements.inputs.storeProfile.value = Object.keys(names)[0];
-            localStorage.setItem('bentoLastProfile', elements.inputs.storeProfile.value);
+        if (!names[currentVal]) {
+            localStorage.setItem('bentoLastProfile', Object.keys(names)[0]);
         }
         
         // Hide delete button if only one remains
@@ -506,10 +514,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const isOnlyOne = Object.keys(names).length <= 1;
             elements.buttons.deleteStoreProfile.style.opacity = isOnlyOne ? '0.5' : '1';
             elements.buttons.deleteStoreProfile.style.pointerEvents = isOnlyOne ? 'none' : 'auto';
-        }
-        
-        if (elements.inputs.quickStoreName) {
-            elements.inputs.quickStoreName.textContent = names[currentVal] || '';
         }
     };
 
@@ -542,8 +546,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadStoreInfo = (profileId = null) => {
         if (!profileId) {
             profileId = localStorage.getItem('bentoLastProfile') || 'A';
-            if (elements.inputs.storeProfile) elements.inputs.storeProfile.value = profileId;
         }
+        
+        // 両方のプルダウンの値を同期
+        if (elements.inputs.storeProfile) elements.inputs.storeProfile.value = profileId;
+        if (elements.inputs.quickStoreProfile) elements.inputs.quickStoreProfile.value = profileId;
 
         let saved = localStorage.getItem(`bentoStoreInfo_${profileId}`);
         if (!saved && profileId === 'A') {
@@ -595,6 +602,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         document.getElementById('second-store-wrapper').style.display = elements.inputs.useSecondStore.checked ? 'block' : 'none';
         
+        // かんたん印刷側の表示を更新
+        if (elements.inputs.quickStoreName) {
+            const names = getStoreProfileNames();
+            elements.inputs.quickStoreName.textContent = names[profileId] || '';
+        }
+
         loadStoreProfileNameInput();
         updatePreview();
     };
@@ -678,10 +691,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // フィールド変更
-        const storeFields = ['manufacturerTitle', 'manufacturer', 'address', 'phone', 'useSecondStore', 'manufacturerTitle2', 'manufacturer2', 'address2', 'phone2'];
+        const storeFields = [
+            'manufacturerTitle', 'manufacturer', 'address', 'phone', 
+            'useSecondStore', 'manufacturerTitle2', 'manufacturer2', 
+            'address2', 'phone2', 'storeProfile', 'storeProfileName'
+        ];
         
         Object.values(elements.inputs).forEach(input => {
-            if (input && input.id !== 'preset-select' && !storeFields.includes(input.id.replace(/-/g, ''))) {
+            if (input && input.id !== 'preset-select' && input.id !== 'quick-preset-select' && !storeFields.includes(input.id.replace(/-/g, ''))) {
                 input.addEventListener('input', updatePreview);
             }
         });
@@ -703,8 +720,19 @@ document.addEventListener('DOMContentLoaded', () => {
         // 🏢 パターン切り替え処理
         if (elements.inputs.storeProfile) {
             elements.inputs.storeProfile.addEventListener('change', (e) => {
-                loadStoreInfo(e.target.value);
-                saveStoreInfo(); // Update the globally saved LastProfile
+                const val = e.target.value;
+                if (elements.inputs.quickStoreProfile) elements.inputs.quickStoreProfile.value = val;
+                loadStoreInfo(val);
+                saveStoreInfo();
+            });
+        }
+        
+        if (elements.inputs.quickStoreProfile) {
+            elements.inputs.quickStoreProfile.addEventListener('change', (e) => {
+                const val = e.target.value;
+                if (elements.inputs.storeProfile) elements.inputs.storeProfile.value = val;
+                loadStoreInfo(val);
+                saveStoreInfo();
             });
         }
         
