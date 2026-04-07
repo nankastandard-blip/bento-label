@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ラベル制作">
+    <link rel="manifest" href="manifest.json">
+    <title>弁当ラベルメーカー</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container no-print">
+        <header class="app-header">
+            <div class="header-content">
+                <h1>🍱 弁当ラベルメーカー</h1>
+                <p>ブラウザで入力して、ワンクリックで食品表示ラベルを印刷</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <label for="print-count-header" style="margin:0; font-weight:bold; white-space: nowrap;">印刷枚数</label>
+                    <input type="number" id="print-count-header" class="form-control" value="1" min="1" max="999" style="width: 70px; padding: 0.4rem;">
+                </div>
+                <button id="print-btn-header" class="print-btn primary-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                    ラベルを印刷する
+                </button>
+            </div>
+        </header>
+
+        <main class="app-main">
+            <!-- 入力フォームエリア -->
+            <section class="editor-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>📝 入力フォーム</h2>
+                    </div>
+                    
+                    <div class="card-body">
+                        <!-- ① どこに置く弁当か (事業者情報・販売先パターン) -->
+                        <div class="form-group" style="background: #eef2f5; padding: 1rem; border: 1px solid #cce1ff; border-radius: 6px; border-left: 4px solid var(--primary-color); margin-bottom: 1.5rem;">
+                            <label style="font-weight: bold; color: var(--primary-color); display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; font-size: 1.1rem;">
+                                <span>🏢 ① 店舗・販売先</span>
+                            </label>
+                            <select id="store-profile-select" class="form-control" style="margin-bottom: 0.5rem; font-size: 1rem; font-weight: bold;">
+                                <option value="A">パターンA (自分のお店など・主利用)</option>
+                                <option value="B">パターンB (道の駅・直売所など)</option>
+                                <option value="C">パターンC (スーパー・委託販売など)</option>
+                            </select>
+                            
+                            <details style="background: white; padding: 0.75rem; border-radius: 4px; border: 1px solid #ddd; margin-bottom: 0.5rem;">
+                                <summary style="font-weight: bold; cursor: pointer; color: #555;">⚙️ このパターンの情報を編集 (名前、住所等)</summary>
+                                <div style="margin-top: 1rem;">
+                                    <div class="form-group" style="margin-bottom: 1rem; border-bottom: 1px dashed #ccc; padding-bottom: 1rem;">
+                                        <label style="color: var(--secondary-color); font-weight: bold;">📝 パターン名</label>
+                                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                            <input type="text" id="store-profile-name" class="form-control" placeholder="例: 道の駅、自分のお店 など" style="flex: 1; min-width: 150px;">
+                                            <button type="button" id="copy-store-profile-btn" class="action-btn" style="margin:0; background-color: #28a745; color: white; border: none; border-radius: 4px; font-weight: bold; padding: 0 0.75rem; cursor: pointer;">➕ 追加</button>
+                                            <button type="button" id="delete-store-profile-btn" class="action-btn delete-btn" style="margin:0; padding: 0 0.75rem;">🗑️ 削除</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom: 0.5rem;">
+                                        <label>事業者情報 <span class="required">*</span></label>
+                                        <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                            <select id="manufacturer-title" class="form-control" style="width: 120px;">
+                                                <option value="製造者">製造者</option>
+                                                <option value="販売者">販売者</option>
+                                                <option value="加工者">加工者</option>
+                                            </select>
+                                            <input type="text" id="manufacturer" class="form-control" placeholder="店舗名・会社名" value="テスト惣菜店" required style="flex: 1;">
+                                        </div>
+                                        <input type="text" id="address" class="form-control" placeholder="住所を入力" value="東京都新宿区テスト1-2-3" required style="margin-bottom: 0.5rem;">
+                                        <input type="tel" id="phone" class="form-control" placeholder="電話番号 (例: 03-0000-0000)" value="03-0000-0000">
+                                    </div>
+                                    
+                                    <div class="form-group" style="margin-bottom: 0;">
+                                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin-bottom: 0.5rem;">
+                                            <input type="checkbox" id="use-second-store" style="width: 1.2rem; height: 1.2rem;"> 
+                                            <span style="font-weight: bold; font-size: 0.9rem;">2つ目の事業者も印字する（製造と販売を分ける場合等）</span>
+                                        </label>
+                                        
+                                        <div id="second-store-wrapper" style="display: none; padding-left: 1rem; border-left: 3px solid #ddd; margin-top: 0.5rem;">
+                                            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                                <select id="manufacturer-title2" class="form-control" style="width: 120px;">
+                                                    <option value="製造者">製造者</option>
+                                                    <option value="製造所">製造所</option>
+                                                    <option value="販売者">販売者</option>
+                                                </select>
+                                                <input type="text" id="manufacturer2" class="form-control" placeholder="店舗名・会社名" style="flex: 1;">
+                                            </div>
+                                            <input type="text" id="address2" class="form-control" placeholder="住所を入力" style="margin-bottom: 0.5rem;">
+                                            <input type="tel" id="phone2" class="form-control" placeholder="電話番号 (製造者の場合のみ印字されます)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                        
+                        <!-- ② 何を作るか (プリセット選択) -->
+                        <div class="form-group presets-group" style="margin-bottom: 1.5rem;">
+                            <label for="preset-select" style="font-size: 1.1rem; color: #2a5d84; font-weight: bold;">🍱 ② テンプレート (メニュー)</label>
+                            <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem;">
+                                <select id="preset-select" class="form-control" style="font-weight: bold; font-size: 1rem;">
+                                    <option value="">-- 新規作成 (入力内容をクリアする) --</option>
+                                    <!-- Javascriptで動的に埋まります -->
+                                </select>
+                            </div>
+                            
+                            <!-- テンプレート管理用ボタン -->
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; background: #fafafa; padding: 0.5rem; border: 1px dashed #ccc; border-radius: 4px;">
+                                <button type="button" id="save-preset-btn" class="action-btn save-btn" style="margin:0; flex: 1; min-width: 120px; padding: 0.4rem 0.5rem;">💾 上書き保存</button>
+                                <button type="button" id="copy-preset-btn" class="action-btn" style="margin:0; flex: 1; min-width: 120px; padding: 0.4rem 0.5rem; background-color: #28a745; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">📋 新しく追加</button>
+                                <button type="button" id="delete-preset-btn" class="action-btn delete-btn" style="margin:0; flex: 1; min-width: 120px; padding: 0.4rem 0.5rem;">🗑️ 削除</button>
+                            </div>
+                        </div>
+
+                        <hr class="divider">
+
+                        <form id="label-form">
+                            <!-- ③ 細かい内容の確認・微調整 -->
+                            <h3 class="sub-heading" style="margin-top: 0; padding-top: 0; color: #555;">📝 ③ 印刷内容</h3>
+                            <div class="form-group">
+                                <label for="product-name">名称 (お弁当の名前) <span class="required">*</span></label>
+                                <div style="display: flex; gap: 0.5rem; align-items: stretch;">
+                                    <input type="text" id="product-name" class="form-control" placeholder="例: チキン南蛮弁当" required>
+                                    <button type="button" class="action-btn mic-btn" data-target="product-name" style="margin-top: 0; padding: 0 0.5rem; font-size: 1.1rem; background-color: #f1f3f5; color: #333; border-color: #ddd;" title="音声入力">🎙️</button>
+                                    <button type="button" id="auto-fill-btn" class="action-btn auto-fill-btn" style="margin-top: 0; white-space: nowrap;">💡 自動入力</button>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group half">
+                                    <label for="price" style="font-weight:bold; color:var(--primary-color);">税込価格 (円) <span class="required">*</span></label>
+                                    <input type="number" id="price" class="form-control" placeholder="例: 500" style="font-size: 1.1rem; font-weight: bold;">
+                                </div>
+                                <div class="form-group half">
+                                    <label for="category">品目（名称）</label>
+                                    <input type="text" id="category" class="form-control" value="弁当" list="category-list" placeholder="例: 弁当、惣菜" required autocomplete="off">
+                                    <datalist id="category-list">
+                                        <option value="弁当">
+                                        <option value="惣菜">
+                                        <option value="惣菜半製品">
+                                        <option value="おにぎり">
+                                        <option value="寿司">
+                                        <option value="調理めん">
+                                        <option value="調理パン">
+                                        <option value="生菓子">
+                                    </datalist>
+                                </div>
+                            </div>
+                            
+                            <!-- バーコード (JAN) -->
+                            <div class="form-group" style="background-color: #f8f9fa; padding: 0.75rem; border-radius: 4px; border: 1px solid #ddd;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin-bottom: 0;">
+                                    <input type="checkbox" id="use-jancode" style="width: 1.2rem; height: 1.2rem;"> 
+                                    <span style="font-weight: bold;">バーコード (JANコード) を印字する</span>
+                                </label>
+                                <div id="jancode-wrapper" style="display: none; margin-top: 0.5rem;">
+                                    <input type="text" id="jancode-value" class="form-control" placeholder="商品コードをスキャン・または入力 (13桁)" maxlength="13">
+                                </div>
+                            </div>
+                            
+                            <!-- ご飯の種類と原材料 -->
+                            <div class="form-group" style="background-color: #fff9e6; padding: 0.75rem; border-radius: 4px; border: 1px solid #ffeba1; margin-bottom: 1rem;">
+                                <label style="font-weight:bold; color:#b8860b; margin-bottom: 0.5rem; display: block;">🍚 本日のご飯</label>
+                                <div style="display: flex; gap: 1rem; flex-wrap: wrap;" id="rice-type-group">
+                                    <label style="cursor: pointer; display: flex; align-items: center; gap: 0.3rem;"><input type="radio" name="rice-type" value="御飯（国産米）" checked> 白米</label>
+                                    <label style="cursor: pointer; display: flex; align-items: center; gap: 0.3rem;"><input type="radio" name="rice-type" value="玄米（国産米）"> 玄米</label>
+                                    <label style="cursor: pointer; display: flex; align-items: center; gap: 0.3rem;"><input type="radio" name="rice-type" value="麦入り御飯（米（国産）、大麦）"> 麦入り</label>
+                                    <label style="cursor: pointer; display: flex; align-items: center; gap: 0.3rem;"><input type="radio" name="rice-type" value="五穀米（米（国産）、五穀）"> 五穀米</label>
+                                    <label style="cursor: pointer; display: flex; align-items: center; gap: 0.3rem;"><input type="radio" name="rice-type" value="なし"> ご飯なし（おかずのみ等）</label>
+                                </div>
+                                <small class="help-text" style="display: block; margin-top: 0.25rem;">※切り替えると「原材料名」のご飯表記が自動で置き換わります。</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ingredients" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                                    <span>原材料名 <span class="required">*</span></span>
+                                    <button type="button" class="action-btn mic-btn" data-target="ingredients" style="margin: 0; padding: 0.2rem 0.5rem; font-size: 0.85rem; background-color: #f1f3f5; color: #333; border-color: #ddd;" title="音声入力">🎙️ 音声で入力</button>
+                                </label>
+                                <textarea id="ingredients" class="form-control" rows="4" placeholder="例: 御飯（国産米）、サバ塩焼き、卵焼き、きんぴらごぼう、醤油、調味料（アミノ酸等）..." required></textarea>
+                            </div>
+                            
+                            <!-- 保存 -->                            <div class="form-group">
+                                <label for="store-method">保存方法 <span class="required">*</span></label>
+                                <select id="store-method" class="form-control" required>
+                                    <option value="直射日光及び高温多湿を避けて保存してください">常温（直射日光および高温多湿を避けて保存）</option>
+                                    <option value="10℃以下で保存してください">要冷蔵（10℃以下で保存）</option>
+                                    <option value="-18℃以下で保存してください">要冷凍（-18℃以下で保存）</option>
+                                </select>
+                            </div>
+
+                            <!-- 栄養成分と価格 -->
+                            <div class="form-row">
+                                <div class="form-group half">
+                                    <label for="calories">熱量 (kcal)</label>
+                                    <input type="number" id="calories" class="form-control" placeholder="例: 650">
+                                </div>
+                                <div class="form-group half">
+                                    <label for="protein">蛋白質 (g)</label>
+                                    <input type="number" id="protein" class="form-control" placeholder="例: 20.5" step="0.1">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group half">
+                                    <label for="fat">脂質 (g)</label>
+                                    <input type="number" id="fat" class="form-control" placeholder="例: 15.2" step="0.1">
+                                </div>
+                                <div class="form-group half">
+                                    <label for="carb">炭水化物 (g)</label>
+                                    <input type="number" id="carb" class="form-control" placeholder="例: 80.0" step="0.1">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group half">
+                                    <label for="salt">食塩相当量 (g)</label>
+                                    <input type="number" id="salt" class="form-control" placeholder="例: 2.5" step="0.1">
+                                </div>
+                                <!-- placeholder to keep flex row layout correct for adjacent item -->
+                                <div class="form-group half" style="visibility: hidden;"></div>
+                            </div>
+
+
+                            
+                            <!-- その他オプション -->
+                            <h3 class="sub-heading">その他の印字オプション</h3>
+                            
+                            <div class="form-group">
+                                <label style="font-weight:bold; margin-bottom: 0.5rem; display: block;">リサイクルマーク (容器の素材)</label>
+                                <div style="display: flex; gap: 1rem; flex-wrap: wrap;" id="packaging-mark-group">
+                                    <label style="cursor: pointer; display: flex; align-items: center; gap: 0.3rem;"><input type="radio" name="packaging-mark" value="プラ" checked> プラ</label>
+                                    <label style="cursor: pointer; display: flex; align-items: center; gap: 0.3rem;"><input type="radio" name="packaging-mark" value="紙"> 紙</label>
+                                    <label style="cursor: pointer; display: flex; align-items: center; gap: 0.3rem;"><input type="radio" name="packaging-mark" value="なし"> なし</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- プレビューエリア -->
+            <section class="preview-section">
+                <div class="card sticky">
+                    <div class="card-header preview-header">
+                        <h2>👀 印刷プレビュー</h2>
+                        <span class="badge">Brother QL-820NWBc対応 (62mmラベル巻 想定)</span>
+                    </div>
+                    
+                    <div class="card-body preview-container">
+                        <!-- この部分が実際に印刷されるラベル -->
+                        <div id="print-target" class="label-box">
+                            <div class="label-inner">
+                                <div class="label-header" style="display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid #000; padding-bottom: 0.5mm; margin-bottom: 1.5mm;">
+                                    <div class="label-title" id="preview-name" style="border: none; padding: 0; margin: 0;">お弁当</div>
+                                    <div id="preview-packaging-mark" class="logo-mark" style="display: block;">プラ</div>
+                                </div>
+                                
+                                <div class="label-body">
+                                    <table class="label-table">
+                                        <tr>
+                                            <th class="label-th">名称</th>
+                                            <td class="label-td" id="preview-category">弁当</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="label-th">原材料名</th>
+                                            <td class="label-td" id="preview-ingredients"></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="label-th">消費期限</th>
+                                            <td class="label-td font-bold" id="preview-consume"></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="label-th">保存方法</th>
+                                            <td class="label-td" id="preview-store"></td>
+                                        </tr>
+                                    </table>
+                                    
+                                    <div class="nutrition-box">
+                                        <div class="nutrition-title">栄養成分表示（1包装当り）</div>
+                                        <div class="nutrition-grid">
+                                            <span>熱量 <span id="preview-calories">-</span>kcal</span>
+                                            <span>蛋白質 <span id="preview-protein">-</span>g</span>
+                                            <span>脂質 <span id="preview-fat">-</span>g</span>
+                                            <span>炭水化物 <span id="preview-carb">-</span>g</span>
+                                            <span>食塩相当量 <span id="preview-salt">-</span>g</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="manufacturer-info" id="preview-store-info-1">
+                                        <div><span class="label-th-inline" id="preview-manufacturer-title">製造者</span> <span id="preview-manufacturer" class="font-bold"></span></div>
+                                        <div id="preview-address" class="address-text"></div>
+                                        <div id="preview-phone-container"><span class="label-th-inline">TEL</span> <span id="preview-phone"></span></div>
+                                    </div>
+                                    <div class="manufacturer-info" id="preview-store-info-2" style="display: none; border-top: 1px dashed #ccc; margin-top: 1mm; padding-top: 1mm;">
+                                        <div><span class="label-th-inline" id="preview-manufacturer-title2">製造者</span> <span id="preview-manufacturer2" class="font-bold"></span></div>
+                                        <div id="preview-address2" class="address-text"></div>
+                                        <div id="preview-phone-container2"><span class="label-th-inline">TEL</span> <span id="preview-phone2"></span></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="label-footer" style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px dashed #000; padding-top: 0.5mm;">
+                                    <div id="preview-barcode-container" style="display: none; margin: 0;">
+                                        <svg id="preview-barcode"></svg>
+                                    </div>
+                                    
+                                    <div class="price-box tax-in" style="border: none; margin: 0; padding: 0; text-align: right; flex: 1;">
+                                        <div class="price-label" style="font-size: 6pt; margin-bottom: 0;">税込価格</div>
+                                        <div class="price-value tax-value" style="font-size: 13pt; font-weight: bold; line-height: 1;"><span id="preview-price-tax"></span><span class="yen" style="font-size: 8pt;">円</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer" style="display: flex; flex-direction: column; gap: 1rem; background-color: #f7f9fc; border-top: 2px solid #e2e8f0; padding: 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                            <label for="consume-days" style="margin:0; font-weight:bold; color: #2c3e50;">🕒 消費期限 (印刷日から):</label>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="number" id="consume-days" class="form-control" value="1" min="0" max="365" style="width: 80px; font-weight: bold; text-align: right;" required>
+                                <span style="font-weight: bold;">日後</span>
+                            </div>
+                        </div>
+                        <div style="text-align: right; margin-top: -0.5rem;">
+                            <small class="help-text" id="calculated-date-hint" style="color: #e74c3c; font-weight: bold; font-size: 0.95rem;">印字される日付: 計算中...</small>
+                        </div>
+                        
+                        <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; margin-top: 0.5rem;">
+                            <div style="display: flex; align-items: center; gap: 0.4rem;">
+                                <label for="print-count-footer" style="margin:0; font-weight:bold; white-space: nowrap;">出力枚数:</label>
+                                <input type="number" id="print-count-footer" class="form-control" value="1" min="1" max="999" style="width: 70px;">
+                            </div>
+                            <button id="print-btn-footer" class="print-btn primary-btn full-width" style="flex: 1;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                                印刷する
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 印刷用コンテナ (画面上では非表示。印刷時にここに複数ラベルをクローンする) -->
+    <div id="print-spool" class="print-only"></div>
+
+    <!-- 印刷用のスクリプト -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,479 @@
+/* Base Variables */
+:root {
+    --primary-color: #f97316; /* Appetizing orange */
+    --primary-hover: #ea580c;
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --font-family: 'Noto Sans JP', sans-serif;
+    
+    /* Label physical dimensions (for screen preview constraints) */
+    --label-width: 62mm; /* Brother QL-820NWBc 標準の62mm幅に対応 */
+    --label-height: auto;
+}
+
+/* Reset & Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.5;
+}
+
+/* Layout */
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.header-content h1 {
+    font-size: 1.8rem;
+    color: var(--text-main);
+    margin-bottom: 0.25rem;
+}
+
+.header-content p {
+    color: var(--text-muted);
+}
+
+.app-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .app-main {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* UI Components */
+.card {
+    background-color: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    background-color: #f8fafc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-footer {
+    padding: 1.25rem 1.5rem;
+    border-top: 1px solid var(--border-color);
+    background-color: #f8fafc;
+}
+
+.badge {
+    background-color: #e0f2fe;
+    color: #0369a1;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.form-group.half {
+    flex: 1;
+    min-width: 120px;
+    margin-bottom: 0;
+}
+
+.form-group.third {
+    flex: 1;
+    min-width: 80px;
+    margin-bottom: 0;
+}
+
+label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+    font-size: 0.9rem;
+}
+
+.required {
+    color: #ef4444;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-family: var(--font-family);
+    font-size: 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+}
+
+textarea.form-control {
+    resize: vertical;
+}
+
+.help-text {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.divider {
+    border: 0;
+    border-top: 1px solid var(--border-color);
+    margin: 1.5rem 0;
+}
+
+.sub-heading {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #334155;
+}
+
+.presets-group {
+    background-color: #fff7ed;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    border: 1px dashed #fdba74;
+}
+
+/* Buttons */
+.print-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-family);
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.print-btn:active {
+    transform: translateY(1px);
+}
+
+.action-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s;
+    margin-top: 0.75rem;
+}
+
+.save-btn {
+    background-color: #10b981;
+    color: white;
+}
+
+.save-btn:hover {
+    background-color: #059669;
+}
+
+.delete-btn {
+    background-color: #ef4444;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #dc2626;
+}
+
+.auto-fill-btn {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.auto-fill-btn:hover {
+    background-color: #2563eb;
+}
+
+.preset-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.primary-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.primary-btn:hover {
+    background-color: var(--primary-hover);
+}
+
+.full-width {
+    width: 100%;
+}
+
+/* Sticky column */
+.sticky {
+    position: sticky;
+    top: 2rem;
+}
+
+/* Label Preview Styles (Screen only) */
+.preview-container {
+    background-color: #e2e8f0;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--radius-md);
+}
+
+.label-box {
+    background-color: white;
+    width: var(--label-width);
+    /* Set a min height just for visual representation on screen */
+    min-height: 60mm;
+    box-shadow: var(--shadow-sm);
+    box-sizing: border-box;
+    /* Simulated appearance of sticker paper */
+    border: 1px solid #ccc;
+}
+
+/* The actual label design inner content */
+.label-inner {
+    padding: 2.5mm;
+    font-family: "MS PGothic", "Noto Sans JP", sans-serif;
+    color: #000;
+    font-size: 7.5pt; /* 全体的に少し縮小 */
+    line-height: 1.25;
+}
+
+.label-header {
+    text-align: center;
+    margin-bottom: 1.5mm;
+}
+
+.label-title {
+    font-size: 10.5pt;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.label-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5mm;
+}
+
+.label-th {
+    text-align: left;
+    white-space: nowrap;
+    vertical-align: top;
+    padding-right: 1.5mm;
+    font-weight: normal;
+    width: 25%;
+    font-size: 7pt;
+}
+
+.label-td {
+    vertical-align: top;
+}
+
+#preview-ingredients {
+    font-size: 8pt; /* 原材料名だけは大きめキープ */
+    line-height: 1.3;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.nutrition-box {
+    border: 1px solid #000;
+    padding: 1mm;
+    margin-bottom: 1.5mm;
+    font-size: 6.5pt;
+}
+
+.nutrition-grid {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1.5mm;
+}
+
+.nutrition-grid span {
+    white-space: nowrap;
+}
+
+.manufacturer-info {
+    font-size: 6.5pt;
+    margin-bottom: 1.5mm;
+}
+
+.label-th-inline {
+    display: inline-block;
+    width: 12mm;
+}
+
+.address-text {
+    padding-left: 12mm;
+    text-indent: -12mm;
+}
+
+.label-footer {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 0.5mm;
+}
+
+.price-box {
+    text-align: center;
+}
+
+.price-label {
+    font-size: 7pt;
+}
+
+.price-value {
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+.yen {
+    font-size: 9pt;
+    font-weight: normal;
+}
+
+.print-only {
+    display: none;
+}
+
+/* プラ・紙マークの汎用スタイル (SVG用) */
+.logo-mark {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+}
+
+.logo-mark svg {
+    width: 2.5em; /* フォントサイズに応じて拡大縮小 */
+    height: 2.5em;
+    vertical-align: middle;
+}
+
+/* 音声入力ボタンのアニメーション */
+@keyframes pulse-mic {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 77, 79, 0.7); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 6px rgba(255, 77, 79, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 77, 79, 0); }
+}
+
+.mic-btn {
+    transition: all 0.3s ease;
+}
+
+.mic-btn.listening {
+    background-color: #ff4d4f !important;
+    color: white !important;
+    border-color: #ff4d4f !important;
+    animation: pulse-mic 1.5s infinite;
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+@media print {
+    /* アプリケーションUI全体を非表示 */
+    .app-container {
+        display: none !important;
+    }
+    
+    /* 印刷スプール（クローンされたラベル群）のみ表示 */
+    .print-only {
+        display: block !important;
+        width: 62mm;
+    }
+    
+    /* 複製された各ラベルのスタイルと改ページ制御 */
+    .spool-label {
+        width: 62mm;
+        margin: 0;
+        border: none;
+        box-shadow: none;
+        page-break-after: always; /* ラベルごとにプリンタにカット(改ページ)を指示 */
+    }
+
+    /* 最後のラベルの後は改ページしない（無駄な白紙カットを防ぐ） */
+    .spool-label:last-child {
+        page-break-after: auto;
+    }
+
+    /* Print specific tweaks */
+    .label-inner {
+        padding: 1.5mm;
+    }
+
+    @page {
+        size: 62mm auto; /* Brother QL-820NWBc の 62mm長尺テープを想定 */
+        margin: 0;
+    }
+}
