@@ -113,8 +113,48 @@ body {
 }
 
 @media (max-width: 768px) {
+    .app-container {
+        padding: 0;
+    }
+    
+    .app-header {
+        display: none !important; /* スマホではヘッダーや上部印刷ボタンを非表示 */
+    }
+
     .app-main {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column-reverse; /* プレビューを上部に持ってくる */
+        gap: 0;
+    }
+    
+    .preview-section {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background-color: var(--bg-color);
+        padding: 1rem;
+        border-bottom: 2px solid var(--border-color);
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); /* スクロール時に浮き出るように */
+    }
+    
+    .editor-section {
+        padding: 1rem;
+    }
+
+    #quick-store-name {
+        font-size: 1rem !important; /* かんたん印刷の店舗名を控えめに */
+    }
+    
+    .tabs-container {
+        margin-top: 0;
+    }
+
+    .preview-header {
+        display: none !important; /* スマホではプレビューのタイトル行も消して領域節約 */
+    }
+
+    .preview-container {
+        padding: 0.5rem !important; /* プレビュー周りの余白を最小限に */
     }
 }
 
