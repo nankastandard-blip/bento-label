@@ -602,11 +602,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         document.getElementById('second-store-wrapper').style.display = elements.inputs.useSecondStore.checked ? 'block' : 'none';
         
-        // かんたん印刷側の表示を更新
-        if (elements.inputs.quickStoreName) {
-            const names = getStoreProfileNames();
-            elements.inputs.quickStoreName.textContent = names[profileId] || '';
-        }
+
 
         loadStoreProfileNameInput();
         updatePreview();
