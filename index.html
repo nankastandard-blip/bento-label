@@ -47,10 +47,8 @@
                             <h2 style="color: #854d0e;">🖨️ かんたん印刷</h2>
                         </div>
                         <div class="card-body">
-                            <div class="form-group" style="margin-bottom: 2rem; text-align: center; border-radius: 8px; background: #eef2f5; padding: 1rem; border: 2px solid #cce1ff;">
-                                <div style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0.25rem;">現在の店舗・販売先</div>
-                                <div id="quick-store-name" style="font-size: 1.4rem; font-weight: bold; color: var(--primary-color);"></div>
-                                <div style="font-size: 0.85rem; margin-top: 0.5rem; color: #666;">※変更する場合は「管理・編集」タブから</div>
+                            <div class="form-group" style="margin-bottom: 2rem; text-align: center; border-radius: 8px; background: #eef2f5; padding: 0.75rem; border: 1px solid #cce1ff;">
+                                <div style="font-size: 0.9rem; color: #666;">店舗: <span id="quick-store-name" style="font-weight: bold; color: var(--primary-color);"></span></div>
                             </div>
                             
                             <div class="form-group" style="margin-bottom: 2rem;">
@@ -234,13 +232,13 @@
                                 </select>
                             </div>
                             
-                            <div class="form-group" style="background-color: #f7f9fc; padding: 1rem; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 1rem;">
-                                <label for="consume-days" style="margin:0; font-weight:bold; color: #2c3e50;">🕒 消費期限 (印刷日から)</label>
-                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
-                                    <input type="number" id="consume-days" class="form-control" value="1" min="0" max="365" style="width: 80px; font-weight: bold; text-align: right;" required>
-                                    <span style="font-weight: bold;">日後</span>
-                                </div>
-                                <small class="help-text" id="calculated-date-hint" style="color: #e74c3c; font-weight: bold; font-size: 0.95rem; display: block; margin-top: 0.5rem;">印字される日付: 計算中...</small>
+                            <div class="form-group">
+                                <label for="store-method">保存方法 <span class="required">*</span></label>
+                                <select id="store-method" class="form-control" required>
+                                    <option value="直射日光及び高温多湿を避けて保存してください">常温（直射日光および高温多湿を避けて保存）</option>
+                                    <option value="10℃以下で保存してください">要冷蔵（10℃以下で保存）</option>
+                                    <option value="-18℃以下で保存してください">要冷凍（-18℃以下で保存）</option>
+                                </select>
                             </div>
 
                             <!-- 栄養成分と価格 -->
@@ -363,13 +361,27 @@
                                 </div>
                             </div>
                             
-                            <!-- プレビュースクリーン用 印刷ボタン -->
-                            <div class="print-controls" style="display: flex; gap: 0.5rem; align-items: center; justify-content: center; width: 100%; max-width: 62mm; margin-top: 0.5rem;">
-                                <div style="display: flex; align-items: center; background: white; border: 1px solid #ccc; border-radius: 8px; padding: 0.25rem;">
-                                    <span style="font-size: 0.8rem; font-weight: bold; padding-left: 0.5rem;">枚数</span>
-                                    <input type="number" id="print-count-footer" class="form-control" value="1" min="1" max="999" style="width: 50px; text-align: center; font-size: 1.1rem; font-weight: bold; border: none; background: transparent; padding: 0.25rem;">
+                            <!-- プレビュースクリーン用 コントロール -->
+                            <div class="print-controls" style="display: flex; flex-direction: column; gap: 0.75rem; align-items: center; justify-content: center; width: 100%; max-width: 62mm; margin-top: 0.75rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; font-size: 0.9rem;">
+                                    <label for="consume-days" style="margin:0; font-weight:bold; color: #2c3e50;">🕒 消費期限:</label>
+                                    <div style="display: flex; align-items: center; gap: 0.2rem;">
+                                        <input type="number" id="consume-days" class="form-control" value="1" min="0" max="365" style="width: 50px; text-align: center; padding: 0.25rem;" required>
+                                        <span style="font-weight: bold;">日後</span>
+                                    </div>
                                 </div>
-                                <button id="print-btn-footer" class="print-btn primary-btn" style="flex: 1; padding: 0.75rem; font-size: 1.1rem; border-radius: 8px;">🖨️ 印刷する</button>
+                                <div style="text-align: center; width: 100%; margin-top: -0.5rem;">
+                                    <small class="help-text" id="calculated-date-hint" style="color: #e74c3c; font-weight: bold; font-size: 0.8rem;">日付計算中...</small>
+                                </div>
+
+                                <div style="display: flex; gap: 0.5rem; align-items: stretch; width: 100%;">
+                                    <div style="display: flex; align-items: center; background: white; border: 1px solid #ccc; border-radius: 8px; padding: 0.25rem;">
+                                        <button type="button" id="quick-count-minus" class="action-btn" style="width: 30px; height: 30px; line-height: 1; padding: 0; margin: 0; background-color: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 4px; font-weight: bold;">-</button>
+                                        <input type="number" id="print-count-footer" class="form-control" value="1" min="1" max="999" style="width: 50px; text-align: center; font-size: 1.1rem; font-weight: bold; border: none; background: transparent; padding: 0.25rem;">
+                                        <button type="button" id="quick-count-plus" class="action-btn" style="width: 30px; height: 30px; line-height: 1; padding: 0; margin: 0; background-color: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 4px; font-weight: bold;">+</button>
+                                    </div>
+                                    <button id="print-btn-footer" class="print-btn primary-btn" style="flex: 1; padding: 0.75rem; font-size: 1.1rem; border-radius: 8px;">🖨️ 印刷</button>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -655,20 +655,24 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (elements.buttons.quickCountMinus) {
             elements.buttons.quickCountMinus.addEventListener('click', () => {
-                let val = parseInt(elements.inputs.quickPrintCount.value) || 1;
+                let targetInput = elements.buttons.printCountF || elements.buttons.printCountH;
+                if (!targetInput) return;
+                let val = parseInt(targetInput.value) || 1;
                 if(val > 1) {
-                    elements.inputs.quickPrintCount.value = val - 1;
-                    elements.inputs.quickPrintCount.dispatchEvent(new Event('input'));
+                    targetInput.value = val - 1;
+                    targetInput.dispatchEvent(new Event('input'));
                 }
             });
         }
         
         if (elements.buttons.quickCountPlus) {
             elements.buttons.quickCountPlus.addEventListener('click', () => {
-                let val = parseInt(elements.inputs.quickPrintCount.value) || 1;
+                let targetInput = elements.buttons.printCountF || elements.buttons.printCountH;
+                if (!targetInput) return;
+                let val = parseInt(targetInput.value) || 1;
                 if(val < 999) {
-                    elements.inputs.quickPrintCount.value = val + 1;
-                    elements.inputs.quickPrintCount.dispatchEvent(new Event('input'));
+                    targetInput.value = val + 1;
+                    targetInput.dispatchEvent(new Event('input'));
                 }
             });
         }
