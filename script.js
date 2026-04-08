@@ -1196,10 +1196,46 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    const formatIngredientsWithOrigin = (text) => {
+        if (!text || text === '-' || text.trim() === '') return text;
+
+        // 最初の原材料（／より前、かつ最初の「、」の前まで）を抽出
+        // 例:「豚肉、玉ねぎ／調味料」 -> 「豚肉」
+        const match = text.match(/^[^、／]+/);
+        if (!match) return text;
+        
+        const firstItem = match[0].trim();
+        if (!firstItem) return text;
+
+        // すでに括弧が含まれている（産地や副原料が書かれている）場合は何もしない
+        if (firstItem.includes('（') || firstItem.includes('(')) return text;
+
+        // 生鮮材料キーワード (国産)
+        const rawKeywords = ['肉', '魚', '米', '野菜', 'じゃがいも', '玉ねぎ', '人参', 'キャベツ', 'レタス', 'ブロッコリー', 'トマト', 'きゅうり', '卵', '海老', 'えび', 'イカ', 'いか', 'アサリ', '貝', '果'];
+        // 加工品キーワード (国内製造)
+        const processedKeywords = ['めん', '麺', 'パン', 'ソース', 'ルウ', 'マヨネーズ', 'ケチャップ', '醤油', 'しょうゆ', '味噌', 'みそ', '豆腐', '納豆', 'ハム', 'ベーコン', 'ソーセージ', 'ハンバーグ', 'カツ', 'フライ', '揚げ', 'コロッケ', '焼売', '餃子', '佃煮', 'パスタ', 'スパゲティ', 'うどん', 'そば', 'ちくわ', 'かまぼこ'];
+
+        let origin = '';
+        if (rawKeywords.some(kw => firstItem.includes(kw))) {
+            origin = '（国産）';
+        } else if (processedKeywords.some(kw => firstItem.includes(kw))) {
+            origin = '（国内製造）';
+        } else {
+            // 判別できない場合は、ユーザーの指示に基づき「材料（国産）」をデフォルトとする
+            origin = '（国産）';
+        }
+
+        // 先頭項目に産地を付け加えた新しい文字列を返す
+        return firstItem + origin + text.substring(match[0].length);
+    };
+
     const updatePreview = () => {
         elements.preview.name.textContent = elements.inputs.name.value || '名称未設定';
         elements.preview.category.textContent = elements.inputs.category.value || '惣菜';
-        elements.preview.ingredients.textContent = elements.inputs.ingredients.value || '-';
+        
+        // 原材料名の表示時に産地補完を適用
+        const rawIngredients = elements.inputs.ingredients.value || '-';
+        elements.preview.ingredients.textContent = formatIngredientsWithOrigin(rawIngredients);
         
         const daysAdd = parseInt(elements.inputs.consumeDays.value) || 0;
         const targetDate = new Date();
