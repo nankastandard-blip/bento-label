@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             keywords: ['メンチ', 'メンチカツ'],
             data: {
-                ingredients: '食肉（豚肉、牛肉）、玉ねぎ、パン粉、小麦粉、卵、砂糖、食塩、香辛料、植物油脂／加工デンプン、調味料（アミノ酸）、（一部に小麦・卵・乳成分・牛肉・豚肉・大豆を含む）',
+                ingredients: '食肉（豚肉（国産）、牛肉（国産））、玉ねぎ、パン粉、小麦粉、卵、砂糖、食塩、香辛料、植物油脂／加工デンプン、調味料（アミノ酸）、（一部に小麦・卵・乳成分・牛肉・豚肉・大豆を含む）',
                 calories: '310', protein: '10.5', fat: '20.0', carb: '22.0', salt: '1.2', price: '180',
                 category: '惣菜'
             }
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             keywords: ['サラダ', 'ポテトサラダ', 'マカロニサラダ'],
             data: {
-                ingredients: 'じゃがいも（またはマカロニ）、マヨネーズ、きゅうり、人参、玉ねぎ、ハム、食塩、香辛料／調味料（アミノ酸等）、増粘剤（加工デンプン）、（一部に卵・大豆・豚肉・りんごを含む）',
+                ingredients: 'じゃがいも（国産）（またはマカロニ（国内製造））、マヨネーズ、きゅうり、人参、玉ねぎ、ハム、食塩、香辛料／調味料（アミノ酸等）、増粘剤（加工デンプン）、（一部に卵・大豆・豚肉・りんごを含む）',
                 calories: '150', protein: '2.5', fat: '12.0', carb: '10.0', salt: '0.6', price: '200',
                 category: '惣菜',
                 storeMethod: '10℃以下で保存してください'
@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             keywords: ['ひじき', '煮物', '筑前煮', '肉じゃが'],
             data: {
-                ingredients: '野菜（じゃがいも、人参、玉ねぎ、里芋など）、醤油、砂糖、みりん、風味調味料、植物油脂／調味料（アミノ酸等）、（一部に小麦・大豆を含む）',
+                ingredients: '野菜（国産じゃがいも、人参、玉ねぎ、里芋など）、醤油、砂糖、みりん、風味調味料、植物油脂／調味料（アミノ酸等）、（一部に小麦・大豆を含む）',
                 calories: '120', protein: '3.0', fat: '2.5', carb: '15.0', salt: '1.2', price: '250',
                 category: '惣菜'
             }
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             keywords: ['酢豚'],
             data: {
-                ingredients: '豚肉、玉ねぎ、人参、ピーマン、椎茸、ケチャップ、砂糖、醤油、醸造酢、植物油脂、片栗粉／調味料（アミノ酸等）、増粘剤（加工デンプン）、酸味料、（一部に小麦・豚肉・大豆を含む）',
+                ingredients: '豚肉（国産）、玉ねぎ、人参、ピーマン、椎茸、ケチャップ、砂糖、醤油、醸造酢、植物油脂、片栗粉／調味料（アミノ酸等）、増粘剤（加工デンプン）、酸味料、（一部に小麦・豚肉・大豆を含む）',
                 calories: '400', protein: '12.0', fat: '25.0', carb: '28.0', salt: '2.0', price: '350',
                 category: '惣菜'
             }
@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             keywords: ['エビフライ', '海老フライ'],
             data: {
-                ingredients: 'えび、パン粉、小麦粉、卵、植物油脂、食塩、タルタルソース／加工デンプン、調味料（アミノ酸等）、増粘剤（タマリンド）、香辛料抽出物、（一部に小麦・卵・乳成分・えび・大豆を含む）',
+                ingredients: 'えび（国産）、パン粉、小麦粉、卵、植物油脂、食塩、タルタルソース／加工デンプン、調味料（アミノ酸等）、増粘剤（タマリンド）、香辛料抽出物、（一部に小麦・卵・乳成分・えび・大豆を含む）',
                 calories: '320', protein: '15.0', fat: '18.0', carb: '22.0', salt: '1.5', price: '380',
                 category: '惣菜'
             }
@@ -303,29 +303,29 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     // ==== タブ切り替え処理は setupEventListeners で行います ====
     const defaultTemplates = {
-        't200_1': { name: '豚汁', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '味噌、豚肉、大根、人参、ごぼう、こんにゃく、ねぎ／調味料（アミノ酸等）、（一部に大豆・豚肉を含む）', price: '200', calories: '150', protein: '8.5', fat: '9.2', carb: '7.8', salt: '1.8', useJancode: false, jancodeValue: '', usePlaMark: true },
+        't200_1': { name: '豚汁', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '味噌（国内製造）、豚肉、大根、人参、ごぼう、こんにゃく、ねぎ／調味料（アミノ酸等）、（一部に大豆・豚肉を含む）', price: '200', calories: '150', protein: '8.5', fat: '9.2', carb: '7.8', salt: '1.8', useJancode: false, jancodeValue: '', usePlaMark: true },
         't200_2': { name: 'おにぎり（鮭）', category: 'おにぎり', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '塩飯（米（国産）、塩）、鮭フレーク、海苔（国産）／調味料（アミノ酸等）、着色料（紅麹）、（一部にさけ・大豆を含む）', price: '200', calories: '180', protein: '4.2', fat: '1.1', carb: '38.5', salt: '1.2', useJancode: false, jancodeValue: '', usePlaMark: true },
         't200_3': { name: 'おにぎり（こんぶ）', category: 'おにぎり', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '塩飯（米（国産）、塩）、昆布佃煮、海苔（国産）／調味料（アミノ酸等）、カラメル色素、酸味料、（一部に小麦・大豆を含む）', price: '200', calories: '175', protein: '3.8', fat: '0.8', carb: '39.0', salt: '1.5', useJancode: false, jancodeValue: '', usePlaMark: true },
         't200_4': { name: 'おにぎり（うめ）', category: 'おにぎり', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '塩飯（米（国産）、塩）、梅干し、海苔（国産）／酸味料、調味料（アミノ酸等）、着色料（赤106）、（一部に大豆を含む）', price: '200', calories: '170', protein: '3.5', fat: '0.5', carb: '38.0', salt: '2.0', useJancode: false, jancodeValue: '', usePlaMark: true },
 
-        't250_1': { name: '豚汁（小）', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '味噌、豚肉、大根、人参、ごぼう、こんにゃく、ねぎ／調味料（アミノ酸等）、（一部に大豆・豚肉を含む）', price: '250', calories: '120', protein: '6.8', fat: '7.5', carb: '6.2', salt: '1.4', useJancode: false, jancodeValue: '', usePlaMark: true },
+        't250_1': { name: '豚汁（小）', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '味噌（国内製造）、豚肉、大根、人参、ごぼう、こんにゃく、ねぎ／調味料（アミノ酸等）、（一部に大豆・豚肉を含む）', price: '250', calories: '120', protein: '6.8', fat: '7.5', carb: '6.2', salt: '1.4', useJancode: false, jancodeValue: '', usePlaMark: true },
         't250_2': { name: '焼きそば（小）', category: '調理めん', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: 'ゆで中華めん（国内製造）、キャベツ、豚肉、もやし、人参、濃厚ソース、植物油脂、青のり／調味料（アミノ酸等）、カラメル色素、かんすい、酸味料、（一部に小麦・豚肉・大豆・りんごを含む）', price: '250', calories: '280', protein: '8.5', fat: '12.0', carb: '35.0', salt: '2.5', useJancode: false, jancodeValue: '', usePlaMark: true },
-        't250_3': { name: '玉こんにゃく', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: 'こんにゃく、醤油、砂糖、みりん、風味調味料／調味料（アミノ酸等）、水酸化カルシウム、（一部に小麦・大豆を含む）', price: '250', calories: '45', protein: '1.2', fat: '0.2', carb: '10.5', salt: '1.8', useJancode: false, jancodeValue: '', usePlaMark: true },
-        't250_4': { name: '岩下の新生姜タルタル', category: '惣菜', consumeDays: '1', storeMethod: '10℃以下で保存してください', ingredients: 'マヨネーズ、岩下の新生姜、ゆで卵、玉ねぎ、砂糖、食塩、香辛料／調味料（アミノ酸等）、酸味料、（一部に卵・大豆・りんごを含む）', price: '250', calories: '150', protein: '2.5', fat: '14.0', carb: '1.8', salt: '0.8', useJancode: false, jancodeValue: '', usePlaMark: true },
+        't250_3': { name: '玉こんにゃく', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: 'こんにゃく（国内製造）、醤油、砂糖、みりん、風味調味料／調味料（アミノ酸等）、水酸化カルシウム、（一部に小麦・大豆を含む）', price: '250', calories: '45', protein: '1.2', fat: '0.2', carb: '10.5', salt: '1.8', useJancode: false, jancodeValue: '', usePlaMark: true },
+        't250_4': { name: '岩下の新生姜タルタル', category: '惣菜', consumeDays: '1', storeMethod: '10℃以下で保存してください', ingredients: 'マヨネーズ（国内製造）、岩下の新生姜、ゆで卵、玉ねぎ、砂糖、食塩、香辛料／調味料（アミノ酸等）、酸味料、（一部に卵・大豆・りんごを含む）', price: '250', calories: '150', protein: '2.5', fat: '14.0', carb: '1.8', salt: '0.8', useJancode: false, jancodeValue: '', usePlaMark: true },
 
-        't340_1': { name: '豚汁（中）', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '味噌、豚肉、大根、人参、ごぼう、こんにゃく、ねぎ／調味料（アミノ酸等）、（一部に大豆・豚肉を含む）', price: '340', calories: '180', protein: '10.2', fat: '11.0', carb: '9.3', salt: '2.1', useJancode: false, jancodeValue: '', usePlaMark: true },
-        't340_2': { name: 'ちくわの磯辺揚げ', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: 'ちくわ、小麦粉、植物油脂、青のり、食塩／加工デンプン、調味料（アミノ酸等）、（一部に小麦・卵・大豆を含む）', price: '340', calories: '220', protein: '8.0', fat: '12.5', carb: '18.0', salt: '1.5', useJancode: false, jancodeValue: '', usePlaMark: true },
-        't340_3': { name: 'ちくわの磯辺揚げ＆紅生姜揚げ', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: 'ちくわ、紅生姜、小麦粉、植物油脂、青のり、食塩／加工デンプン、調味料（アミノ酸等）、酸味料、着色料（赤106）、（一部に小麦・卵・大豆を含む）', price: '340', calories: '215', protein: '7.8', fat: '12.0', carb: '18.5', salt: '1.8', useJancode: false, jancodeValue: '', usePlaMark: true },
-        't340_4': { name: '野菜サラダ（小）', category: '惣菜', consumeDays: '1', storeMethod: '10℃以下で保存してください', ingredients: 'キャベツ、レタス、人参、きゅうり、トマト、コーン／酸化防止剤（V.C）、（一部に大豆を含む）', price: '340', calories: '45', protein: '1.5', fat: '0.3', carb: '9.5', salt: '0.1', useJancode: false, jancodeValue: '', usePlaMark: true },
-        't340_5': { name: 'マカロニサラダ', category: '惣菜', consumeDays: '1', storeMethod: '10℃以下で保存してください', ingredients: 'マカロニ、マヨネーズ、きゅうり、人参、玉ねぎ、ハム、食塩、香辛料／調味料（アミノ酸等）、増粘剤（加工デンプン）、（一部に卵・大豆・豚肉・りんごを含む）', price: '340', calories: '180', protein: '3.5', fat: '13.0', carb: '12.0', salt: '0.8', useJancode: false, jancodeValue: '', usePlaMark: true },
-        't340_6': { name: 'シシャモフライ', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: 'シシャモ、パン粉、小麦粉、卵、植物油脂、食塩／加工デンプン、調味料（アミノ酸等）、（一部に小麦・卵・大豆を含む）', price: '340', calories: '190', protein: '12.0', fat: '10.5', carb: '11.5', salt: '0.9', useJancode: false, jancodeValue: '', usePlaMark: true },
-        't340_7': { name: '海老かき揚げ1個', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '玉ねぎ、人参、えび、小麦粉、卵、植物油脂、食塩／膨張剤、着色料（ビタミンB2）、（一部に小麦・卵・えび・大豆を含む）', price: '340', calories: '250', protein: '4.5', fat: '18.0', carb: '18.5', salt: '0.4', useJancode: false, jancodeValue: '', usePlaMark: true },
+        't340_1': { name: '豚汁（中）', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '味噌（国内製造）、豚肉、大根、人参、ごぼう、こんにゃく、ねぎ／調味料（アミノ酸等）、（一部に大豆・豚肉を含む）', price: '340', calories: '180', protein: '10.2', fat: '11.0', carb: '9.3', salt: '2.1', useJancode: false, jancodeValue: '', usePlaMark: true },
+        't340_2': { name: 'ちくわの磯辺揚げ', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: 'ちくわ（国内製造）、小麦粉、植物油脂、青のり、食塩／加工デンプン、調味料（アミノ酸等）、（一部に小麦・卵・大豆を含む）', price: '340', calories: '220', protein: '8.0', fat: '12.5', carb: '18.0', salt: '1.5', useJancode: false, jancodeValue: '', usePlaMark: true },
+        't340_3': { name: 'ちくわの磯辺揚げ＆紅生姜揚げ', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: 'ちくわ（国内製造）、紅生姜、小麦粉、植物油脂、青のり、食塩／加工デンプン、調味料（アミノ酸等）、酸味料、着色料（赤106）、（一部に小麦・卵・大豆を含む）', price: '340', calories: '215', protein: '7.8', fat: '12.0', carb: '18.5', salt: '1.8', useJancode: false, jancodeValue: '', usePlaMark: true },
+        't340_4': { name: '野菜サラダ（小）', category: '惣菜', consumeDays: '1', storeMethod: '10℃以下で保存してください', ingredients: 'キャベツ（国産）、レタス、人参、きゅうり、トマト、コーン／酸化防止剤（V.C）、（一部に大豆を含む）', price: '340', calories: '45', protein: '1.5', fat: '0.3', carb: '9.5', salt: '0.1', useJancode: false, jancodeValue: '', usePlaMark: true },
+        't340_5': { name: 'マカロニサラダ', category: '惣菜', consumeDays: '1', storeMethod: '10℃以下で保存してください', ingredients: 'マカロニ（国内製造）、マヨネーズ、きゅうり、人参、玉ねぎ、ハム、食塩、香辛料／調味料（アミノ酸等）、増粘剤（加工デンプン）、（一部に卵・大豆・豚肉・りんごを含む）', price: '340', calories: '180', protein: '3.5', fat: '13.0', carb: '12.0', salt: '0.8', useJancode: false, jancodeValue: '', usePlaMark: true },
+        't340_6': { name: 'シシャモフライ', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: 'シシャモ（国産）、パン粉、小麦粉、卵、植物油脂、食塩／加工デンプン、調味料（アミノ酸等）、（一部に小麦・卵・大豆を含む）', price: '340', calories: '190', protein: '12.0', fat: '10.5', carb: '11.5', salt: '0.9', useJancode: false, jancodeValue: '', usePlaMark: true },
+        't340_7': { name: '海老かき揚げ1個', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '玉ねぎ（国産）、人参、えび、小麦粉、卵、植物油脂、食塩／膨張剤、着色料（ビタミンB2）、（一部に小麦・卵・えび・大豆を含む）', price: '340', calories: '250', protein: '4.5', fat: '18.0', carb: '18.5', salt: '0.4', useJancode: false, jancodeValue: '', usePlaMark: true },
         't340_8': { name: '冷やしうどん（小）', category: '調理めん', consumeDays: '1', storeMethod: '10℃以下で保存してください', ingredients: 'ゆでうどん（国内製造）、めんつゆ、ネギ、天かす／調味料（アミノ酸等）、酸味料、（一部に小麦・大豆を含む）', price: '340', calories: '210', protein: '5.5', fat: '1.2', carb: '44.0', salt: '2.8', useJancode: false, jancodeValue: '', usePlaMark: true },
         't340_9': { name: 'おにぎり1個セット', category: '弁当', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '塩飯（米（国産）、塩）、鮭フレーク、だし巻き卵、唐揚げ、海苔（国産）／調味料（アミノ酸等）、着色料（紅麹）、（一部に小麦・卵・鶏肉・さけ・大豆を含む）', price: '340', calories: '320', protein: '12.5', fat: '8.5', carb: '48.0', salt: '1.8', useJancode: false, jancodeValue: '', usePlaMark: true },
 
-        't500_1': { name: '岩下の新生姜”本気”唐揚げ', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '鶏肉、岩下の新生姜、小麦粉、片栗粉、醤油、酒、植物油脂、食塩／調味料（アミノ酸等）、酸味料、（一部に小麦・鶏肉・大豆を含む）', price: '500', calories: '350', protein: '22.0', fat: '24.0', carb: '11.5', salt: '1.8', useJancode: false, jancodeValue: '', usePlaMark: true },
-        't500_2': { name: '野菜サラダ（中）', category: '惣菜', consumeDays: '1', storeMethod: '10℃以下で保存してください', ingredients: 'キャベツ、レタス、人参、きゅうり、トマト、コーン／酸化防止剤（V.C）、（一部に大豆を含む）', price: '500', calories: '85', protein: '2.8', fat: '0.6', carb: '17.5', salt: '0.2', useJancode: false, jancodeValue: '', usePlaMark: true },
-        't500_3': { name: '豚汁（大）', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '味噌、豚肉、大根、人参、ごぼう、こんにゃく、ねぎ／調味料（アミノ酸等）、（一部に大豆・豚肉を含む）', price: '500', calories: '250', protein: '14.5', fat: '15.2', carb: '12.8', salt: '2.8', useJancode: false, jancodeValue: '', usePlaMark: true },
+        't500_1': { name: '岩下の新生姜”本気”唐揚げ', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '鶏肉（国産）、岩下の新生姜、小麦粉、片栗粉、醤油、酒、植物油脂、食塩／調味料（アミノ酸等）、酸味料、（一部に小麦・鶏肉・大豆を含む）', price: '500', calories: '350', protein: '22.0', fat: '24.0', carb: '11.5', salt: '1.8', useJancode: false, jancodeValue: '', usePlaMark: true },
+        't500_2': { name: '野菜サラダ（中）', category: '惣菜', consumeDays: '1', storeMethod: '10℃以下で保存してください', ingredients: 'キャベツ（国産）、レタス、人参、きゅうり、トマト、コーン／酸化防止剤（V.C）、（一部に大豆を含む）', price: '500', calories: '85', protein: '2.8', fat: '0.6', carb: '17.5', salt: '0.2', useJancode: false, jancodeValue: '', usePlaMark: true },
+        't500_3': { name: '豚汁（大）', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '味噌（国内製造）、豚肉、大根、人参、ごぼう、こんにゃく、ねぎ／調味料（アミノ酸等）、（一部に大豆・豚肉を含む）', price: '500', calories: '250', protein: '14.5', fat: '15.2', carb: '12.8', salt: '2.8', useJancode: false, jancodeValue: '', usePlaMark: true },
         't500_4': { name: '冷やしかき揚げうどん', category: '調理めん', consumeDays: '1', storeMethod: '10℃以下で保存してください', ingredients: 'ゆでうどん（国内製造）、野菜かき揚げ、めんつゆ、ネギ／調味料（アミノ酸等）、膨張剤、（一部に小麦・卵・大豆を含む）', price: '500', calories: '480', protein: '12.5', fat: '18.5', carb: '65.0', salt: '4.8', useJancode: false, jancodeValue: '', usePlaMark: true },
         't500_5': { name: 'かつ丼', category: '弁当', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '麦入り御飯（米（国産）、大麦）、豚ロースカツ、卵、玉ねぎ、醤油、みりん、砂糖、風味調味料／調味料（アミノ酸等）、加工デンプン、着色料（カロチノイド）、（一部に小麦・卵・豚肉・大豆を含む）', price: '500', calories: '850', protein: '28.0', fat: '32.0', carb: '105.0', salt: '4.2', useJancode: false, jancodeValue: '', usePlaMark: true },
         't500_6': { name: 'かき揚げ天丼', category: '弁当', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '麦入り御飯（米（国産）、大麦）、野菜かき揚げ、天丼のたれ／調味料（アミノ酸等）、カラメル色素、膨張剤、（一部に小麦・卵・えび・大豆を含む）', price: '500', calories: '720', protein: '12.5', fat: '25.0', carb: '110.0', salt: '3.5', useJancode: false, jancodeValue: '', usePlaMark: true },
@@ -333,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
         't500_8': { name: 'マーボー丼', category: '弁当', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '麦入り御飯（米（国産）、大麦）、豆腐、豚挽肉、ネギ、豆板醤、醤油、片栗粉／調味料（アミノ酸等）、豆腐用凝固剤、（一部に小麦・豚肉・大豆・ごまを含む）', price: '500', calories: '650', protein: '22.0', fat: '24.0', carb: '85.0', salt: '3.6', useJancode: false, jancodeValue: '', usePlaMark: true },
         't500_9': { name: 'おにぎり2個セット', category: '弁当', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '塩飯（米（国産）、塩）、鮭フレーク、梅干し、唐揚げ、だし巻き卵、海苔（国産）／調味料（アミノ酸等）、酸味料、（一部に小麦・卵・鶏肉・さけ・大豆を含む）', price: '500', calories: '480', protein: '18.5', fat: '14.2', carb: '68.0', salt: '2.5', useJancode: false, jancodeValue: '', usePlaMark: true },
         't500_10': { name: 'パスタ（トマトクリーム）', category: '調理めん', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: 'スパゲティ（国内製造）、トマトソース、クリーム、ベーコン、プロセスチーズ／調味料（アミノ酸等）、乳化剤、発色剤（亜硝酸Na）、（一部に小麦・乳成分・豚肉・大豆を含む）', price: '500', calories: '580', protein: '22.5', fat: '25.0', carb: '65.0', salt: '3.2', useJancode: false, jancodeValue: '', usePlaMark: true },
-        't500_11': { name: 'おつまみパック6', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '唐揚げ、枝豆、ウインナー、ポテトフライ、玉子焼き、ちくわ磯辺揚げ／調味料（アミノ酸等）、リン酸塩（Na）、発色剤（亜硝酸Na）、（一部に小麦・卵・乳成分・鶏肉・豚肉・大豆を含む）', price: '500', calories: '450', protein: '24.0', fat: '28.0', carb: '25.0', salt: '3.5', useJancode: false, jancodeValue: '', usePlaMark: true },
+        't500_11': { name: 'おつまみパック6', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '唐揚げ（国内製造）、枝豆、ウインナー、ポテトフライ、玉子焼き、ちくわ磯辺揚げ／調味料（アミノ酸等）、リン酸塩（Na）、発色剤（亜硝酸Na）、（一部に小麦・卵・乳成分・鶏肉・豚肉・大豆を含む）', price: '500', calories: '450', protein: '24.0', fat: '28.0', carb: '25.0', salt: '3.5', useJancode: false, jancodeValue: '', usePlaMark: true },
 
         't660_1': { name: '岩下の新生姜”本気”唐揚げ弁当', category: '弁当', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '麦入り御飯（米（国産）、大麦）、岩下の新生姜本気唐揚げ、その他おかず／調味料（アミノ酸等）、酸味料、（一部に小麦・鶏肉・大豆を含む）', price: '660', calories: '780', protein: '28.5', fat: '30.1', carb: '95.6', salt: '3.5', useJancode: false, jancodeValue: '', usePlaMark: true },
         't660_2': { name: 'サバフライ弁当', category: '弁当', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '麦入り御飯（米（国産）、大麦）、サバフライ、その他おかず／調味料（アミノ酸等）、加工デンプン、（一部に小麦・卵・さば・大豆を含む）', price: '660', calories: '720', protein: '24.1', fat: '25.4', carb: '92.3', salt: '3.2', useJancode: false, jancodeValue: '', usePlaMark: true },
@@ -344,19 +344,19 @@ document.addEventListener('DOMContentLoaded', () => {
         't660_7': { name: 'とり胸低温調理弁当', category: '弁当', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '麦入り御飯（米（国産）、大麦）、鶏胸肉、塩だれ、その他おかず／調味料（アミノ酸等）、（一部に小麦・鶏肉・大豆を含む）', price: '660', calories: '620', protein: '32.5', fat: '12.1', carb: '88.6', salt: '3.2', useJancode: false, jancodeValue: '', usePlaMark: true },
         't660_8': { name: '焼肉弁当', category: '弁当', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '麦入り御飯（米（国産）、大麦）、牛肉、玉ねぎ、焼肉のたれ、その他おかず／調味料（アミノ酸等）、カラメル色素、酸味料、（一部に小麦・牛肉・ごま・大豆・りんごを含む）', price: '660', calories: '820', protein: '24.5', fat: '28.1', carb: '105.6', salt: '3.8', useJancode: false, jancodeValue: '', usePlaMark: true },
         't660_9': { name: 'ガパオライス', category: '弁当', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '麦入り御飯（米（国産）、大麦）、鶏挽肉、パプリカ、玉ねぎ、バジル、ナンプラー、目玉焼き／調味料（アミノ酸等）、（一部に小麦・卵・鶏肉・大豆を含む）', price: '660', calories: '710', protein: '22.8', fat: '24.2', carb: '98.1', salt: '4.1', useJancode: false, jancodeValue: '', usePlaMark: true },
-        't660_10': { name: 'サラダ（大）', category: '惣菜', consumeDays: '1', storeMethod: '10℃以下で保存してください', ingredients: 'キャベツ、レタス、人参、きゅうり、トマト、コーン／酸化防止剤（V.C）、（一部に大豆を含む）', price: '660', calories: '120', protein: '4.5', fat: '0.8', carb: '24.5', salt: '0.3', useJancode: false, jancodeValue: '', usePlaMark: true },
+        't660_10': { name: 'サラダ（大）', category: '惣菜', consumeDays: '1', storeMethod: '10℃以下で保存してください', ingredients: 'キャベツ（国産）、レタス、人参、きゅうり、トマト、コーン／酸化防止剤（V.C）、（一部に大豆を含む）', price: '660', calories: '120', protein: '4.5', fat: '0.8', carb: '24.5', salt: '0.3', useJancode: false, jancodeValue: '', usePlaMark: true },
 
         't750_1': { name: '岩下の新生姜”本気”唐揚げ（タルタル）弁当', category: '弁当', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '麦入り御飯（米（国産）、大麦）、岩下の新生姜本気唐揚げ、岩下の新生姜タルタル、その他おかず／調味料（アミノ酸等）、酸味料、（一部に小麦・卵・鶏肉・大豆・りんごを含む）', price: '750', calories: '880', protein: '30.5', fat: '42.1', carb: '98.6', salt: '3.8', useJancode: false, jancodeValue: '', usePlaMark: true },
         't750_2': { name: '幕ノ内弁当', category: '弁当', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '麦入り御飯（米（国産）、大麦）、焼き鮭、海老フライ、煮物、その他おかず／調味料（アミノ酸等）、着色料（赤106、カロチノイド）、（一部に小麦・卵・えび・さけ・鶏肉・豚肉・大豆を含む）', price: '750', calories: '650', protein: '22.8', fat: '18.2', carb: '92.1', salt: '3.6', useJancode: false, jancodeValue: '', usePlaMark: true },
         't750_3': { name: '焼きサバ弁当', category: '弁当', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '麦入り御飯（米（国産）、大麦）、塩鯖焼き、その他おかず／調味料（アミノ酸等）、酸化防止剤（V.C）、酸味料、（一部に小麦・さば・大豆を含む）', price: '750', calories: '680', protein: '25.5', fat: '22.4', carb: '90.3', salt: '3.5', useJancode: false, jancodeValue: '', usePlaMark: true },
         't750_4': { name: '筋トレ弁当', category: '弁当', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '玄米（国産米）、鶏胸肉低温調理、ブロッコリー、ゆで卵／調味料（アミノ酸等）、（一部に卵・鶏肉を含む）', price: '750', calories: '580', protein: '45.0', fat: '12.0', carb: '68.0', salt: '2.5', useJancode: false, jancodeValue: '', usePlaMark: true },
-        't750_5': { name: 'サラダ（おすすめ）', category: '惣菜', consumeDays: '1', storeMethod: '10℃以下で保存してください', ingredients: 'レタス、ローストポーク、ゆで卵、トマト、ブロッコリー／酸化防止剤（V.C）、（一部に卵・豚肉・大豆を含む）', price: '750', calories: '320', protein: '18.5', fat: '14.2', carb: '12.1', salt: '1.2', useJancode: false, jancodeValue: '', usePlaMark: true },
-        't750_6': { name: '若鶏の半身揚げ', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '鶏肉、香辛料、食塩、植物油脂／調味料（アミノ酸等）、（一部に鶏肉を含む）', price: '750', calories: '550', protein: '42.0', fat: '38.0', carb: '2.0', salt: '2.8', useJancode: false, jancodeValue: '', usePlaMark: true },
+        't750_5': { name: 'サラダ（おすすめ）', category: '惣菜', consumeDays: '1', storeMethod: '10℃以下で保存してください', ingredients: 'レタス（国産）、ローストポーク、ゆで卵、トマト、ブロッコリー／酸化防止剤（V.C）、（一部に卵・豚肉・大豆を含む）', price: '750', calories: '320', protein: '18.5', fat: '14.2', carb: '12.1', salt: '1.2', useJancode: false, jancodeValue: '', usePlaMark: true },
+        't750_6': { name: '若鶏の半身揚げ', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '鶏肉（国産）、香辛料、食塩、植物油脂／調味料（アミノ酸等）、（一部に鶏肉を含む）', price: '750', calories: '550', protein: '42.0', fat: '38.0', carb: '2.0', salt: '2.8', useJancode: false, jancodeValue: '', usePlaMark: true },
 
         't1000_1': { name: '日替わり弁当', category: '弁当', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '麦入り御飯（米（国産）、大麦）、主菜（肉類または魚介類）、その他おかず／調味料（アミノ酸等）、着色料（赤106、カロチノイド）、（一部に小麦・卵・乳成分・牛肉・豚肉・鶏肉・さば・大豆・ごま・りんごを含む）', price: '1000', calories: '750', protein: '25.0', fat: '22.0', carb: '105.0', salt: '3.8', useJancode: false, jancodeValue: '', usePlaMark: true },
         't1000_2': { name: '玄米日替わり弁当', category: '弁当', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '玄米（国産米）、主菜（肉類または魚介類）、その他おかず／調味料（アミノ酸等）、着色料（赤106、カロチノイド）、（一部に小麦・卵・乳成分・牛肉・豚肉・鶏肉・さば・大豆・ごま・りんごを含む）', price: '1000', calories: '720', protein: '25.5', fat: '22.0', carb: '100.0', salt: '3.6', useJancode: false, jancodeValue: '', usePlaMark: true },
-        't1000_3': { name: '鍋セット', category: '惣菜半製品', consumeDays: '1', storeMethod: '10℃以下で保存してください', ingredients: '白菜、豚肉、ネギ、豆腐、きのこ類、鍋スープ／調味料（アミノ酸等）、豆腐用凝固剤、（一部に小麦・豚肉・大豆を含む）', price: '1000', calories: '450', protein: '28.0', fat: '32.0', carb: '15.0', salt: '5.5', useJancode: false, jancodeValue: '', usePlaMark: true },
-        't1000_4': { name: '冷凍岩下の新生姜”本気”唐揚げ', category: '冷凍食品', consumeDays: '30', storeMethod: '-18℃以下で保存してください', ingredients: '鶏肉、岩下の新生姜、小麦粉、片栗粉、醤油、酒、植物油脂、食塩／調味料（アミノ酸等）、酸味料、（一部に小麦・鶏肉・大豆を含む）', price: '1000', calories: '350', protein: '22.0', fat: '24.0', carb: '11.5', salt: '1.8', useJancode: false, jancodeValue: '', usePlaMark: true }
+        't1000_3': { name: '鍋セット', category: '惣菜半製品', consumeDays: '1', storeMethod: '10℃以下で保存してください', ingredients: '白菜（国産）、豚肉、ネギ、豆腐、きのこ類、鍋スープ／調味料（アミノ酸等）、豆腐用凝固剤、（一部に小麦・豚肉・大豆を含む）', price: '1000', calories: '450', protein: '28.0', fat: '32.0', carb: '15.0', salt: '5.5', useJancode: false, jancodeValue: '', usePlaMark: true },
+        't1000_4': { name: '冷凍岩下の新生姜”本気”唐揚げ', category: '冷凍食品', consumeDays: '30', storeMethod: '-18℃以下で保存してください', ingredients: '鶏肉（国産）、岩下の新生姜、小麦粉、片栗粉、醤油、酒、植物油脂、食塩／調味料（アミノ酸等）、酸味料、（一部に小麦・鶏肉・大豆を含む）', price: '1000', calories: '350', protein: '22.0', fat: '24.0', carb: '11.5', salt: '1.8', useJancode: false, jancodeValue: '', usePlaMark: true }
     };
 
     let userTemplates = {};
