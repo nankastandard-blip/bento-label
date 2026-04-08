@@ -344,12 +344,12 @@
                         </div> <!-- End print-target -->
                             
                         <!-- プレビュースクリーン用 コントロール -->
-                        <div class="print-controls" style="display: flex; flex-direction: column; gap: 0.5rem; align-items: center; justify-content: center; width: 100%; max-width: 45mm; background: #fff; padding: 0.5rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                        <div class="print-controls" style="display: flex; flex-direction: column; gap: 0.3rem; align-items: center; justify-content: center; width: 100%; max-width: 62mm; background: #fff; padding: 0.3rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                                 <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; font-size: 0.9rem;">
-                                    <label for="consume-days" style="margin:0; font-weight:bold; color: #2c3e50;">🕒 消費期限:</label>
-                                    <div style="display: flex; align-items: center; gap: 0.2rem;">
-                                        <input type="number" id="consume-days" class="form-control" value="1" min="0" max="365" style="width: 50px; text-align: center; padding: 0.25rem;" required>
-                                        <span style="font-weight: bold;">日後</span>
+                                    <label for="consume-days" style="margin:0; font-weight:bold; color: #2c3e50; font-size:0.85rem;">🕒 消費期限:</label>
+                                     <div style="display: flex; align-items: center; gap: 0.2rem;">
+                                         <input type="number" id="consume-days" class="form-control" value="1" min="0" max="365" style="width: 45px; text-align: center; padding: 0.2rem; font-size:0.85rem;" required>
+                                         <span style="font-weight: bold; font-size:0.85rem;">日後</span>
                                     </div>
                                 </div>
                                 <div style="text-align: center; width: 100%; margin-top: -0.5rem;">
@@ -358,11 +358,11 @@
 
                                 <div style="display: flex; gap: 0.5rem; align-items: stretch; width: 100%;">
                                     <div style="display: flex; align-items: center; background: white; border: 1px solid #ccc; border-radius: 8px; padding: 0.25rem;">
-                                        <button type="button" id="quick-count-minus" class="action-btn" style="width: 30px; height: 30px; line-height: 1; padding: 0; margin: 0; background-color: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 4px; font-weight: bold;">-</button>
-                                        <input type="number" id="print-count-footer" class="form-control" value="1" min="1" max="999" style="width: 50px; text-align: center; font-size: 1.1rem; font-weight: bold; border: none; background: transparent; padding: 0.25rem;">
-                                        <button type="button" id="quick-count-plus" class="action-btn" style="width: 30px; height: 30px; line-height: 1; padding: 0; margin: 0; background-color: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 4px; font-weight: bold;">+</button>
+                                        <button type="button" id="quick-count-minus" class="action-btn" style="width: 24px; height: 24px; line-height: 1; padding: 0; margin: 0; background-color: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 3px; font-weight: bold; font-size: 0.8rem;">-</button>
+                                        <input type="number" id="print-count-footer" class="form-control" value="1" min="1" max="999" style="width: 40px; text-align: center; font-size: 0.9rem; font-weight: bold; border: none; background: transparent; padding: 0.2rem;">
+                                        <button type="button" id="quick-count-plus" class="action-btn" style="width: 24px; height: 24px; line-height: 1; padding: 0; margin: 0; background-color: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 3px; font-weight: bold; font-size: 0.8rem;">+</button>
                                     </div>
-                                    <button id="print-btn-footer" class="print-btn primary-btn" style="flex: 1; padding: 0.75rem; font-size: 1.1rem; border-radius: 8px;">🖨️ 印刷</button>
+                                    <button id="print-btn-footer" class="print-btn primary-btn" style="flex: 1; padding: 0.5rem; font-size: 0.9rem; border-radius: 6px;">🖨️ 印刷</button>
                                 </div>
                             </div>
                     </div>
