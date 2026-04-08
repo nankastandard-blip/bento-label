@@ -1216,8 +1216,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const processedKeywords = ['めん', '麺', 'パン', 'ソース', 'ルウ', 'マヨネーズ', 'ケチャップ', '醤油', 'しょうゆ', '味噌', 'みそ', '豆腐', '納豆', 'ハム', 'ベーコン', 'ソーセージ', 'ウインナー', 'ハンバーグ', 'カツ', 'フライ', '揚げ', 'コロッケ', '焼売', '餃子', '佃煮', 'パスタ', 'スパゲティ', 'マカロニ', 'うどん', 'そば', 'ちくわ', 'かまぼこ', 'こんにゃく', 'チーズ', '天かす'];
 
         let origin = '';
-        // 鶏肉が最初の原材料の場合はデフォルトでブラジル産
-        if (firstItem.includes('鶏肉') || firstItem.includes('鶏')) {
+        // 鶏肉・鶏関連のキーワードが最初の原材料の場合はデフォルトでブラジル産
+        const chickenKeywords = ['鶏肉', '鶏', '若鶏', 'チキン', '鶏むね', '鶏もも'];
+        if (chickenKeywords.some(kw => firstItem.includes(kw))) {
             origin = '（ブラジル産）';
         } else if (rawKeywords.some(kw => firstItem.includes(kw))) {
             origin = '（国産）';
