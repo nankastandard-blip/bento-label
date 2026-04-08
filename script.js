@@ -825,7 +825,15 @@ document.addEventListener('DOMContentLoaded', () => {
                          noRiceRadio.checked = true;
                          // 既存の ingredients にご飯が入っていれば消すため updateRiceInIngredients を呼ぶ
                          // updateRiceInIngredients の定義前なのでここでは text の直接書き換えなどを検討しますが、
-                         // 今回は updatePreview() 内で処理されるか、または後述の window.updateRiceInIngredients を利用します。
+                         // すでに括弧が含まれている（産地や副原料が書かれている）場合は何もしない
+                         if (firstItem.includes('（') || firstItem.includes('(')) return text;
+
+                         // 鶏肉系キーワードが最初に来たらデフォルトでブラジル産
+                         const chickenKeywords = ['鶏肉', '鶏', '若鶏', 'チキン', '鶏むね', '鶏もも', '唐揚げ'];
+                         if (chickenKeywords.some(kw => firstItem.includes(kw))) {
+                             origin = '（ブラジル産）';
+                             return firstItem + origin + text.substring(match[0].length);
+                         }
                      }
                  }
             }
