@@ -278,11 +278,10 @@
                         <span class="badge">Brother QL-820NWBc対応 (62mmラベル巻 想定)</span>
                     </div>
                     
-                    <div class="card-body">
-                        <div class="preview-container" style="margin-bottom: 1.5rem;">
-                            <!-- この部分が実際に印刷されるラベル -->
-                            <div id="print-target" class="label-box">
-                                <div class="label-inner">
+                    <div class="card-body preview-container" style="flex-direction: column; gap: 1.5rem;">
+                        <!-- この部分が実際に印刷されるラベル -->
+                        <div id="print-target" class="label-box">
+                            <div class="label-inner">
                                 <div class="label-header" style="display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid #000; padding-bottom: 0.5mm; margin-bottom: 1.5mm;">
                                     <div class="label-title" id="preview-name" style="border: none; padding: 0; margin: 0;">お弁当</div>
                                     <div id="preview-packaging-mark" class="logo-mark" style="display: block;">プラ</div>
@@ -342,10 +341,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> <!-- End print-target -->
                             
                         <!-- プレビュースクリーン用 コントロール -->
-                        <div class="print-controls" style="display: flex; flex-direction: column; gap: 0.75rem; width: 100%; background: #f8fafc; padding: 1rem; border: 1px solid #cbd5e1; border-radius: 8px;">
+                        <div class="print-controls" style="display: flex; flex-direction: column; gap: 0.75rem; align-items: center; justify-content: center; width: 100%; max-width: 62mm; background: #fff; padding: 1rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                                 <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; font-size: 0.9rem;">
                                     <label for="consume-days" style="margin:0; font-weight:bold; color: #2c3e50;">🕒 消費期限:</label>
                                     <div style="display: flex; align-items: center; gap: 0.2rem;">
