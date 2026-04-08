@@ -531,10 +531,16 @@ textarea.form-control {
    ========================================================================== */
 @media print {
     /* アプリケーションUI全体を非表示 */
-    .app-container {
+    .app-container,
+    .no-print {
         display: none !important;
     }
     
+    /* ラベル内の操作用コントロールも非表示にする */
+    .print-controls {
+        display: none !important;
+    }
+
     /* 印刷スプール（クローンされたラベル群）のみ表示 */
     .print-only {
         display: block !important;
@@ -558,6 +564,7 @@ textarea.form-control {
     /* Print specific tweaks */
     .label-inner {
         padding: 1.5mm;
+        background-color: white !important; /* 背景色は常に白 */
     }
 
     @page {
