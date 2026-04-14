@@ -218,6 +218,226 @@ document.addEventListener('DOMContentLoaded', () => {
                 calories: '280', protein: '6.0', fat: '16.0', carb: '26.0', salt: '1.2', price: '200',
                 category: '惣菜'
             }
+        },
+        // ==== タイ料理 ====
+        {
+            keywords: ['ガパオ'],
+            data: {
+                ingredients: '麦入り御飯（米（国産）、大麦）、鶏挽肉、パプリカ、玉ねぎ、バジル、ナンプラー、オイスターソース、植物油脂、目玉焼き／調味料（アミノ酸等）、（一部に小麦・卵・鶏肉・大豆を含む）',
+                calories: '710', protein: '22.8', fat: '24.2', carb: '98.1', salt: '4.1', price: '680'
+            }
+        },
+        {
+            keywords: ['パッタイ'],
+            data: {
+                ingredients: 'ビーフン（国内製造）、えび、厚揚げ、もやし、ニラ、卵、おろしにんにく、パッタイソース（砂糖、ナンプラー、タマリンドなど）、ピーナッツ、植物油脂／調味料（アミノ酸等）、酸味料、（一部に小麦・卵・えび・落花生・大豆・ごまを含む）',
+                calories: '580', protein: '15.0', fat: '18.0', carb: '85.0', salt: '4.5', price: '600',
+                category: '調理めん'
+            }
+        },
+        {
+            keywords: ['グリーンカレー'],
+            data: {
+                ingredients: '麦入り御飯（米（国産）、大麦）、ココナッツミルク、鶏肉、茄子、たけのこ、ピーマン、グリーンカレーペースト、ナンプラー、砂糖／調味料（アミノ酸等）、（一部に乳成分・鶏肉・大豆を含む）',
+                calories: '620', protein: '18.0', fat: '25.0', carb: '88.0', salt: '3.8', price: '650'
+            }
+        },
+        {
+            keywords: ['カオマンガイ'],
+            data: {
+                ingredients: '味付け御飯（米（国産）、鶏だし、生姜）、ゆで鶏肉、きゅうり、パクチー、特製だれ（味噌、醤油、生姜、にんにく等）／調味料（アミノ酸等）、（一部に小麦・鶏肉・大豆を含む）',
+                calories: '650', protein: '25.0', fat: '18.0', carb: '92.0', salt: '3.5', price: '650'
+            }
+        },
+        // ==== インド料理 ====
+        {
+            keywords: ['バターチキン'],
+            data: {
+                ingredients: '麦入り御飯（米（国産）、大麦）、バターチキンカレー（鶏肉（ブラジル産）、トマトペースト、生クリーム、バター、カシューナッツ、香辛料など）／調味料（アミノ酸等）、着色料（パプリカ色素）、（一部に小麦・乳成分・鶏肉・カシューナッツ・大豆を含む）',
+                calories: '850', protein: '28.0', fat: '35.0', carb: '95.0', salt: '3.2', price: '700'
+            }
+        },
+        {
+            keywords: ['キーマカレー'],
+            data: {
+                ingredients: '麦入り御飯（米（国産）、大麦）、キーマカレー（豚挽肉、牛肉、玉ねぎ、トマト、香辛料など）、ゆで卵／調味料（アミノ酸等）、カラメル色素、（一部に小麦・牛肉・豚肉・大豆を含む）',
+                calories: '780', protein: '22.5', fat: '28.0', carb: '105.0', salt: '3.5', price: '650'
+            }
+        },
+        {
+            keywords: ['タンドリーチキン'],
+            data: {
+                ingredients: '鶏肉（ブラジル産）、ヨーグルト、生姜、にんにく、トマトペースト、香辛料、植物油脂、食塩／調味料（アミノ酸等）、（一部に乳成分・鶏肉・大豆を含む）',
+                calories: '320', protein: '35.0', fat: '18.0', carb: '4.5', salt: '2.1', price: '450',
+                category: '惣菜'
+            }
+        },
+        // ==== 中華・その他 ====
+        {
+            keywords: ['エビチリ', '海老のチリソース'],
+            data: {
+                ingredients: 'えび、玉ねぎ、トマトケチャップ、豆板醤、醤油、砂糖、みりん、生姜、にんにく、片栗粉／調味料（アミノ酸等）、（一部にえび・小麦・大豆を含む）',
+                calories: '320', protein: '12.0', fat: '18.0', carb: '22.0', salt: '2.5', price: '450',
+                category: '惣菜'
+            }
+        },
+        {
+            keywords: ['油淋鶏', 'ユーリンチー'],
+            data: {
+                ingredients: '鶏肉（ブラジル産）、長ねぎ、生姜、にんにく、醤油、酢、砂糖、ごま油、植物油脂、片栗粉／調味料（アミノ酸等）、（一部に小麦・鶏肉・大豆・ごまを含む）',
+                calories: '550', protein: '28.0', fat: '35.0', carb: '15.0', salt: '2.8', price: '500', 
+                category: '惣菜'
+            }
+        },
+        {
+            keywords: ['青椒肉絲', 'チンジャオ'],
+            data: {
+                ingredients: '豚肉、ピーマン、たけのこ、醤油、オイスターソース、砂糖、酒、植物油脂、片栗粉／調味料（アミノ酸等）、（一部に小麦・豚肉・大豆を含む）',
+                calories: '420', protein: '18.0', fat: '28.0', carb: '12.0', salt: '2.2', price: '500', 
+                category: '惣菜'
+            }
+        },
+        {
+            keywords: ['回鍋肉', 'ホイコーロー'],
+            data: {
+                ingredients: '豚肉、キャベツ、ピーマン、ネギ、味噌、醤油、豆板醤、植物油脂、砂糖／調味料（アミノ酸等）、増粘剤（加工デンプン）、（一部に小麦・豚肉・大豆・ごまを含む）',
+                calories: '450', protein: '16.0', fat: '32.0', carb: '12.0', salt: '3.0', price: '500',
+                category: '惣菜'
+            }
+        },
+        {
+            keywords: ['棒棒鶏', 'バンバンジー', '蒸し鶏'],
+            data: {
+                ingredients: '鶏肉、きゅうり、ごまソース（練りごま、醤油、酢、砂糖、ラー油等）／調味料（アミノ酸等）、（一部に小麦・鶏肉・大豆・ごまを含む）',
+                calories: '280', protein: '25.0', fat: '18.0', carb: '4.5', salt: '1.8', price: '450',
+                category: '惣菜', storeMethod: '10℃以下で保存してください'
+            }
+        },
+        {
+            keywords: ['中華丼'],
+            data: {
+                ingredients: '麦入り御飯（米（国産）、大麦）、中華あん（白菜、海老、豚肉、人参、たけのこ、椎茸、うずら卵、醤油、片栗粉等）／調味料（アミノ酸等）、（一部に小麦・卵・えび・豚肉・大豆・ごまを含む）',
+                calories: '650', protein: '18.0', fat: '12.0', carb: '105.0', salt: '3.8', price: '600'
+            }
+        },
+        {
+            keywords: ['焼売', 'しゅうまい', 'シュウマイ'],
+            data: {
+                ingredients: '皮（小麦粉）、豚肉、玉ねぎ、澱粉、醤油、砂糖、食塩、植物油脂／調味料（アミノ酸等）、（一部に小麦・豚肉・大豆を含む）',
+                calories: '240', protein: '12.0', fat: '15.0', carb: '18.0', salt: '1.5', price: '300',
+                category: '惣菜'
+            }
+        },
+        {
+            keywords: ['餃子', 'ギョーザ', 'ぎょうざ'],
+            data: {
+                ingredients: '皮（小麦粉）、野菜（キャベツ、ニラ、ネギ、生姜、にんにく）、豚肉、植物油脂、醤油、ラード、食塩、胡椒／調味料（アミノ酸等）、（一部に小麦・豚肉・大豆・ごまを含む）',
+                calories: '280', protein: '10.0', fat: '18.0', carb: '24.0', salt: '1.2', price: '300',
+                category: '惣菜'
+            }
+        },
+        // ==== 各国料理 ====
+        {
+            keywords: ['ビビンバ', 'ビビンパ'],
+            data: {
+                ingredients: '麦入り御飯（米（国産）、大麦）、牛肉、ナムル（もやし、人参、ほうれん草等）、コチュジャンだれ、玉子焼き／調味料（アミノ酸等）、（一部に小麦・卵・牛肉・大豆・ごまを含む）',
+                calories: '720', protein: '20.0', fat: '22.0', carb: '105.0', salt: '3.5', price: '650'
+            }
+        },
+        {
+            keywords: ['プルコギ'],
+            data: {
+                ingredients: '牛肉、玉ねぎ、ピーマン、春雨、醤油、砂糖、ごま油、にんにく、梨果汁、唐辛子／調味料（アミノ酸等）、（一部に小麦・牛肉・大豆・ごま・りんごを含む）',
+                calories: '480', protein: '22.0', fat: '35.0', carb: '18.0', salt: '2.8', price: '500',
+                category: '惣菜'
+            }
+        },
+        {
+            keywords: ['タコス', 'タコライス'],
+            data: {
+                ingredients: '麦入り御飯（米（国産）、大麦）（またはトルティーヤ）、タコスミート（挽肉、玉ねぎ、トマト、スパイス）、レタス、チーズ、サルサソース／調味料（アミノ酸等）、（一部に乳成分・牛肉・豚肉・大豆を含む）',
+                calories: '680', protein: '22.0', fat: '20.0', carb: '98.0', salt: '3.2', price: '650'
+            }
+        },
+        {
+            keywords: ['パエリア'],
+            data: {
+                ingredients: '味付け米（米（国産）、サフラン、魚介だし）、えび、いか、あさり、鶏肉、パプリカ、ピーマン／調味料（アミノ酸等）、香料、（一部にえび・いか・鶏肉・大豆を含む）',
+                calories: '550', protein: '24.0', fat: '12.0', carb: '88.0', salt: '3.0', price: '750'
+            }
+        },
+        {
+            keywords: ['フォー'],
+            data: {
+                ingredients: '米粉めん（ベトナム製造）、鶏だし、鶏肉、もやし、パクチー、レモンペースト、食塩、ナンプラー／調味料（アミノ酸等）、酸味料、（一部に鶏肉・大豆を含む）',
+                calories: '380', protein: '15.0', fat: '4.5', carb: '68.0', salt: '4.5', price: '550',
+                category: '調理めん'
+            }
+        },
+        // ==== パスタ・洋食 ====
+        {
+            keywords: ['ミートソース', 'ボロネーゼ'],
+            data: {
+                ingredients: 'スパゲティ（国内製造）、ミートソース（牛肉、豚肉、玉ねぎ、トマトペースト、ワイン、植物油脂、スパイス等）／調味料（アミノ酸等）、カラメル色素、（一部に小麦・牛肉・豚肉・大豆を含む）',
+                calories: '580', protein: '18.5', fat: '22.0', carb: '75.0', salt: '3.2',
+                category: '調理めん'
+            }
+        },
+        {
+            keywords: ['カルボナーラ'],
+            data: {
+                ingredients: 'スパゲティ（国内製造）、カルボナーラソース（生クリーム、卵、チーズ、ベーコン、プロセスチーズ、植物油脂、スパイス等）／調味料（アミノ酸等）、乳化剤、増粘剤（加工デンプン）、リン酸塩（Na）、発色剤（亜硝酸Na）、（一部に小麦・卵・乳成分・豚肉・大豆を含む）',
+                calories: '650', protein: '20.0', fat: '35.0', carb: '68.0', salt: '3.5',
+                category: '調理めん'
+            }
+        },
+        {
+            keywords: ['ナポリタン'],
+            data: {
+                ingredients: 'スパゲティ（国内製造）、トマトケチャップ、ウィンナー、玉ねぎ、ピーマン、植物油脂、砂糖、食塩、胡椒／調味料（アミノ酸等）、リン酸塩（Na）、発色剤（亜硝酸Na）、（一部に小麦・卵・乳成分・豚肉・大豆を含む）',
+                calories: '520', protein: '14.5', fat: '18.0', carb: '72.0', salt: '3.8',
+                category: '調理めん'
+            }
+        },
+        {
+            keywords: ['たらこパスタ', '明太子パスタ'],
+            data: {
+                ingredients: 'スパゲティ（国内製造）、たらこソース（たらこ、植物油脂、バター、醤油、エキス等）、海苔／調味料（アミノ酸等）、着色料（紅麹、ベニバナ）、（一部に小麦・乳成分・大豆を含む）',
+                calories: '480', protein: '15.5', fat: '18.2', carb: '65.5', salt: '4.2',
+                category: '調理めん'
+            }
+        },
+        {
+            keywords: ['ペペロンチーノ'],
+            data: {
+                ingredients: 'スパゲティ（国内製造）、植物油脂、ベーコン、唐辛子、にんにく、アンチョビエキス、食塩、胡椒／調味料（アミノ酸等）、（一部に小麦・大豆・豚肉を含む）',
+                calories: '550', protein: '14.0', fat: '25.0', carb: '70.0', salt: '3.0',
+                category: '調理めん'
+            }
+        },
+        {
+            keywords: ['グラタン', 'マカグラ'],
+            data: {
+                ingredients: 'マカロニ（国内製造）、牛乳、鶏肉、えび、ホワイトソース、チーズ、玉ねぎ、パン粉／調味料（アミノ酸等）、増粘剤（加工デンプン）、（一部に小麦・卵・乳成分・えび・鶏肉・大豆を含む）',
+                calories: '450', protein: '18.0', fat: '28.0', carb: '32.0', salt: '2.5',
+                category: '惣菜', storeMethod: '10℃以下で保存してください'
+            }
+        },
+        {
+            keywords: ['ドリア'],
+            data: {
+                ingredients: '味付け御飯（米（国産）、バター、玉ねぎ、チキンエキス）、ホワイトソース、チーズ、海老／調味料（アミノ酸等）、増粘剤（加工デンプン）、（一部に小麦・卵・乳成分・えび・大豆を含む）',
+                calories: '580', protein: '16.5', fat: '25.0', carb: '72.0', salt: '3.2',
+                category: '弁当'
+            }
+        },
+        {
+            keywords: ['シチュー', 'ビーフシチュー'],
+            data: {
+                ingredients: '牛肉、玉ねぎ、人参、じゃがいも、デミグラスソース、赤ワイン、砂糖、食塩、植物油脂、スパイス／調味料（アミノ酸等）、カラメル色素、（一部に小麦・牛肉・大豆を含む）',
+                calories: '380', protein: '15.0', fat: '22.0', carb: '28.0', salt: '2.4',
+                category: '惣菜'
+            }
         }
     ];
 
@@ -292,6 +512,7 @@ document.addEventListener('DOMContentLoaded', () => {
             copyPreset: document.getElementById('copy-preset-btn'),
             deletePreset: document.getElementById('delete-preset-btn'),
             autoFill: document.getElementById('auto-fill-btn'),
+            searchWeb: document.getElementById('search-web-btn'),
             copyStoreProfile: document.getElementById('copy-store-profile-btn'),
             deleteStoreProfile: document.getElementById('delete-store-profile-btn'),
             // かんたん印刷用
@@ -323,7 +544,7 @@ document.addEventListener('DOMContentLoaded', () => {
         't340_8': { name: '冷やしうどん（小）', category: '調理めん', consumeDays: '1', storeMethod: '10℃以下で保存してください', ingredients: 'ゆでうどん（国内製造）、めんつゆ、ネギ、天かす／調味料（アミノ酸等）、酸味料、（一部に小麦・大豆を含む）', price: '340', calories: '210', protein: '5.5', fat: '1.2', carb: '44.0', salt: '2.8', useJancode: false, jancodeValue: '', usePlaMark: true },
         't340_9': { name: 'おにぎり1個セット', category: '弁当', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '塩飯（米（国産）、塩）、鮭フレーク、だし巻き卵、唐揚げ、海苔（国産）／調味料（アミノ酸等）、着色料（紅麹）、（一部に小麦・卵・鶏肉・さけ・大豆を含む）', price: '340', calories: '320', protein: '12.5', fat: '8.5', carb: '48.0', salt: '1.8', useJancode: false, jancodeValue: '', usePlaMark: true },
 
-        't500_1': { name: '岩下の新生姜”本気”唐揚げ', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '鶏肉（国産）、岩下の新生姜、小麦粉、片栗粉、醤油、酒、植物油脂、食塩／調味料（アミノ酸等）、酸味料、（一部に小麦・鶏肉・大豆を含む）', price: '500', calories: '350', protein: '22.0', fat: '24.0', carb: '11.5', salt: '1.8', useJancode: false, jancodeValue: '', usePlaMark: true },
+        't500_1': { name: '岩下の新生姜”本気”唐揚げ', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '鶏肉（ブラジル産）、岩下の新生姜、小麦粉、片栗粉、醤油、酒、植物油脂、食塩／調味料（アミノ酸等）、酸味料、（一部に小麦・鶏肉・大豆を含む）', price: '500', calories: '350', protein: '22.0', fat: '24.0', carb: '11.5', salt: '1.8', useJancode: false, jancodeValue: '', usePlaMark: true },
         't500_2': { name: '野菜サラダ（中）', category: '惣菜', consumeDays: '1', storeMethod: '10℃以下で保存してください', ingredients: 'キャベツ（国産）、レタス、人参、きゅうり、トマト、コーン／酸化防止剤（V.C）、（一部に大豆を含む）', price: '500', calories: '85', protein: '2.8', fat: '0.6', carb: '17.5', salt: '0.2', useJancode: false, jancodeValue: '', usePlaMark: true },
         't500_3': { name: '豚汁（大）', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '味噌（国内製造）、豚肉、大根、人参、ごぼう、こんにゃく、ねぎ／調味料（アミノ酸等）、（一部に大豆・豚肉を含む）', price: '500', calories: '250', protein: '14.5', fat: '15.2', carb: '12.8', salt: '2.8', useJancode: false, jancodeValue: '', usePlaMark: true },
         't500_4': { name: '冷やしかき揚げうどん', category: '調理めん', consumeDays: '1', storeMethod: '10℃以下で保存してください', ingredients: 'ゆでうどん（国内製造）、野菜かき揚げ、めんつゆ、ネギ／調味料（アミノ酸等）、膨張剤、（一部に小麦・卵・大豆を含む）', price: '500', calories: '480', protein: '12.5', fat: '18.5', carb: '65.0', salt: '4.8', useJancode: false, jancodeValue: '', usePlaMark: true },
@@ -351,12 +572,12 @@ document.addEventListener('DOMContentLoaded', () => {
         't750_3': { name: '焼きサバ弁当', category: '弁当', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '麦入り御飯（米（国産）、大麦）、塩鯖焼き、その他おかず／調味料（アミノ酸等）、酸化防止剤（V.C）、酸味料、（一部に小麦・さば・大豆を含む）', price: '750', calories: '680', protein: '25.5', fat: '22.4', carb: '90.3', salt: '3.5', useJancode: false, jancodeValue: '', usePlaMark: true },
         't750_4': { name: '筋トレ弁当', category: '弁当', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '玄米（国産米）、鶏胸肉低温調理、ブロッコリー、ゆで卵／調味料（アミノ酸等）、（一部に卵・鶏肉を含む）', price: '750', calories: '580', protein: '45.0', fat: '12.0', carb: '68.0', salt: '2.5', useJancode: false, jancodeValue: '', usePlaMark: true },
         't750_5': { name: 'サラダ（おすすめ）', category: '惣菜', consumeDays: '1', storeMethod: '10℃以下で保存してください', ingredients: 'レタス（国産）、ローストポーク、ゆで卵、トマト、ブロッコリー／酸化防止剤（V.C）、（一部に卵・豚肉・大豆を含む）', price: '750', calories: '320', protein: '18.5', fat: '14.2', carb: '12.1', salt: '1.2', useJancode: false, jancodeValue: '', usePlaMark: true },
-        't750_6': { name: '若鶏の半身揚げ', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '鶏肉（国産）、香辛料、食塩、植物油脂／調味料（アミノ酸等）、（一部に鶏肉を含む）', price: '750', calories: '550', protein: '42.0', fat: '38.0', carb: '2.0', salt: '2.8', useJancode: false, jancodeValue: '', usePlaMark: true },
+        't750_6': { name: '若鶏の半身揚げ', category: '惣菜', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '鶏肉（ブラジル産）、香辛料、食塩、植物油脂／調味料（アミノ酸等）、（一部に鶏肉を含む）', price: '750', calories: '550', protein: '42.0', fat: '38.0', carb: '2.0', salt: '2.8', useJancode: false, jancodeValue: '', usePlaMark: true },
 
         't1000_1': { name: '日替わり弁当', category: '弁当', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '麦入り御飯（米（国産）、大麦）、主菜（肉類または魚介類）、その他おかず／調味料（アミノ酸等）、着色料（赤106、カロチノイド）、（一部に小麦・卵・乳成分・牛肉・豚肉・鶏肉・さば・大豆・ごま・りんごを含む）', price: '1000', calories: '750', protein: '25.0', fat: '22.0', carb: '105.0', salt: '3.8', useJancode: false, jancodeValue: '', usePlaMark: true },
         't1000_2': { name: '玄米日替わり弁当', category: '弁当', consumeDays: '1', storeMethod: '直射日光及び高温多湿を避けて保存してください', ingredients: '玄米（国産米）、主菜（肉類または魚介類）、その他おかず／調味料（アミノ酸等）、着色料（赤106、カロチノイド）、（一部に小麦・卵・乳成分・牛肉・豚肉・鶏肉・さば・大豆・ごま・りんごを含む）', price: '1000', calories: '720', protein: '25.5', fat: '22.0', carb: '100.0', salt: '3.6', useJancode: false, jancodeValue: '', usePlaMark: true },
         't1000_3': { name: '鍋セット', category: '惣菜半製品', consumeDays: '1', storeMethod: '10℃以下で保存してください', ingredients: '白菜（国産）、豚肉、ネギ、豆腐、きのこ類、鍋スープ／調味料（アミノ酸等）、豆腐用凝固剤、（一部に小麦・豚肉・大豆を含む）', price: '1000', calories: '450', protein: '28.0', fat: '32.0', carb: '15.0', salt: '5.5', useJancode: false, jancodeValue: '', usePlaMark: true },
-        't1000_4': { name: '冷凍岩下の新生姜”本気”唐揚げ', category: '冷凍食品', consumeDays: '30', storeMethod: '-18℃以下で保存してください', ingredients: '鶏肉（国産）、岩下の新生姜、小麦粉、片栗粉、醤油、酒、植物油脂、食塩／調味料（アミノ酸等）、酸味料、（一部に小麦・鶏肉・大豆を含む）', price: '1000', calories: '350', protein: '22.0', fat: '24.0', carb: '11.5', salt: '1.8', useJancode: false, jancodeValue: '', usePlaMark: true }
+        't1000_4': { name: '冷凍岩下の新生姜”本気”唐揚げ', category: '冷凍食品', consumeDays: '30', storeMethod: '-18℃以下で保存してください', ingredients: '鶏肉（ブラジル産）、岩下の新生姜、小麦粉、片栗粉、醤油、酒、植物油脂、食塩／調味料（アミノ酸等）、酸味料、（一部に小麦・鶏肉・大豆を含む）', price: '1000', calories: '350', protein: '22.0', fat: '24.0', carb: '11.5', salt: '1.8', useJancode: false, jancodeValue: '', usePlaMark: true }
     };
 
     let userTemplates = {};
@@ -396,13 +617,40 @@ document.addEventListener('DOMContentLoaded', () => {
         if(userTemplates['tmpl_maku']) { delete userTemplates['tmpl_maku']; shouldSave = true; }
         
         
-        // 【マイグレーション】既存の保存データ内の「御飯（国産米）」を「麦入り御飯（米（国産）、大麦）」に一括置換
+        // 【マイグレーション】既存の保存データ内の表記を一括更新
         Object.keys(userTemplates).forEach(id => {
             const t = userTemplates[id];
-            if (t.ingredients && t.ingredients.includes('御飯（国産米）')) {
+            if (!t.ingredients) return;
+            
+            let updated = false;
+            // 1. 「御飯（国産米）」を「麦入り御飯（米（国産）、大麦）」に置換
+            if (t.ingredients.includes('御飯（国産米）')) {
                 t.ingredients = t.ingredients.replace(/御飯（国産米）/g, '麦入り御飯（米（国産）、大麦）');
-                shouldSave = true;
+                updated = true;
             }
+            
+            // 2. 鶏肉関連の産地を「ブラジル産」に更新
+            const chickenKeywords = ['鶏肉', '鶏もも肉', 'とり肉', '若鶏', 'チキン', '鶏むね'];
+            const match = t.ingredients.match(/^[^、／]+/); // 先頭の原材料
+            if (match) {
+                let firstItem = match[0];
+                if (chickenKeywords.some(kw => firstItem.includes(kw))) {
+                    // まだ「ブラジル産」が含まれていない場合のみ処理
+                    if (!firstItem.includes('ブラジル産')) {
+                        // 国産と書いてある場合は置換、産地がない場合は付加
+                        if (firstItem.includes('国産')) {
+                            t.ingredients = t.ingredients.replace('国産', 'ブラジル産');
+                            updated = true;
+                        } else if (!firstItem.includes('（') && !firstItem.includes('(')) {
+                            // 括弧すらない場合は末尾に付加
+                            t.ingredients = t.ingredients.replace(firstItem, firstItem.trim() + '（ブラジル産）');
+                            updated = true;
+                        }
+                    }
+                }
+            }
+            
+            if (updated) shouldSave = true;
         });
         
         if (shouldSave) saveTemplates();
@@ -1118,8 +1366,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     updatePreview();
                     alert(`「${name}」に近い一般的な目安データを自動入力しました！\n実際の具材に合わせて少し修正して保存してください。`);
                 } else {
-                    alert(`「${name}」の目安データが見つかりませんでした。\n「からあげ」「ハンバーグ」「とんかつ」などのキーワードが含まれていると自動推測しやすいです！`);
+                    if (confirm(`「${name}」の目安データが見つかりませんでした。\nネットで検索しますか？`)) {
+                        elements.buttons.searchWeb.click();
+                    }
                 }
+            });
+        }
+
+        // 🔍 ネット検索機能
+        if(elements.buttons.searchWeb) {
+            elements.buttons.searchWeb.addEventListener('click', () => {
+                const name = elements.inputs.name.value.trim();
+                const query = name ? `${name} 栄養成分表示 100g` : 'お弁当 栄養成分表示 一覧';
+                window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
             });
         }
 
@@ -1225,7 +1484,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let origin = '';
         // 鶏肉・鶏関連のキーワードが最初の原材料の場合はデフォルトでブラジル産
-        const chickenKeywords = ['鶏肉', '鶏', '若鶏', 'チキン', '鶏むね', '鶏もも'];
+        const chickenKeywords = ['鶏肉', '鶏', '若鶏', 'チキン', '鶏むね', '鶏もも', 'とり肉'];
         if (chickenKeywords.some(kw => firstItem.includes(kw))) {
             origin = '（ブラジル産）';
         } else if (rawKeywords.some(kw => firstItem.includes(kw))) {
