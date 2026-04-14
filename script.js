@@ -1500,7 +1500,24 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const updatePreview = () => {
-        elements.preview.name.textContent = elements.inputs.name.value || '名称未設定';
+        const nameVal = elements.inputs.name.value.trim() || '名称未設定';
+        
+        // 21文字を超える場合は切り捨て
+        let displayName = nameVal;
+        if (nameVal.length > 21) {
+            displayName = nameVal.substring(0, 20) + '...';
+        }
+        elements.preview.name.textContent = displayName;
+        
+        // 名称の文字数に応じてフォントサイズを自動調整（一段に収めるため）
+        if (displayName.length > 15) {
+            elements.preview.name.style.fontSize = '8pt';
+        } else if (displayName.length > 11) {
+            elements.preview.name.style.fontSize = '9pt';
+        } else {
+            elements.preview.name.style.fontSize = '10.5pt';
+        }
+
         elements.preview.category.textContent = elements.inputs.category.value || '惣菜';
         
         // 原材料名の表示時に産地補完を適用

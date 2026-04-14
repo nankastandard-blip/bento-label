@@ -252,6 +252,33 @@ label {
     box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
 }
 
+.name-input-large {
+    font-size: 1.25rem !important;
+    font-weight: bold;
+    color: var(--primary-color);
+    padding: 0.8rem !important;
+    background-color: #fff;
+    border: 2px solid var(--border-color);
+}
+
+.name-input-large:focus {
+    border-color: var(--primary-color);
+}
+
+.btn-small {
+    padding: 0 0.5rem !important;
+    font-size: 0.8rem !important;
+    height: auto !important;
+    margin-top: 0 !important;
+    white-space: nowrap;
+}
+
+.search-web-btn {
+    background-color: #6c757d !important;
+    color: white !important;
+    border: none !important;
+}
+
 textarea.form-control {
     resize: vertical;
 }
@@ -402,7 +429,11 @@ textarea.form-control {
 .label-title {
     font-size: 10.5pt;
     font-weight: bold;
-    line-height: 1;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip; /* はみ出しをカット、一段を維持 */
+    flex-grow: 1;
 }
 
 .label-table {
