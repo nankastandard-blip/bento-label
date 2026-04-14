@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             keywords: ['かき揚げ', '野菜かき揚げ'],
             data: {
-                ingredients: '野菜（国産玉ねぎ、人参、さつまいも、かぼちゃ）、えび（国産）、小麦粉、卵、植物油脂、食塩／膨張剤、着色料（ビタミンB2）、（一部に小麦・卵・えびを含む）',
+                ingredients: '野菜（国産玉ねぎ、人参、さつまいも、かぼちゃ）、えび（バナメイ産）、小麦粉、卵、植物油脂、食塩／膨張剤、着色料（ビタミンB2）、（一部に小麦・卵・えびを含む）',
                 calories: '380', protein: '6.5', fat: '22.0', carb: '38.0', salt: '0.6', price: '250',
                 category: '惣菜'
             }
@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             keywords: ['ミックス天ぷら', '海老・イカの天ぷら'],
             data: {
-                ingredients: 'えび（国産）、いか（国産）、なす（国産）、かぼちゃ（国産）、小麦粉、卵、植物油脂、食塩／膨張剤、（一部に小麦・卵・えび・いかを含む）',
+                ingredients: 'えび（バナメイ産）、いか（国産）、なす（国産）、かぼちゃ（国産）、小麦粉、卵、植物油脂、食塩／膨張剤、（一部に小麦・卵・えび・いかを含む）',
                 calories: '380', protein: '20.0', fat: '22.0', carb: '28.0', salt: '1.0', price: '550',
                 category: '惣菜'
             }
@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             keywords: ['えび天', '海老天'],
             data: {
-                ingredients: 'えび（国産）、小麦粉、卵、澱粉、植物油脂、食塩／膨張剤、（一部に小麦・卵・えびを含む）',
+                ingredients: 'えび（バナメイ産）、小麦粉、卵、澱粉、植物油脂、食塩／膨張剤、（一部に小麦・卵・えびを含む）',
                 calories: '150', protein: '12.0', fat: '8.0', carb: '7.5', salt: '0.5', price: '150',
                 category: '惣菜'
             }
@@ -1741,8 +1741,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let origin = '';
         const chickenKeywords = ['鶏肉', '鶏', '若鶏', 'チキン', '鶏むね', '鶏もも', 'とり肉'];
+        const shrimpKeywords = ['海老', 'えび', 'エビ', 'シュリンプ'];
         
-        if (chickenKeywords.some(kw => firstItem.includes(kw))) {
+        if (shrimpKeywords.some(kw => firstItem.includes(kw))) {
+            origin = '（バナメイ産）';
+        } else if (chickenKeywords.some(kw => firstItem.includes(kw))) {
             origin = '（ブラジル産）';
         } else if (rawKeywords.some(kw => firstItem.includes(kw))) {
             origin = '（国産）';
