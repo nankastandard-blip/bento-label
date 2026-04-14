@@ -163,6 +163,46 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
         {
+            keywords: ['さといもの唐揚げ', '里芋の唐揚げ', 'さといも唐揚げ'],
+            data: {
+                ingredients: 'さといも（国産）、小麦粉、澱粉、醤油、砂糖、みりん、風味調味料、おろし生姜、植物油脂／調味料（アミノ酸等）、（一部に小麦・大豆を含む）',
+                calories: '160', protein: '2.5', fat: '7.0', carb: '22.0', salt: '1.2', price: '250',
+                category: '惣菜'
+            }
+        },
+        {
+            keywords: ['ごぼうの唐揚げ', 'ゴボウの唐揚げ', 'ごぼう唐揚げ'],
+            data: {
+                ingredients: 'ごぼう（国産）、小麦粉、澱粉、醤油、砂糖、みりん、ごま油、風味調味料、植物油脂／調味料（アミノ酸等）、（一部に小麦・大豆・ごまを含む）',
+                calories: '180', protein: '3.0', fat: '9.0', carb: '24.0', salt: '1.5', price: '250',
+                category: '惣菜'
+            }
+        },
+        {
+            keywords: ['だいこんの唐揚げ', '大根の唐揚げ', 'だいこん唐揚げ'],
+            data: {
+                ingredients: 'だいこん（国産）、小麦粉、澱粉、醤油、砂糖、風味調味料、おろしにんにく、おろし生姜、植物油脂／調味料（アミノ酸等）、（一部に小麦・大豆を含む）',
+                calories: '110', protein: '1.5', fat: '6.5', carb: '12.0', salt: '1.3', price: '220',
+                category: '惣菜'
+            }
+        },
+        {
+            keywords: ['しいたけの唐揚げ', '椎茸の唐揚げ', 'しいたけ唐揚げ'],
+            data: {
+                ingredients: 'しいたけ（国産）、小麦粉、澱粉、醤油、砂糖、風味調味料、植物油脂／調味料（アミノ酸等）、（一部に小麦・大豆を含む）',
+                calories: '140', protein: '3.5', fat: '8.0', carb: '15.0', salt: '1.0', price: '280',
+                category: '惣菜'
+            }
+        },
+        {
+            keywords: ['れんこんの唐揚げ', 'レンコンの唐揚げ', 'れんこん唐揚げ'],
+            data: {
+                ingredients: 'れんこん（国産）、小麦粉、澱粉、醤油、砂糖、みりん、おろし生姜、植物油脂／調味料（アミノ酸等）、（一部に小麦・大豆を含む）',
+                calories: '170', protein: '2.2', fat: '7.5', carb: '25.0', salt: '1.1', price: '250',
+                category: '惣菜'
+            }
+        },
+        {
             keywords: ['サラダ', 'ポテトサラダ', 'マカロニサラダ'],
             data: {
                 ingredients: 'じゃがいも（国産）（またはマカロニ（国内製造））、マヨネーズ、きゅうり、人参、玉ねぎ、ハム、食塩、香辛料／調味料（アミノ酸等）、増粘剤（加工デンプン）、（一部に卵・大豆・豚肉・りんごを含む）',
@@ -188,10 +228,66 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
         {
-            keywords: ['天ぷら', '天プラ', 'かき揚げ', '天婦羅'],
+            keywords: ['かき揚げ', '野菜かき揚げ'],
             data: {
-                ingredients: '野菜（玉ねぎ、人参、さつまいも、かぼちゃ等）、魚介類（えび、いか等）、小麦粉、卵、植物油脂、食塩／膨張剤、着色料（ビタミンB2）、（一部に小麦・卵・えび・いかを含む）',
-                calories: '350', protein: '6.0', fat: '20.0', carb: '36.0', salt: '0.5', price: '300',
+                ingredients: '野菜（国産玉ねぎ、人参、さつまいも、かぼちゃ等）、魚介類（えび等）、小麦粉、卵、植物油脂、食塩／膨張剤、着色料（ビタミンB2）、（一部に小麦・卵・えびを含む）',
+                calories: '380', protein: '6.5', fat: '22.0', carb: '38.0', salt: '0.6', price: '250',
+                category: '惣菜'
+            }
+        },
+        {
+            keywords: ['天ぷら', '天婦羅', '天プラ'],
+            data: {
+                ingredients: '魚介類または野菜（国産）、小麦粉、卵、植物油脂、食塩／膨張剤、（一部に小麦・卵を含む）',
+                calories: '280', protein: '15.0', fat: '15.0', carb: '20.0', salt: '0.8', price: '400',
+                category: '惣菜'
+            }
+        },
+        {
+            keywords: ['えび天', '海老天'],
+            data: {
+                ingredients: 'えび（国産）、小麦粉、卵、澱粉、植物油脂、食塩／膨張剤、（一部に小麦・卵・えびを含む）',
+                calories: '150', protein: '12.0', fat: '8.0', carb: '7.5', salt: '0.5', price: '150',
+                category: '惣菜'
+            }
+        },
+        {
+            keywords: ['いか天', 'イカ天'],
+            data: {
+                ingredients: 'いか（国産）、小麦粉、卵、澱粉、植物油脂、食塩／膨張剤、（一部に小麦・卵・いかを含む）',
+                calories: '180', protein: '15.5', fat: '9.0', carb: '9.0', salt: '0.6', price: '150',
+                category: '惣菜'
+            }
+        },
+        {
+            keywords: ['かぼちゃ天'],
+            data: {
+                ingredients: 'かぼちゃ（国産）、小麦粉、卵、澱粉、植物油脂、食塩／膨張剤、（一部に小麦・卵を含む）',
+                calories: '110', protein: '1.5', fat: '6.5', carb: '12.0', salt: '0.3', price: '120',
+                category: '惣菜'
+            }
+        },
+        {
+            keywords: ['なす天', 'ナス天'],
+            data: {
+                ingredients: 'なす（国産）、小麦粉、卵、澱粉、植物油脂、食塩／膨張剤、（一部に小麦・卵を含む）',
+                calories: '90', protein: '1.0', fat: '7.0', carb: '6.0', salt: '0.3', price: '120',
+                category: '惣菜'
+            }
+        },
+        {
+            keywords: ['さつま芋天', 'さつまいも天', '芋天'],
+            data: {
+                ingredients: 'さつまいも（国産）、小麦粉、卵、澱粉、植物油脂、食塩／膨張剤、（一部に小麦・卵を含む）',
+                calories: '140', protein: '1.2', fat: '6.0', carb: '22.0', salt: '0.3', price: '120',
+                category: '惣菜'
+            }
+        },
+        {
+            keywords: ['あなご天'],
+            data: {
+                ingredients: 'あなご（国産）、小麦粉、卵、澱粉、植物油脂、食塩／膨張剤、（一部に小麦・卵を含む）',
+                calories: '220', protein: '18.0', fat: '12.0', carb: '10.0', salt: '0.8', price: '350',
                 category: '惣菜'
             }
         },
