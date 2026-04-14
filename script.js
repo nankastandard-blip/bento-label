@@ -353,10 +353,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
         {
-            keywords: ['タコス', 'タコライス'],
+            keywords: ['タコライス'],
             data: {
-                ingredients: '麦入り御飯（米（国産）、大麦）（またはトルティーヤ）、タコスミート（挽肉、玉ねぎ、トマト、スパイス）、レタス、チーズ、サルサソース／調味料（アミノ酸等）、（一部に乳成分・牛肉・豚肉・大豆を含む）',
+                ingredients: '麦入り御飯（米（国産）、大麦）、タコスミート（挽肉、玉ねぎ、トマト、スパイス）、レタス、チーズ、サルサソース／調味料（アミノ酸等）、（一部に乳成分・牛肉・豚肉・大豆を含む）',
                 calories: '680', protein: '22.0', fat: '20.0', carb: '98.0', salt: '3.2', price: '650'
+            }
+        },
+        {
+            keywords: ['タコス'],
+            data: {
+                ingredients: 'トルティーヤ、タコスミート（挽肉、玉ねぎ、トマト、スパイス）、レタス、チーズ、サルサソース／調味料（アミノ酸等）、（一部に乳成分・牛肉・豚肉・大豆を含む）',
+                calories: '450', protein: '18.0', fat: '22.0', carb: '45.0', salt: '2.5', price: '500',
+                category: '惣菜'
             }
         },
         {
@@ -1466,25 +1474,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const formatIngredientsWithOrigin = (text) => {
         if (!text || text === '-' || text.trim() === '') return text;
 
-        // 最初の原材料（／より前、かつ最初の「、」の前まで）を抽出
-        // 例:「豚肉、玉ねぎ／調味料」 -> 「豚肉」
-        const match = text.match(/^[^、／]+/);
-        if (!match) return text;
+        // 括弧のネストを考慮して、最初の「、」または「／」の位置を探す
+        let splitIndex = -1;
+        let depth = 0;
+        for (let i = 0; i < text.length; i++) {
+            const char = text[i];
+            if (char === '（' || char === '(') depth++;
+            if (char === '）' || char === ')') depth--;
+
+            if (depth === 0) {
+                if (char === '、' || char === '／') {
+                    splitIndex = i;
+                    break;
+                }
+            }
+        }
+
+        const firstItemRaw = splitIndex === -1 ? text : text.substring(0, splitIndex);
+        const firstItem = firstItemRaw.trim();
         
-        const firstItem = match[0].trim();
         if (!firstItem) return text;
 
-        // すでに括弧が含まれている（産地や副原料が書かれている）場合は何もしない
+        // すでに括弧が含まれている場合は、その項目自体には自動補完しない
         if (firstItem.includes('（') || firstItem.includes('(')) return text;
 
         // 生鮮材料キーワード (国産)
         const rawKeywords = ['肉', '魚', '米', '野菜', 'じゃがいも', '玉ねぎ', '人参', 'キャベツ', 'レタス', 'ブロッコリー', 'トマト', 'きゅうり', '卵', '海老', 'えび', 'イカ', 'いか', 'アサリ', '貝', '果'];
         // 加工品キーワード (国内製造)
-        const processedKeywords = ['めん', '麺', 'パン', 'ソース', 'ルウ', 'マヨネーズ', 'ケチャップ', '醤油', 'しょうゆ', '味噌', 'みそ', '豆腐', '納豆', 'ハム', 'ベーコン', 'ソーセージ', 'ウインナー', 'ハンバーグ', 'カツ', 'フライ', '揚げ', 'コロッケ', '焼売', '餃子', '佃煮', 'パスタ', 'スパゲティ', 'マカロニ', 'うどん', 'そば', 'ちくわ', 'かまぼこ', 'こんにゃく', 'チーズ', '天かす'];
+        const processedKeywords = ['めん', '麺', 'パン', 'ソース', 'ルウ', 'マヨネーズ', 'ケチャップ', '醤油', 'しょうゆ', '味噌', 'みそ', '豆腐', '納豆', 'ハム', 'ベーコン', 'ソーセージ', 'ウインナー', 'ハンバーグ', 'カツ', 'フライ', '揚げ', 'コロッケ', '焼売', '餃子', '佃煮', 'パスタ', 'スパゲティ', 'マカロニ', 'うどん', 'そば', 'ちくわ', 'かまぼこ', 'こんにゃく', 'チーズ', '天かす', 'トルティーヤ', '皮'];
 
         let origin = '';
-        // 鶏肉・鶏関連のキーワードが最初の原材料の場合はデフォルトでブラジル産
         const chickenKeywords = ['鶏肉', '鶏', '若鶏', 'チキン', '鶏むね', '鶏もも', 'とり肉'];
+        
         if (chickenKeywords.some(kw => firstItem.includes(kw))) {
             origin = '（ブラジル産）';
         } else if (rawKeywords.some(kw => firstItem.includes(kw))) {
@@ -1495,8 +1516,7 @@ document.addEventListener('DOMContentLoaded', () => {
             origin = '（国産）';
         }
 
-        // 先頭項目に産地を付け加えた新しい文字列を返す
-        return firstItem + origin + text.substring(match[0].length);
+        return firstItem + origin + text.substring(firstItemRaw.length);
     };
 
     const updatePreview = () => {
