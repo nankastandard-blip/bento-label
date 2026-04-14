@@ -1559,6 +1559,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 let match = bestMatch;
 
+                // 2.5 【✨新機能】天ぷら・天丼類の場合、名称から具材を動的に抽出して補完する
+                if (match && match.ingredients && (match.ingredients.includes('【ここに具材名') || name.match(/(.+?)(の?天ぷら|天|天丼)$/))) {
+                    const tempuraRegex = /^(.+?)(の?天ぷら|天|天丼)$/;
+                    const tMatch = name.match(tempuraRegex);
+                    if (tMatch) {
+                        const material = tMatch[1]; // 例: 「舞茸」
+                        // 抜き出した素材に産地補完を適用（舞茸（国産）など）
+                        const materialWithOrigin = formatIngredientsWithOrigin(material);
+                        
+                        // 具材を差し替えた新しい原材料リストを作成
+                        if (name.includes('丼')) {
+                            // 天丼の場合
+                            match.ingredients = `麦入り御飯（米（国産）、大麦）、${materialWithOrigin}、小麦粉、卵、植物油脂、天ぷらつゆ、食塩／膨張剤、調味料（アミノ酸等）、（一部に小麦・卵・大豆を含む）`;
+                        } else {
+                            // 通常の天ぷらの場合
+                            match.ingredients = `${materialWithOrigin}、小麦粉、卵、植物油脂、食塩／膨張剤、（一部に小麦・卵を含む）`;
+                        }
+                    }
+                }
+
                 if (match) {
                     elements.inputs.category.value = match.category || '弁当';
                     elements.inputs.ingredients.value = match.ingredients;
@@ -1715,7 +1735,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (firstItem.includes('（') || firstItem.includes('(')) return text;
 
         // 生鮮材料キーワード (国産)
-        const rawKeywords = ['肉', '魚', '米', 'もち米', '野菜', 'じゃがいも', '玉ねぎ', '人参', 'キャベツ', 'レタス', 'ブロッコリー', 'トマト', 'きゅうり', '卵', '海老', 'えび', 'イカ', 'いか', 'アサリ', '貝', '果'];
+        const rawKeywords = ['肉', '魚', '米', 'もち米', '野菜', 'じゃがいも', '玉ねぎ', '人参', 'キャベツ', 'レタス', 'ブロッコリー', 'トマト', 'きゅうり', '卵', '海老', 'えび', 'イカ', 'いか', 'アサリ', '貝', '果', '舞茸', '茄子', 'なす', '南瓜', 'かぼちゃ', 'アスパラ', '竹の子', 'たけのこ'];
         // 加工品キーワード (国内製造)
         const processedKeywords = ['めん', '麺', 'パン', 'ソース', 'ルウ', 'マヨネーズ', 'ケチャップ', '醤油', 'しょうゆ', '味噌', 'みそ', '豆腐', '納豆', 'ハム', 'ベーコン', 'ソーセージ', 'ウインナー', 'ハンバーグ', 'カツ', 'フライ', '揚げ', 'コロッケ', '焼売', '餃子', '佃煮', 'パスタ', 'スパゲティ', 'マカロニ', 'うどん', 'そば', 'ちくわ', 'かまぼこ', 'こんにゃく', 'チーズ', '天かす', 'トルティーヤ', '皮'];
 
