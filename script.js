@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             keywords: ['かき揚げ', '野菜かき揚げ'],
             data: {
-                ingredients: '野菜（国産玉ねぎ、人参、さつまいも、かぼちゃ等）、魚介類（えび等）、小麦粉、卵、植物油脂、食塩／膨張剤、着色料（ビタミンB2）、（一部に小麦・卵・えびを含む）',
+                ingredients: '野菜（国産玉ねぎ、人参、さつまいも、かぼちゃ）、えび（国産）、小麦粉、卵、植物油脂、食塩／膨張剤、着色料（ビタミンB2）、（一部に小麦・卵・えびを含む）',
                 calories: '380', protein: '6.5', fat: '22.0', carb: '38.0', salt: '0.6', price: '250',
                 category: '惣菜'
             }
@@ -238,8 +238,24 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             keywords: ['天ぷら', '天婦羅', '天プラ'],
             data: {
-                ingredients: '魚介類または野菜（国産）、小麦粉、卵、植物油脂、食塩／膨張剤、（一部に小麦・卵を含む）',
+                ingredients: '【ここに具材名を記入してください：例 えび、なす等】（国産）、小麦粉、卵、植物油脂、食塩／膨張剤、（一部に小麦・卵を含む）',
                 calories: '280', protein: '15.0', fat: '15.0', carb: '20.0', salt: '0.8', price: '400',
+                category: '惣菜'
+            }
+        },
+        {
+            keywords: ['野菜天ぷら盛り合わせ', '野菜天盛り'],
+            data: {
+                ingredients: '野菜（国産なす、かぼちゃ、さつまいも、ししとう）、小麦粉、卵、植物油脂、食塩／膨張剤、（一部に小麦・卵を含む）',
+                calories: '320', protein: '4.5', fat: '18.0', carb: '35.0', salt: '0.7', price: '450',
+                category: '惣菜'
+            }
+        },
+        {
+            keywords: ['ミックス天ぷら', '海老・イカの天ぷら'],
+            data: {
+                ingredients: 'えび（国産）、いか（国産）、なす（国産）、かぼちゃ（国産）、小麦粉、卵、植物油脂、食塩／膨張剤、（一部に小麦・卵・えび・いかを含む）',
+                calories: '380', protein: '20.0', fat: '22.0', carb: '28.0', salt: '1.0', price: '550',
                 category: '惣菜'
             }
         },
