@@ -907,7 +907,6 @@ document.addEventListener('DOMContentLoaded', () => {
             manufacturer2: document.getElementById('manufacturer2'),
             address2: document.getElementById('address2'),
             phone2: document.getElementById('phone2'),
-            usePlaMark: document.getElementById('use-pla-mark'),
             useJancode: document.getElementById('use-jancode'),
             jancodeValue: document.getElementById('jancode-value'),
             // かんたん印刷用
@@ -1856,75 +1855,97 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert(`【登録済み】「${name}」はすでにテンプレートに登録されています。\nあなたの保存したデータから内容を読み込みました。`);
                 }
 
-                let match = bestMatch;
+                let match = bestMatch ? JSON.parse(JSON.stringify(bestMatch)) : null;
 
-                // 2.3 【✨新機能】名称から「うどん」か「そば」かを判別して原材料を最適化
-                if (match && match.ingredients) {
-                    if (name.includes('うどん')) {
-                        match.ingredients = match.ingredients
-                            .replace('うどんまたはそば', 'うどん')
-                            .replace('・そば', '') // アレルゲンから「そば」を削除
-                            .replace('そば・', ''); // 文頭寄りの「そば・」を削除
-                    } else if (name.includes('そば')) {
-                        match.ingredients = match.ingredients
-                            .replace('うどんまたはそば', 'そば');
-                    }
-                }
+                try {
+                    // 2.3 【✨新機能】名称から「うどん」か「そば」かを判別して原材料を最適化
+                    if (match && match.ingredients) {
+                        const isUdon = name.includes('うどん');
+                        const isSoba = name.includes('そば');
 
-                // 2.5 【✨新機能】天ぷら・天丼類の場合、名称から具材を動的に抽出して補完する
-                if (match && match.ingredients && (match.ingredients.includes('【ここに具材名') || name.match(/(.+?)(の?天ぷら|天|天丼)$/))) {
-                    const tempuraRegex = /^(.+?)(の?天ぷら|天|天丼)$/;
-                    const tMatch = name.match(tempuraRegex);
-                    if (tMatch) {
-                        const material = tMatch[1]; // 例: 「舞茸」
-                        // 抜き出した素材に産地補完を適用（舞茸（国産）など）
-                        const materialWithOrigin = formatIngredientsWithOrigin(material);
-                        
-                        // 具材を差し替えた新しい原材料リストを作成
-                        if (name.includes('丼')) {
-                            // 天丼の場合
-                            match.ingredients = `麦入り御飯（米（国産）、大麦）、${materialWithOrigin}、小麦粉、卵、植物油脂、天ぷらつゆ、食塩／膨張剤、調味料（アミノ酸等）、（一部に小麦・卵・大豆を含む）`;
-                        } else {
-                            // 通常の天ぷらの場合
-                            match.ingredients = `${materialWithOrigin}、小麦粉、卵、植物油脂、食塩／膨張剤、（一部に小麦・卵を含む）`;
+                        if (isUdon) {
+                            match.ingredients = match.ingredients
+                                .replace(/うどんまたはそば/g, 'うどん')
+                                .replace(/・そば/g, '') // アレルゲンから「そば」を削除
+                                .replace(/そば・/g, ''); // 文頭寄りの「そば・」を削除
+                        } else if (isSoba) {
+                            match.ingredients = match.ingredients
+                                .replace(/うどんまたはそば/g, 'そば');
                         }
                     }
+
+                    // 2.5 【✨新機能】天ぷら・天丼類の場合、名称から具材を動的に抽出して補完する
+                    // ※ただし、既にかき揚げなどの具体的な原材料が展開されている麺類（調理めん）はスキップする
+                    if (match && match.ingredients && match.category !== '調理めん' && (match.ingredients.includes('【ここに具材名') || name.match(/(.+?)(の?天ぷら|天|天丼)$/))) {
+                        const tempuraRegex = /^(.+?)(の?天ぷら|天|天丼)$/;
+                        const tMatch = name.match(tempuraRegex);
+                        if (tMatch) {
+                            const material = tMatch[1]; // 例: 「舞茸」
+                            const materialWithOrigin = formatIngredientsWithOrigin(material);
+                            
+                            if (name.includes('丼')) {
+                                match.ingredients = `麦入り御飯（米（国産）、大麦）、${materialWithOrigin}、小麦粉、卵、植物油脂、天ぷらつゆ、食塩／膨張剤、調味料（アミノ酸等）、（一部に小麦・卵・大豆を含む）`;
+                            } else {
+                                match.ingredients = `${materialWithOrigin}、小麦粉、卵、植物油脂、食塩／膨張剤、（一部に小麦・卵を含む）`;
+                            }
+                        }
+                    }
+                } catch (err) {
+                    console.error('AutoFill Logic Error:', err);
                 }
 
-                if (match) {
-                    elements.inputs.category.value = match.category || '弁当';
-                    elements.inputs.ingredients.value = match.ingredients;
-                    elements.inputs.consumeDays.value = match.consumeDays || '1';
-                    elements.inputs.calories.value = match.calories;
-                    elements.inputs.protein.value = match.protein;
-                    elements.inputs.fat.value = match.fat;
-                    elements.inputs.carb.value = match.carb;
-                    elements.inputs.salt.value = match.salt;
-                    if(match.price) elements.inputs.price.value = match.price;
-                    if(match.useJancode !== undefined) {
-                        elements.inputs.useJancode.checked = match.useJancode;
-                        document.getElementById('jancode-wrapper').style.display = match.useJancode ? 'block' : 'none';
-                        elements.inputs.jancodeValue.value = match.jancodeValue || '';
-                    }
-                    if(match.usePlaMark !== undefined) {
-                        elements.inputs.usePlaMark.checked = match.usePlaMark;
-                    }
-                    if(match.storeMethod) {
-                        elements.inputs.storeMethod.value = match.storeMethod;
+                try {
+                    if (match) {
+                        elements.inputs.category.value = match.category || '弁当';
+                        elements.inputs.ingredients.value = match.ingredients;
+                        elements.inputs.consumeDays.value = match.consumeDays || '1';
+                        elements.inputs.calories.value = match.calories;
+                        elements.inputs.protein.value = match.protein;
+                        elements.inputs.fat.value = match.fat;
+                        elements.inputs.carb.value = match.carb;
+                        elements.inputs.salt.value = match.salt;
+                        if(match.price) elements.inputs.price.value = match.price;
+                        if(match.useJancode !== undefined) {
+                            const useJancodeEl = document.getElementById('use-jancode');
+                            if (useJancodeEl) useJancodeEl.checked = match.useJancode;
+                            
+                            const jancodeWrapper = document.getElementById('jancode-wrapper');
+                            if(jancodeWrapper) jancodeWrapper.style.display = match.useJancode ? 'block' : 'none';
+                            
+                            const jancodeInput = document.getElementById('jancode-value');
+                            if(jancodeInput) jancodeInput.value = match.jancodeValue || '';
+                        }
+                        
+                        // リサイクルマークのラジオ選択
+                        let targetMark = match.packagingMark;
+                        if (targetMark === undefined && match.usePlaMark !== undefined) {
+                            targetMark = match.usePlaMark ? 'プラ' : 'なし';
+                        }
+                        if (targetMark) {
+                            const radio = document.querySelector(`input[name="packaging-mark"][value="${targetMark}"]`);
+                            if (radio) radio.checked = true;
+                        }
+                        if(match.storeMethod) {
+                            elements.inputs.storeMethod.value = match.storeMethod;
+                        } else {
+                            elements.inputs.storeMethod.value = '直射日光及び高温多湿を避けて保存してください';
+                        }
+                        
+                        // ご飯のラジオボタン状態を原材料テキストと同期
+                        if(window.syncRiceRadioFromText) {
+                            window.syncRiceRadioFromText(match.ingredients);
+                        }
+                        
+                        updatePreview();
+                        alert(`「${name}」に近い一般的な目安データを自動入力しました！\n実際の具材に合わせて少し修正して保存してください。`);
                     } else {
-                        elements.inputs.storeMethod.value = '直射日光及び高温多湿を避けて保存してください';
+                        if (confirm(`「${name}」の目安データが見つかりませんでした。\nネットで検索しますか？`)) {
+                            elements.buttons.searchWeb.click();
+                        }
                     }
-                    
-                    if(window.syncRiceRadioFromText) {
-                        window.syncRiceRadioFromText(match.ingredients);
-                    }
-                    
-                    updatePreview();
-                    alert(`「${name}」に近い一般的な目安データを自動入力しました！\n実際の具材に合わせて少し修正して保存してください。`);
-                } else {
-                    if (confirm(`「${name}」の目安データが見つかりませんでした。\nネットで検索しますか？`)) {
-                        elements.buttons.searchWeb.click();
-                    }
+                } catch (err) {
+                    console.error('Finalizing AutoFill Error:', err);
+                    alert(`自動入力エラーが発生しました：\n${err.name}: ${err.message}\n${err.stack.split('\n')[0]}`);
                 }
             });
         }
@@ -2175,24 +2196,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // バーコード生成
         if (elements.inputs.useJancode.checked) {
-            elements.preview.barcodeContainer.style.display = 'block';
+            if (elements.preview.barcodeContainer) elements.preview.barcodeContainer.style.display = 'block';
             try {
                 const val = elements.inputs.jancodeValue.value.trim() || '4900000000000';
                 // 13桁の場合はEAN13として処理、それ以外はCODE128でフォールバック
                 const format = (val.length === 13 && /^\d+$/.test(val)) ? "EAN13" : "CODE128";
-                JsBarcode(elements.preview.barcodeSvg, val, {
-                    format: format,
-                    width: 1.3,
-                    height: 20, /* さらにコンパクトにする */
-                    displayValue: true,
-                    fontSize: 10,
-                    margin: 0
-                });
+                
+                if (typeof JsBarcode === 'function' && elements.preview.barcodeSvg) {
+                    JsBarcode(elements.preview.barcodeSvg, val, {
+                        format: format,
+                        width: 1.3,
+                        height: 20, /* さらにコンパクトにする */
+                        displayValue: true,
+                        fontSize: 10,
+                        margin: 0
+                    });
+                }
             } catch (err) {
                 console.error("Barcode generation error", err);
             }
         } else {
-            elements.preview.barcodeContainer.style.display = 'none';
+            if (elements.preview.barcodeContainer) elements.preview.barcodeContainer.style.display = 'none';
         }
     };
 
