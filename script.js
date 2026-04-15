@@ -1483,6 +1483,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (m) parsed[key] = m[1];
                 }
 
+                // 名称ですでにテンプレートにないか確認（名前が入力されている場合）
+                const currentName = elements.inputs.name.value.trim();
+                let existsInTemplate = false;
+                for (let key in userTemplates) {
+                    if (userTemplates[key].name === currentName) {
+                        existsInTemplate = true;
+                        break;
+                    }
+                }
+
+                if (existsInTemplate) {
+                    if (!confirm(`【警告】「${currentName}」はすでにテンプレートに登録されています。\n今回の解析結果で内容を上書き（入力欄へ反映）しますか？\n（※反映後に保存ボタンを押さない限り、元のテンプレートは消えません）`)) {
+                        return;
+                    }
+                }
+
                 // フォームへ反映
                 if (parsed.ingredients) elements.inputs.ingredients.value = parsed.ingredients;
                 if (parsed.calories) elements.inputs.calories.value = parsed.calories;
@@ -1627,6 +1643,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
                         }
                     }
+                } else {
+                    // テンプレートに完全一致していた場合
+                    alert(`【登録済み】「${name}」はすでにテンプレートに登録されています。\nあなたの保存したデータから内容を読み込みました。`);
                 }
 
                 let match = bestMatch;
