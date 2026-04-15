@@ -13,14 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             keywords: ['チキン南蛮', '南蛮'],
             data: {
-                ingredients: '麦入り御飯（米（国産）、大麦）、鶏肉、タルタルソース、南蛮酢、その他おかず／調味料（アミノ酸等）、酸味料、増粘剤（加工デンプン）、香辛料抽出物、（一部に小麦・卵・乳成分・鶏肉・大豆を含む）',
+                ingredients: '麦入り御飯（米（国産）、大麦）、鶏肉（ブラジル産）、タルタルソース（マヨネーズ、玉ねぎ、きゅうりピクルス、砂糖、卵、その他）、南蛮酢（砂糖、醸造酢、醤油、清酒、レモン果汁、その他）、その他おかず／調味料（アミノ酸等）、香辛料抽出物、増粘剤（加工デンプン）、（一部に小麦・卵・乳成分・鶏肉・大豆を含む）',
                 calories: '850', protein: '25.0', fat: '35.0', carb: '105.0', salt: '3.5', price: '600'
             }
         },
         {
             keywords: ['とんかつ', 'トンカツ', '豚カツ', 'カツ'],
             data: {
-                ingredients: '麦入り御飯（米（国産）、大麦）、豚肉（ロース）、パン粉、とんかつソース、その他おかず／調味料（アミノ酸等）、カラメル色素、増粘多糖類、（一部に小麦・卵・乳成分・豚肉・大豆・りんごを含む）',
+                ingredients: '麦入り御飯（米（国産）、大麦）、豚ロースカツ（豚肉（国産）、パン粉、小麦粉、卵）、とんかつソース（野菜・果実（トマト、りんご、たまねぎ、その他）、砂糖、醸造酢、醤油、その他）、その他おかず／調味料（アミノ酸等）、カラメル色素、増粘多糖類、（一部に小麦・卵・乳成分・豚肉・大豆・りんごを含む）',
                 calories: '920', protein: '28.0', fat: '40.0', carb: '110.0', salt: '3.8', price: '650'
             }
         },
@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             keywords: ['かき揚げ', '野菜かき揚げ'],
             data: {
-                ingredients: '野菜（国産玉ねぎ、人参、さつまいも、かぼちゃ）、えび（バナメイ産）、小麦粉、卵、植物油脂、食塩／膨張剤、着色料（ビタミンB2）、（一部に小麦・卵・えびを含む）',
+                ingredients: 'かき揚げ（玉ねぎ（国産）、人参、春菊、小麦粉、植物油脂、でん粉、食塩）、その他おかず／膨張剤、着色料（ビタミンB2）、（一部に小麦を含む）',
                 calories: '380', protein: '6.5', fat: '22.0', carb: '38.0', salt: '0.6', price: '250',
                 category: '惣菜'
             }
@@ -1435,6 +1435,70 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.buttons.printBtns.forEach(btn => {
             if(btn) btn.addEventListener('click', executePrint);
         });
+
+        // ==== 🚀 スマート辞書インポート機能 ====
+        const smartImportBtn = document.getElementById('execute-smart-import');
+        const smartImportTextarea = document.getElementById('smart-import-text');
+        
+        if (smartImportBtn && smartImportTextarea) {
+            smartImportBtn.addEventListener('click', () => {
+                const text = smartImportTextarea.value.trim();
+                if (!text) {
+                    alert('ネット上の原材料表記や栄養成分表示をコピーして貼り付けてください。');
+                    return;
+                }
+
+                const parsed = {
+                    ingredients: '',
+                    calories: '',
+                    protein: '',
+                    fat: '',
+                    carb: '',
+                    salt: ''
+                };
+
+                // 原材料の解析 (より柔軟な正規表現)
+                const ingMatch = text.match(/(?:原材料名|原材料|原材料表示)[:：\s]*([\s\S]+?)(?:\n\n|栄養成分|栄養表示|保存方法|製造者|販売者|賞味期限|内容量|★|$)/);
+                if (ingMatch) {
+                    parsed.ingredients = ingMatch[1].trim()
+                        .replace(/\r?\n/g, '') // 改行を削除
+                        .replace(/[ 　]+/g, '') // ホワイトスペース削除
+                        .replace(/^[:：\s]*/, '');
+                } else if (text.includes('／') || text.includes('、')) {
+                    // キーワードが見つからないが、箇条書きっぽい場合は全文を候補にする
+                    parsed.ingredients = text.split(/\r?\n\r?\n/)[0].trim().replace(/\r?\n/g, '');
+                }
+
+                // 栄養成分の解析
+                const patterns = {
+                    calories: /(?:熱量|エネルギー|カロリー)[:：\s]*(\d+)\s*kcal/i,
+                    protein: /(?:たんぱく質|タンパク質|蛋白質)[:：\s]*(\d+(?:\.\d+)?)\s*g/i,
+                    fat: /(?:脂質)[:：\s]*(\d+(?:\.\d+)?)\s*g/i,
+                    carb: /(?:炭水化物)[:：\s]*(\d+(?:\.\d+)?)\s*g/i,
+                    salt: /(?:食塩相当量)[:：\s]*(\d+(?:\.\d+)?)\s*g/i
+                };
+
+                for (let key in patterns) {
+                    const m = text.match(patterns[key]);
+                    if (m) parsed[key] = m[1];
+                }
+
+                // フォームへ反映
+                if (parsed.ingredients) elements.inputs.ingredients.value = parsed.ingredients;
+                if (parsed.calories) elements.inputs.calories.value = parsed.calories;
+                if (parsed.protein) elements.inputs.protein.value = parsed.protein;
+                if (parsed.fat) elements.inputs.fat.value = parsed.fat;
+                if (parsed.carb) elements.inputs.carb.value = parsed.carb;
+                if (parsed.salt) elements.inputs.salt.value = parsed.salt;
+
+                updatePreview();
+                if (window.syncRiceRadioFromText) window.syncRiceRadioFromText(elements.inputs.ingredients.value);
+
+                alert('テキストを解析して反映しました！\n反映された内容を確認・微調整して、上の「📋 新しく追加」ボタンを押すと、辞書（テンプレート）として保存されます。');
+                
+                // 成功したらアコーディオンはそのまま、または閉じても良いが、ユーザーが確認できるようそのままにする
+            });
+        }
         
         // ==== 🎙️ 音声入力機能 (Web Speech API) ====
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -1743,7 +1807,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (firstItem.includes('（') || firstItem.includes('(')) return text;
 
         // 生鮮材料キーワード (国産)
-        const rawKeywords = ['肉', '魚', '米', 'もち米', '野菜', 'じゃがいも', '玉ねぎ', '人参', 'キャベツ', 'レタス', 'ブロッコリー', 'トマト', 'きゅうり', '卵', '海老', 'えび', 'イカ', 'いか', 'アサリ', '貝', '果', '舞茸', '茄子', 'なす', '南瓜', 'かぼちゃ', 'アスパラ', '竹の子', 'たけのこ'];
+        const rawKeywords = ['肉', '魚', '米', 'もち米', '野菜', 'じゃがいも', '玉ねぎ', '人参', 'キャベツ', 'レタス', 'ブロッコリー', 'トマト', 'きゅうり', '卵', '海老', 'えび', 'イカ', 'いか', 'アサリ', '貝', '果', '舞茸', '茄子', 'なす', '南瓜', 'かぼちゃ', 'アスパラ', '竹の子', 'たけのこ', '春菊', 'ほうれん草', '小松菜', '大根', 'だいこん', 'ごぼう', '蓮根', 'れんこん'];
         // 加工品キーワード (国内製造)
         const processedKeywords = ['めん', '麺', 'パン', 'ソース', 'ルウ', 'マヨネーズ', 'ケチャップ', '醤油', 'しょうゆ', '味噌', 'みそ', '豆腐', '納豆', 'ハム', 'ベーコン', 'ソーセージ', 'ウインナー', 'ハンバーグ', 'カツ', 'フライ', '揚げ', 'コロッケ', '焼売', '餃子', '佃煮', 'パスタ', 'スパゲティ', 'マカロニ', 'うどん', 'そば', 'ちくわ', 'かまぼこ', 'こんにゃく', 'チーズ', '天かす', 'トルティーヤ', '皮'];
 

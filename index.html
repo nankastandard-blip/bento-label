@@ -161,6 +161,16 @@
                                     <button type="button" id="auto-fill-btn" class="action-btn auto-fill-btn" style="flex: 1; margin: 0; padding: 0.5rem; font-size: 0.95rem;">💡 自動入力</button>
                                     <button type="button" id="search-web-btn" class="action-btn search-web-btn" style="flex: 1; margin: 0; padding: 0.5rem; font-size: 0.95rem;" title="Googleで栄養成分を検索">🔍 ネットで検索</button>
                                 </div>
+                                
+                                <!-- スマート辞書インポート機能 -->
+                                <details class="smart-import-details" style="margin-top: 0.5rem; background: #eef7ff; border: 1px solid #cce5ff; border-radius: 6px; padding: 0.5rem;">
+                                    <summary style="font-size: 0.85rem; font-weight: bold; cursor: pointer; color: #004085;">🚀 ネットの検索結果から辞書を更新 (スマート・インポート)</summary>
+                                    <div style="margin-top: 0.5rem;">
+                                        <p style="font-size: 0.8rem; margin: 0 0 0.4rem 0; color: #555;">コピーした「原材料名」や「栄養成分表示」を下に貼り付けてください。</p>
+                                        <textarea id="smart-import-text" class="form-control" style="font-size: 0.8rem; min-height: 80px; margin-bottom: 0.5rem;" placeholder="例: 原材料名：鶏肉、小麦粉... 栄養成分表示（100g当たり）：熱量200kcal..."></textarea>
+                                        <button type="button" id="execute-smart-import" class="action-btn" style="width: 100%; margin: 0; padding: 0.4rem; font-size: 0.85rem; background-color: #007bff; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">🔍 貼り付けた内容を解析して取り込む</button>
+                                    </div>
+                                </details>
                             </div>
 
                             <div class="form-row">
