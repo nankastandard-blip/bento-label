@@ -1858,6 +1858,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 let match = bestMatch;
 
+                // 2.3 【✨新機能】名称から「うどん」か「そば」かを判別して原材料を最適化
+                if (match && match.ingredients) {
+                    if (name.includes('うどん')) {
+                        match.ingredients = match.ingredients
+                            .replace('うどんまたはそば', 'うどん')
+                            .replace('・そば', '') // アレルゲンから「そば」を削除
+                            .replace('そば・', ''); // 文頭寄りの「そば・」を削除
+                    } else if (name.includes('そば')) {
+                        match.ingredients = match.ingredients
+                            .replace('うどんまたはそば', 'そば');
+                    }
+                }
+
                 // 2.5 【✨新機能】天ぷら・天丼類の場合、名称から具材を動的に抽出して補完する
                 if (match && match.ingredients && (match.ingredients.includes('【ここに具材名') || name.match(/(.+?)(の?天ぷら|天|天丼)$/))) {
                     const tempuraRegex = /^(.+?)(の?天ぷら|天|天丼)$/;
