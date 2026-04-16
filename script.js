@@ -909,11 +909,13 @@ document.addEventListener('DOMContentLoaded', () => {
             phone2: document.getElementById('phone2'),
             useJancode: document.getElementById('use-jancode'),
             jancodeValue: document.getElementById('jancode-value'),
+            toggleRecommendation: document.getElementById('toggle-recommendation'),
             // かんたん印刷用
             quickPreset: document.getElementById('quick-preset-select'),
             quickStoreProfile: document.getElementById('quick-store-profile-select')
         },
         preview: {
+            recommendation: document.getElementById('preview-recommendation'),
             name: document.getElementById('preview-name'),
             category: document.getElementById('preview-category'),
             ingredients: document.getElementById('preview-ingredients'),
@@ -1475,6 +1477,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        elements.inputs.useJancode.addEventListener('change', updatePreview);
+        elements.inputs.toggleRecommendation.addEventListener('change', updatePreview);
+        
+        // 辞書インポート実行
         elements.inputs.consumeDays.addEventListener('input', updatePreview);
         
         // 品目分類の自動推測（スマート入力）
@@ -1896,7 +1902,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 try {
                     if (match) {
-                        elements.inputs.category.value = match.category || '弁当';
+                        elements.inputs.category.value = match.category || inferCategoryByName(name);
                         elements.inputs.ingredients.value = match.ingredients;
                         elements.inputs.consumeDays.value = match.consumeDays || '1';
                         elements.inputs.calories.value = match.calories;
@@ -1939,7 +1945,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         updatePreview();
                         alert(`「${name}」に近い一般的な目安データを自動入力しました！\n実際の具材に合わせて少し修正して保存してください。`);
                     } else {
-                        if (confirm(`「${name}」の目安データが見つかりませんでした。\nネットで検索しますか？`)) {
+                        // 辞書にない場合でも品目だけは推測して入れる
+                        const inferredCat = inferCategoryByName(name);
+                        elements.inputs.category.value = inferredCat;
+                        
+                        if (confirm(`「${name}」の目安データが見つかりませんでした。\n品目は「${inferredCat}」と推測してセットしました。\n栄養成分などをネットで検索しますか？`)) {
                             elements.buttons.searchWeb.click();
                         }
                     }
@@ -2091,6 +2101,45 @@ document.addEventListener('DOMContentLoaded', () => {
         return firstItem + origin + text.substring(firstItemRaw.length);
     };
 
+    /**
+     * 名称から品目を推測する
+     * @param {string} name 
+     * @returns {string} 品目名
+     */
+    const inferCategoryByName = (name) => {
+        if (!name) return '弁当';
+        const n = name.toLowerCase();
+        
+        // 調理めん
+        if (n.match(/(うどん|そば|パスタ|スパゲティ|ラーメン|つけ麺|麺|めん|中華そば|やきそば|焼きそば|そうめん|ひやむぎ|冷やし)/)) {
+            return '調理めん';
+        }
+        
+        // 弁当
+        if (n.match(/(弁当|丼|カレー|ライス|重|チャーハン|炒飯|ピラフ|オムライス)/)) {
+            return '弁当';
+        }
+
+        // おにぎり
+        if (n.match(/(おにぎり|おむすび)/)) {
+            return 'おにぎり';
+        }
+
+        // 寿司
+        if (n.match(/(寿司|いなり|巻|ちらし|すし)/)) {
+            return '寿司';
+        }
+
+        // 惣菜
+        if (n.match(/(サラダ|惣菜|和え|揚げ|焼き|煮|炒め|コロッケ|唐揚げ|ハンバーグ|カツ|フライ|ナムル|キンピラ|きんぴら|ピクルス|きゅうり|トマト)/)) {
+            return '惣菜';
+        }
+
+        return '弁当'; // デフォルト
+    };
+
+    let userManuallyChangedCategory = false;
+
     const updatePreview = () => {
         const nameVal = elements.inputs.name.value.trim() || '名称未設定';
         
@@ -2100,6 +2149,13 @@ document.addEventListener('DOMContentLoaded', () => {
             displayName = nameVal.substring(0, 20) + '...';
         }
         elements.preview.name.textContent = displayName;
+
+        // 本日のおすすめ表示
+        if (elements.inputs.toggleRecommendation.checked) {
+            elements.preview.recommendation.style.display = 'block';
+        } else {
+            elements.preview.recommendation.style.display = 'none';
+        }
         
         // 名称の文字数に応じてフォントサイズを自動調整（一段に収めるため）
         if (displayName.length > 15) {

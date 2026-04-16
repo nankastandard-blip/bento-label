@@ -152,7 +152,9 @@
                             <!-- ③ 細かい内容の確認・微調整 -->
                             <h3 class="sub-heading" style="margin-top: 0; padding-top: 0; color: #555;">📝 ③ 印刷内容</h3>
                             <div class="form-group">
-                                <label for="product-name">名称 (お弁当の名前) <span class="required">*</span></label>
+                                <div style="margin-bottom: 0.5rem;">
+                                    <label for="product-name" style="margin: 0; display: block; font-weight: bold;">名称 (お弁当の名前) <span class="required">*</span></label>
+                                </div>
                                 <div style="display: flex; gap: 0.4rem; align-items: stretch; margin-bottom: 0.5rem;">
                                     <input type="text" id="product-name" class="form-control name-input-large" placeholder="例: チキン南蛮弁当" required>
                                     <button type="button" class="action-btn mic-btn btn-small" data-target="product-name" title="音声入力">🎙️</button>
@@ -296,7 +298,9 @@
                         <!-- この部分が実際に印刷されるラベル -->
                         <div id="print-target" class="label-box">
                             <div class="label-inner">
-                                <div class="label-header" style="display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid #000; padding-bottom: 0.5mm; margin-bottom: 1.5mm;">
+                                <div class="label-header">
+                                    <div id="preview-recommendation" class="recommendation-badge" style="display: none;">★ 本日のおすすめ ★</div>
+                                    <div style="display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid #000; padding-bottom: 0.5mm; margin-bottom: 1.5mm;">
                                     <div class="label-title" id="preview-name" style="border: none; padding: 0; margin: 0;">お弁当</div>
                                     <div id="preview-packaging-mark" class="logo-mark" style="display: block;">プラ</div>
                                 </div>
@@ -366,8 +370,17 @@
                                          <span style="font-weight: bold; font-size:0.85rem;">日後</span>
                                     </div>
                                 </div>
-                                <div style="text-align: center; width: 100%; margin-top: -0.5rem;">
+                                <div style="text-align: center; width: 100%; margin-top: -0.5rem; margin-bottom: 0.5rem;">
                                     <small class="help-text" id="calculated-date-hint" style="color: #e74c3c; font-weight: bold; font-size: 0.8rem;">日付計算中...</small>
+                                </div>
+
+                                <!-- 本日のおすすめトグル -->
+                                <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 0.5rem;">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="toggle-recommendation">
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">本日のおすすめ★</span>
+                                    </label>
                                 </div>
 
                                 <div style="display: flex; gap: 0.5rem; align-items: stretch; width: 100%;">

@@ -423,7 +423,17 @@ textarea.form-control {
 
 .label-header {
     text-align: center;
-    margin-bottom: 1.5mm;
+    margin-bottom: 1mm; /* バッジ追加のため少し詰める */
+}
+
+/* 本日のおすすめバッジ */
+.recommendation-badge {
+    font-size: 8pt;
+    font-weight: bold;
+    border: 1px solid #000;
+    padding: 0.5mm 0;
+    margin-bottom: 1mm;
+    letter-spacing: 0.5mm;
 }
 
 .label-title {
@@ -598,6 +608,68 @@ textarea.form-control {
         background-color: white !important; /* 背景色は常に白 */
     }
 
+    .recommendation-badge {
+        border-width: 0.5pt !important;
+    }
+}
+
+/* トグルスイッチのパーツ */
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    background: #fff4cc;
+    padding: 0.3rem 0.6rem;
+    border-radius: 20px;
+    border: 1px solid #d4a017;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #856404;
+    transition: all 0.2s ease;
+}
+
+.toggle-switch:hover {
+    background: #ffeb99;
+    transform: translateY(-1px);
+}
+
+.toggle-switch input {
+    display: none;
+}
+
+.toggle-slider {
+    width: 28px;
+    height: 16px;
+    background: #ccc;
+    border-radius: 10px;
+    position: relative;
+    transition: 0.3s;
+}
+
+.toggle-slider:before {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    left: 2px;
+    bottom: 2px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+input:checked + .toggle-slider {
+    background: #f59e0b;
+}
+
+input:checked + .toggle-slider:before {
+    transform: translateX(12px);
+}
+
+.toggle-label {
+    white-space: nowrap;
+}
     @page {
         size: 62mm auto; /* Brother QL-820NWBc の 62mm長尺テープを想定 */
         margin: 0;
