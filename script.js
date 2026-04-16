@@ -1297,12 +1297,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ==== アプリケーション初期化とイベント ====
     const init = () => {
-        loadTemplates(); // Load unified templates
-        updateProfileDropdown();
-        loadStoreInfo();
-        renderPresetOptions();
-        setupEventListeners();
-        updatePreview();
+        try {
+            loadTemplates(); // Load unified templates
+            updateProfileDropdown();
+            loadStoreInfo();
+            renderPresetOptions();
+            setupEventListeners();
+            updatePreview();
+        } catch (e) {
+            alert("システム起動エラー: " + e.message);
+            document.body.innerHTML = `<div style="padding: 20px; text-align: left; background: #fff;">
+                <h1 style="color: red;">起動時にエラーが発生しました</h1>
+                <p>以下の内容をコピーして、AIアシスタントに教えてください：</p>
+                <textarea style="width: 100%; height: 300px; font-family: monospace; font-size: 16px;">${e.stack}</textarea>
+            </div>`;
+        }
     };
 
     const setupEventListeners = () => {
@@ -1477,17 +1486,19 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        elements.inputs.useJancode.addEventListener('change', updatePreview);
-        elements.inputs.toggleRecommendation.addEventListener('change', updatePreview);
+        if (elements.inputs.useJancode) elements.inputs.useJancode.addEventListener('change', updatePreview);
+        if (elements.inputs.toggleRecommendation) elements.inputs.toggleRecommendation.addEventListener('change', updatePreview);
         
         // 辞書インポート実行
-        elements.inputs.consumeDays.addEventListener('input', updatePreview);
+        if (elements.inputs.consumeDays) elements.inputs.consumeDays.addEventListener('input', updatePreview);
         
         // 品目分類の自動推測（スマート入力）
-        elements.inputs.category.addEventListener('input', () => {
-            userManuallyChangedCategory = true;
-            updatePreview();
-        });
+        if (elements.inputs.category) {
+            elements.inputs.category.addEventListener('input', () => {
+                userManuallyChangedCategory = true;
+                updatePreview();
+            });
+        }
 
         const inferCategory = (name) => {
             if (!name) return null;
@@ -1506,8 +1517,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return null;
         };
 
-        elements.inputs.name.addEventListener('input', () => {
-            const inferred = inferCategory(elements.inputs.name.value);
+        if (elements.inputs.name) {
+            elements.inputs.name.addEventListener('input', () => {
+                const inferred = inferCategory(elements.inputs.name.value);
             if (inferred && !userManuallyChangedCategory) {
                  elements.inputs.category.value = inferred;
                  
@@ -1518,20 +1530,23 @@ document.addEventListener('DOMContentLoaded', () => {
                          noRiceRadio.checked = true;
                      }
                  }
-            }
-            updatePreview(); // updatePreview handles updating category too
-        });
+             }
+             updatePreview(); // updatePreview handles updating category too
+         });
+         }
 
         // リサイクルマーク切り替え
         document.querySelectorAll('input[name="packaging-mark"]').forEach(radio => {
-            radio.addEventListener('change', updatePreview);
+            if (radio) radio.addEventListener('change', updatePreview);
         });
 
         // バーコード切り替え
-        elements.inputs.useJancode.addEventListener('change', (e) => {
-            document.getElementById('jancode-wrapper').style.display = e.target.checked ? 'block' : 'none';
-            updatePreview();
-        });
+        if (elements.inputs.useJancode) {
+            elements.inputs.useJancode.addEventListener('change', (e) => {
+                document.getElementById('jancode-wrapper').style.display = e.target.checked ? 'block' : 'none';
+                updatePreview();
+            });
+        }
 
         // ご飯の種類切り替え
         const riceTypes = ['御飯（国産米）', '玄米（国産米）', '麦入り御飯（米（国産）、大麦）', '五穀米（米（国産）、五穀）'];
@@ -1595,15 +1610,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // プリセット変更
-        elements.inputs.preset.addEventListener('change', (e) => {
-            const selectedId = e.target.value;
-            if (!selectedId) {
-                clearForm();
-            } else if (userTemplates[selectedId]) {
-                applyPreset(userTemplates[selectedId]);
-            }
-            renderPresetOptions();
-        });
+        if (elements.inputs.preset) {
+            elements.inputs.preset.addEventListener('change', (e) => {
+                const selectedId = e.target.value;
+                if (!selectedId) {
+                    clearForm();
+                } else if (userTemplates[selectedId]) {
+                    applyPreset(userTemplates[selectedId]);
+                }
+                renderPresetOptions();
+            });
+        }
 
         // 枚数入力の同期
         if(elements.buttons.printCountH && elements.buttons.printCountF) {
@@ -2127,7 +2144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return '弁当'; // デフォルト
     };
 
-    let userManuallyChangedCategory = false;
+    userManuallyChangedCategory = false;
 
     const updatePreview = () => {
         const nameVal = elements.inputs.name.value.trim() || '名称未設定';
