@@ -294,104 +294,122 @@
                         <span class="badge">Brother QL-820NWBc対応 (62mmラベル巻 想定)</span>
                     </div>
                     
-                    <div class="card-body preview-container" style="flex-direction: column; gap: 1.5rem;">
-                        <!-- この部分が実際に印刷されるラベル -->
-                        <div id="print-target" class="label-box">
-                            <div class="label-inner">
-                                <div class="label-header">
-                                    <div id="preview-recommendation" class="recommendation-badge" style="display: none;">★ 本日のおすすめ ★</div>
-                                    <div style="display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid #000; padding-bottom: 0.5mm; margin-bottom: 1.5mm;">
-                                    <div class="label-title" id="preview-name" style="border: none; padding: 0; margin: 0;">お弁当</div>
-                                    <div id="preview-packaging-mark" class="logo-mark" style="display: block;">プラ</div>
-                                </div>
-                                
-                                <div class="label-body">
-                                    <table class="label-table">
-                                        <tr>
-                                            <th class="label-th">名称</th>
-                                            <td class="label-td" id="preview-category">弁当</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="label-th">原材料名</th>
-                                            <td class="label-td" id="preview-ingredients"></td>
-                                        </tr>
-                                        <tr>
-                                            <th class="label-th">消費期限</th>
-                                            <td class="label-td font-bold" id="preview-consume"></td>
-                                        </tr>
-                                        <tr>
-                                            <th class="label-th">保存方法</th>
-                                            <td class="label-td" id="preview-store"></td>
-                                        </tr>
-                                    </table>
-                                    
-                                    <div class="nutrition-box">
-                                        <div class="nutrition-title">栄養成分表示（1包装当り）</div>
-                                        <div class="nutrition-grid">
-                                            <span>熱量 <span id="preview-calories">-</span>kcal</span>
-                                            <span>蛋白質 <span id="preview-protein">-</span>g</span>
-                                            <span>脂質 <span id="preview-fat">-</span>g</span>
-                                            <span>炭水化物 <span id="preview-carb">-</span>g</span>
-                                            <span>食塩相当量 <span id="preview-salt">-</span>g</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="manufacturer-info" id="preview-store-info-1">
-                                        <div><span class="label-th-inline" id="preview-manufacturer-title">製造者</span> <span id="preview-manufacturer" class="font-bold"></span></div>
-                                        <div id="preview-address" class="address-text"></div>
-                                        <div id="preview-phone-container"><span class="label-th-inline">TEL</span> <span id="preview-phone"></span></div>
-                                    </div>
-                                    <div class="manufacturer-info" id="preview-store-info-2" style="display: none; border-top: 1px dashed #ccc; margin-top: 1mm; padding-top: 1mm;">
-                                        <div><span class="label-th-inline" id="preview-manufacturer-title2">製造者</span> <span id="preview-manufacturer2" class="font-bold"></span></div>
-                                        <div id="preview-address2" class="address-text"></div>
-                                        <div id="preview-phone-container2"><span class="label-th-inline">TEL</span> <span id="preview-phone2"></span></div>
-                                    </div>
-                                </div>
-                                
-                                <div class="label-footer" style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px dashed #000; padding-top: 0.5mm;">
-                                    <div id="preview-barcode-container" style="display: none; margin: 0;">
-                                        <svg id="preview-barcode"></svg>
-                                    </div>
-                                    
-                                    <div class="price-box tax-in" style="border: none; margin: 0; padding: 0; text-align: right; flex: 1;">
-                                        <div class="price-label" style="font-size: 6pt; margin-bottom: 0;">税込価格</div>
-                                        <div class="price-value tax-value" style="font-size: 13pt; font-weight: bold; line-height: 1;"><span id="preview-price-tax"></span><span class="yen" style="font-size: 8pt;">円</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> <!-- End print-target -->
-                            
-                        <!-- プレビュースクリーン用 コントロール -->
-                        <div class="print-controls" style="display: flex; flex-direction: column; gap: 0.3rem; align-items: center; justify-content: center; width: 100%; max-width: 62mm; background: #fff; padding: 0.3rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-                                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; font-size: 0.9rem;">
-                                    <label for="consume-days" style="margin:0; font-weight:bold; color: #2c3e50; font-size:0.85rem;">🕒 消費期限:</label>
-                                     <div style="display: flex; align-items: center; gap: 0.2rem;">
-                                         <input type="number" id="consume-days" class="form-control" value="1" min="0" max="365" style="width: 45px; text-align: center; padding: 0.2rem; font-size:0.85rem;" required>
-                                         <span style="font-weight: bold; font-size:0.85rem;">日後</span>
-                                    </div>
-                                </div>
-                                <div style="text-align: center; width: 100%; margin-top: -0.5rem; margin-bottom: 0.5rem;">
-                                    <small class="help-text" id="calculated-date-hint" style="color: #e74c3c; font-weight: bold; font-size: 0.8rem;">日付計算中...</small>
-                                </div>
+                    <div class="card-body preview-container" style="flex-direction: column; gap: 0.5rem; background-color: #f1f5f9; padding: 1.25rem;">
+                         <!-- 1. ラベル本体セクション -->
+                         <div style="display: flex; flex-direction: column; align-items: center; width: 100%; gap: 0.5rem;">
+                             <div style="font-size: 0.75rem; font-weight: bold; color: #64748b; letter-spacing: 0.05em; align-self: flex-start; padding-left: 0.5rem; display: flex; align-items: center; gap: 0.3rem;">
+                                 <svg style="width: 12px; height: 12px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                 ラベル確認イメージ
+                             </div>
+                             <!-- この部分が実際に印刷されるラベル -->
+                             <div id="print-target" class="label-box" style="background-color: white; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); width: 62mm; min-height: 40mm; padding: 3mm; box-sizing: border-box; position: relative; overflow: hidden; border: 1px solid #ddd; border-radius: 2px;">
+                                 <div class="label-inner">
+                                     <div class="label-header">
+                                         <div id="preview-recommendation" class="recommendation-badge" style="display: none;">★ 本日のおすすめ ★</div>
+                                         <div style="display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid #000; padding-bottom: 0.5mm; margin-bottom: 1.5mm;">
+                                             <div class="label-title" id="preview-name" style="border: none; padding: 0; margin: 0;">お弁当</div>
+                                             <div id="preview-packaging-mark" class="logo-mark" style="display: block;">プラ</div>
+                                         </div>
+                                     </div>
+                                     
+                                     <div class="label-body">
+                                         <table class="label-table">
+                                             <tr>
+                                                 <th class="label-th">名称</th>
+                                                 <td class="label-td" id="preview-category">弁当</td>
+                                             </tr>
+                                             <tr>
+                                                 <th class="label-th">原材料名</th>
+                                                 <td class="label-td" id="preview-ingredients"></td>
+                                             </tr>
+                                             <tr>
+                                                 <th class="label-th">消費期限</th>
+                                                 <td class="label-td font-bold" id="preview-consume"></td>
+                                             </tr>
+                                             <tr>
+                                                 <th class="label-th">保存方法</th>
+                                                 <td class="label-td" id="preview-store"></td>
+                                             </tr>
+                                         </table>
+                                         
+                                         <div class="nutrition-box">
+                                             <div class="nutrition-title">栄養成分表示（1包装当り）</div>
+                                             <div class="nutrition-grid">
+                                                 <span>熱量 <span id="preview-calories">-</span>kcal</span>
+                                                 <span>蛋白質 <span id="preview-protein">-</span>g</span>
+                                                 <span>脂質 <span id="preview-fat">-</span>g</span>
+                                                 <span>炭水化物 <span id="preview-carb">-</span>g</span>
+                                                 <span>食塩相当量 <span id="preview-salt">-</span>g</span>
+                                             </div>
+                                         </div>
+                                         
+                                         <div class="manufacturer-info" id="preview-store-info-1">
+                                             <div><span class="label-th-inline" id="preview-manufacturer-title">製造者</span> <span id="preview-manufacturer" class="font-bold"></span></div>
+                                             <div id="preview-address" class="address-text"></div>
+                                             <div id="preview-phone-container"><span class="label-th-inline">TEL</span> <span id="preview-phone"></span></div>
+                                         </div>
+                                         <div class="manufacturer-info" id="preview-store-info-2" style="display: none; border-top: 1px dashed #ccc; margin-top: 1mm; padding-top: 1mm;">
+                                             <div><span class="label-th-inline" id="preview-manufacturer-title2">製造者</span> <span id="preview-manufacturer2" class="font-bold"></span></div>
+                                             <div id="preview-address2" class="address-text"></div>
+                                             <div id="preview-phone-container2"><span class="label-th-inline">TEL</span> <span id="preview-phone2"></span></div>
+                                         </div>
+                                     </div>
+                                     
+                                     <div class="label-footer" style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px dashed #000; padding-top: 0.5mm;">
+                                         <div id="preview-barcode-container" style="display: none; margin: 0;">
+                                             <svg id="preview-barcode"></svg>
+                                         </div>
+                                         
+                                         <div class="price-box tax-in" style="border: none; margin: 0; padding: 0; text-align: right; flex: 1;">
+                                             <div class="price-label" style="font-size: 6pt; margin-bottom: 0;">税込価格</div>
+                                             <div class="price-value tax-value" style="font-size: 13pt; font-weight: bold; line-height: 1;"><span id="preview-price-tax"></span><span class="yen" style="font-size: 8pt;">円</span></div>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div> <!-- End print-target -->
+                         </div>
 
-                                <!-- 本日のおすすめトグル -->
-                                <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 0.5rem;">
-                                    <label class="toggle-switch">
-                                        <input type="checkbox" id="toggle-recommendation">
-                                        <span class="toggle-slider"></span>
-                                        <span class="toggle-label">本日のおすすめ★</span>
-                                    </label>
-                                </div>
+                         <!-- 区切り線 -->
+                         <div style="width: 100%; height: 1px; background: #cbd5e1; margin: 0.5rem 0; box-shadow: 0 1px 0 white;"></div>
 
-                                <div style="display: flex; gap: 0.5rem; align-items: stretch; width: 100%;">
-                                    <div style="display: flex; align-items: center; background: white; border: 1px solid #ccc; border-radius: 8px; padding: 0.25rem;">
-                                        <button type="button" id="quick-count-minus" class="action-btn" style="width: 24px; height: 24px; line-height: 1; padding: 0; margin: 0; background-color: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 3px; font-weight: bold; font-size: 0.8rem;">-</button>
-                                        <input type="number" id="print-count-footer" class="form-control" value="1" min="1" max="999" style="width: 40px; text-align: center; font-size: 0.9rem; font-weight: bold; border: none; background: transparent; padding: 0.2rem;">
-                                        <button type="button" id="quick-count-plus" class="action-btn" style="width: 24px; height: 24px; line-height: 1; padding: 0; margin: 0; background-color: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 3px; font-weight: bold; font-size: 0.8rem;">+</button>
-                                    </div>
-                                    <button id="print-btn-footer" class="print-btn primary-btn" style="flex: 1; padding: 0.5rem; font-size: 0.9rem; border-radius: 6px;">🖨️ 印刷</button>
-                                </div>
-                            </div>
+                         <!-- 2. 操作パネルセクション -->
+                         <div style="display: flex; flex-direction: column; align-items: center; width: 100%; gap: 0.5rem;">
+                             <div style="font-size: 0.75rem; font-weight: bold; color: #64748b; letter-spacing: 0.05em; align-self: flex-start; padding-left: 0.5rem; display: flex; align-items: center; gap: 0.3rem;">
+                                 <svg style="width: 12px; height: 12px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+                                 印刷設定・出力
+                             </div>
+                             
+                             <div class="print-controls" style="display: flex; flex-direction: column; gap: 0.3rem; align-items: center; justify-content: center; width: 100%; max-width: 62mm; background: #fff; padding: 0.5rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;">
+                                 <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; font-size: 0.9rem;">
+                                     <label for="consume-days" style="margin:0; font-weight:bold; color: #2c3e50; font-size:0.85rem;">🕒 消費期限:</label>
+                                      <div style="display: flex; align-items: center; gap: 0.2rem;">
+                                          <input type="number" id="consume-days" class="form-control" value="1" min="0" max="365" style="width: 45px; text-align: center; padding: 0.2rem; font-size:0.85rem;" required>
+                                          <span style="font-weight: bold; font-size:0.85rem;">日後</span>
+                                     </div>
+                                 </div>
+                                 <div style="text-align: center; width: 100%; margin-top: -0.5rem; margin-bottom: 0.5rem;">
+                                     <small class="help-text" id="calculated-date-hint" style="color: #e74c3c; font-weight: bold; font-size: 0.8rem;">日付計算中...</small>
+                                 </div>
+ 
+                                 <!-- 本日のおすすめトグル -->
+                                 <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 0.5rem;">
+                                     <label class="toggle-switch">
+                                         <input type="checkbox" id="toggle-recommendation">
+                                         <span class="toggle-slider"></span>
+                                         <span class="toggle-label">本日のおすすめ★</span>
+                                     </label>
+                                 </div>
+ 
+                                 <div style="display: flex; gap: 0.5rem; align-items: stretch; width: 100%;">
+                                     <div style="display: flex; align-items: center; background: white; border: 1px solid #ccc; border-radius: 8px; padding: 0.25rem;">
+                                         <button type="button" id="quick-count-minus" class="action-btn" style="width: 24px; height: 24px; line-height: 1; padding: 0; margin: 0; background-color: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 3px; font-weight: bold; font-size: 0.8rem;">-</button>
+                                         <input type="number" id="print-count-footer" class="form-control" value="1" min="1" max="999" style="width: 40px; text-align: center; font-size: 0.9rem; font-weight: bold; border: none; background: transparent; padding: 0.2rem;">
+                                         <button type="button" id="quick-count-plus" class="action-btn" style="width: 24px; height: 24px; line-height: 1; padding: 0; margin: 0; background-color: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 3px; font-weight: bold; font-size: 0.8rem;">+</button>
+                                     </div>
+                                     <button id="print-btn-footer" class="print-btn primary-btn" style="flex: 1; padding: 0.5rem; font-size: 0.9rem; border-radius: 6px;">🖨️ 印刷</button>
+                                 </div>
+                             </div>
+                         </div>
                     </div>
                 </div>
             </section>
