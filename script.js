@@ -1023,6 +1023,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let userTemplates = {};
     let userManuallyChangedCategory = false; // ユーザーが明示的にカテゴリーを変更したかのフラグ
+    let userManuallyChangedStoreMethod = false; // ユーザーが明示的に保存方法を変更したかのフラグ
 
     const loadTemplates = () => {
         const saved = localStorage.getItem('bentoAllTemplates');
@@ -1496,6 +1497,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (elements.inputs.category) {
             elements.inputs.category.addEventListener('input', () => {
                 userManuallyChangedCategory = true;
+                
+                // 品目が手動で変えられた場合も、保存方法を自動更新（ユーザーが手動で保存方法を変えていない場合のみ）
+                if (!userManuallyChangedStoreMethod) {
+                    const inferredStore = inferStoreMethod(elements.inputs.category.value, elements.inputs.name.value);
+                    elements.inputs.storeMethod.value = inferredStore;
+                }
+                
+                updatePreview();
+            });
+        }
+
+        if (elements.inputs.storeMethod) {
+            elements.inputs.storeMethod.addEventListener('change', () => {
+                userManuallyChangedStoreMethod = true;
                 updatePreview();
             });
         }
@@ -1517,6 +1532,21 @@ document.addEventListener('DOMContentLoaded', () => {
             return null;
         };
 
+        const inferStoreMethod = (category, name = '') => {
+            const n = name.toLowerCase();
+            // 冷凍の判定を最優先
+            if (n.includes('冷凍') || n.includes('フローズン') || n.includes('アイス')) {
+                return '－１８℃以下で保存してください';
+            }
+            
+            const refrigeratedCategories = ['弁当', '寿司', '調理めん', '調理パン', '惣菜', '惣菜半製品', '生菓子'];
+            if (refrigeratedCategories.includes(category)) {
+                return '10℃以下で保存してください';
+            }
+            
+            return '直射日光及び高温多湿を避けて保存してください';
+        };
+
         if (elements.inputs.name) {
             elements.inputs.name.addEventListener('input', () => {
                 const inferred = inferCategory(elements.inputs.name.value);
@@ -1529,6 +1559,11 @@ document.addEventListener('DOMContentLoaded', () => {
                      if (noRiceRadio && !noRiceRadio.checked) {
                          noRiceRadio.checked = true;
                      }
+                 }
+                 
+                 // 保存方法の自動推測を追加
+                 if (!userManuallyChangedStoreMethod) {
+                     elements.inputs.storeMethod.value = inferStoreMethod(inferred, elements.inputs.name.value);
                  }
              }
              updatePreview(); // updatePreview handles updating category too
@@ -1955,6 +1990,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         const inferredCat = inferCategoryByName(name);
                         elements.inputs.category.value = inferredCat;
                         
+                        // 保存方法も推測
+                        if (!userManuallyChangedStoreMethod) {
+                            elements.inputs.storeMethod.value = inferStoreMethod(inferredCat, name);
+                        }
+                        
                         if (confirm(`「${name}」の目安データが見つかりませんでした。\n品目は「${inferredCat}」と推測してセットしました。\n栄養成分などをネットで検索しますか？`)) {
                             elements.buttons.searchWeb.click();
                         }
@@ -2286,6 +2326,7 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.inputs.name.value = data.name || '';
         elements.inputs.category.value = data.category || '弁当';
         userManuallyChangedCategory = false; // テンプレート切り替え時は推測リセット
+        userManuallyChangedStoreMethod = false;
         elements.inputs.ingredients.value = data.ingredients || '';
         if(window.syncRiceRadioFromText) window.syncRiceRadioFromText(elements.inputs.ingredients.value);
         elements.inputs.consumeDays.value = data.consumeDays || '1';
@@ -2313,6 +2354,7 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.inputs.name.value = '';
         elements.inputs.category.value = '弁当';
         userManuallyChangedCategory = false; // クリア時は推測リセット
+        userManuallyChangedStoreMethod = false;
         elements.inputs.ingredients.value = '';
         if(window.syncRiceRadioFromText) window.syncRiceRadioFromText('');
         elements.inputs.consumeDays.value = 1;

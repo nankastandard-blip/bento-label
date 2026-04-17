@@ -289,20 +289,20 @@
             <!-- プレビューエリア -->
             <section class="preview-section">
                 <div class="card sticky">
-                    <div class="card-header preview-header">
-                        <h2>👀 印刷プレビュー</h2>
-                        <span class="badge">Brother QL-820NWBc対応 (62mmラベル巻 想定)</span>
+                    <div class="card-header preview-header" style="padding: 0.5rem 1rem;">
+                        <h2 style="font-size: 1rem;">👀 印刷プレビュー</h2>
+                        <span class="badge" style="font-size: 0.7rem; padding: 0.1rem 0.4rem;">Brother QL-820NWBc対応</span>
                     </div>
                     
-                    <div class="card-body preview-container" style="flex-direction: column; gap: 0.5rem; background-color: #f1f5f9; padding: 1.25rem;">
+                    <div class="card-body preview-container" style="flex-direction: column; gap: 0.25rem; background-color: #f1f5f9; padding: 0.5rem;">
                          <!-- 1. ラベル本体セクション -->
                          <div style="display: flex; flex-direction: column; align-items: center; width: 100%; gap: 0.5rem;">
-                             <div style="font-size: 0.75rem; font-weight: bold; color: #64748b; letter-spacing: 0.05em; align-self: flex-start; padding-left: 0.5rem; display: flex; align-items: center; gap: 0.3rem;">
-                                 <svg style="width: 12px; height: 12px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                                 ラベル確認イメージ
+                             <div style="font-size: 0.7rem; font-weight: bold; color: #64748b; letter-spacing: 0.05em; align-self: flex-start; padding-left: 0.5rem; display: flex; align-items: center; gap: 0.2rem;">
+                                 <svg style="width: 10px; height: 10px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                 プレビュー
                              </div>
                              <!-- この部分が実際に印刷されるラベル -->
-                             <div id="print-target" class="label-box" style="background-color: white; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); width: 62mm; min-height: 40mm; padding: 3mm; box-sizing: border-box; position: relative; overflow: hidden; border: 1px solid #ddd; border-radius: 2px;">
+                             <div id="print-target" class="label-box" style="background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); width: 62mm; min-height: 40mm; padding: 3mm; box-sizing: border-box; position: relative; overflow: hidden; border: 1px solid #ddd; border-radius: 2px;">
                                  <div class="label-inner">
                                      <div class="label-header">
                                          <div id="preview-recommendation" class="recommendation-badge" style="display: none;">★ 本日のおすすめ ★</div>
