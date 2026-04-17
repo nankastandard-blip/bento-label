@@ -296,11 +296,7 @@
                     
                     <div class="card-body preview-container" style="flex-direction: column; gap: 0.25rem; background-color: #f1f5f9; padding: 0.5rem;">
                          <!-- 1. ラベル本体セクション -->
-                         <div style="display: flex; flex-direction: column; align-items: center; width: 100%; gap: 0.5rem;">
-                             <div style="font-size: 0.7rem; font-weight: bold; color: #64748b; letter-spacing: 0.05em; align-self: flex-start; padding-left: 0.5rem; display: flex; align-items: center; gap: 0.2rem;">
-                                 <svg style="width: 10px; height: 10px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                                 プレビュー
-                             </div>
+                         <div style="display: flex; flex-direction: column; align-items: center; width: 100%; gap: 0.25rem;">
                              <!-- この部分が実際に印刷されるラベル -->
                              <div id="print-target" class="label-box" style="background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); width: 62mm; min-height: 40mm; padding: 3mm; box-sizing: border-box; position: relative; overflow: hidden; border: 1px solid #ddd; border-radius: 2px;">
                                  <div class="label-inner">
@@ -369,17 +365,9 @@
                              </div> <!-- End print-target -->
                          </div>
 
-                         <!-- 区切り線 -->
-                         <div style="width: 100%; height: 1px; background: #cbd5e1; margin: 0.5rem 0; box-shadow: 0 1px 0 white;"></div>
-
                          <!-- 2. 操作パネルセクション -->
-                         <div style="display: flex; flex-direction: column; align-items: center; width: 100%; gap: 0.5rem;">
-                             <div style="font-size: 0.75rem; font-weight: bold; color: #64748b; letter-spacing: 0.05em; align-self: flex-start; padding-left: 0.5rem; display: flex; align-items: center; gap: 0.3rem;">
-                                 <svg style="width: 12px; height: 12px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
-                                 印刷設定・出力
-                             </div>
-                             
-                             <div class="print-controls" style="display: flex; flex-direction: column; gap: 0.3rem; align-items: center; justify-content: center; width: 100%; max-width: 62mm; background: #fff; padding: 0.5rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;">
+                         <div style="display: flex; flex-direction: column; align-items: center; width: 100%; gap: 0.25rem;">
+                             <div class="print-controls" style="display: flex; flex-direction: column; gap: 0.25rem; align-items: center; justify-content: center; width: 100%; max-width: 62mm; background: #fff; padding: 0.4rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;">
                                  <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; font-size: 0.9rem;">
                                      <label for="consume-days" style="margin:0; font-weight:bold; color: #2c3e50; font-size:0.85rem;">🕒 消費期限:</label>
                                       <div style="display: flex; align-items: center; gap: 0.2rem;">
@@ -387,16 +375,16 @@
                                           <span style="font-weight: bold; font-size:0.85rem;">日後</span>
                                      </div>
                                  </div>
-                                 <div style="text-align: center; width: 100%; margin-top: -0.5rem; margin-bottom: 0.5rem;">
-                                     <small class="help-text" id="calculated-date-hint" style="color: #e74c3c; font-weight: bold; font-size: 0.8rem;">日付計算中...</small>
+                                 <div style="text-align: center; width: 100%; margin: 0;">
+                                     <small class="help-text" id="calculated-date-hint" style="color: #e74c3c; font-weight: bold; font-size: 0.75rem;">日付計算中...</small>
                                  </div>
  
                                  <!-- 本日のおすすめトグル -->
-                                 <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 0.5rem;">
+                                 <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 0.25rem;">
                                      <label class="toggle-switch">
                                          <input type="checkbox" id="toggle-recommendation">
                                          <span class="toggle-slider"></span>
-                                         <span class="toggle-label">本日のおすすめ★</span>
+                                         <span class="toggle-label" style="font-size: 0.8rem;">本日のおすすめ★</span>
                                      </label>
                                  </div>
  
