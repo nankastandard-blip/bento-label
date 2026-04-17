@@ -2336,6 +2336,9 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.inputs.carb.value = data.carb || '';
         elements.inputs.salt.value = data.salt || '';
         elements.inputs.price.value = data.price || '';
+        if (data.storeMethod) {
+            elements.inputs.storeMethod.value = data.storeMethod;
+        }
         
         let targetPackagingMark = data.packagingMark;
         if (targetPackagingMark === undefined) {
