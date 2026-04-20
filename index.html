@@ -10,6 +10,7 @@
     <title>弁当ラベルメーカー</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -203,7 +204,13 @@
                                     <span style="font-weight: bold;">バーコード (JANコード) を印字する</span>
                                 </label>
                                 <div id="jancode-wrapper" style="display: none; margin-top: 0.5rem;">
-                                    <input type="text" id="jancode-value" class="form-control" placeholder="商品コードをスキャン・または入力 (13桁)" maxlength="13">
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <input type="text" id="jancode-value" class="form-control" placeholder="スキャンまたは入力 (13桁)" maxlength="13" style="flex: 1;">
+                                        <button type="button" id="start-scan-btn" class="btn btn-secondary" style="padding: 0 0.8rem; display: flex; align-items: center; gap: 0.4rem; background: #6c757d; border-color: #6c757d;">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                                            スキャン
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -402,6 +409,20 @@
                 </div>
             </section>
         </main>
+    </div>
+
+    <!-- バーコードスキャン用モーダル -->
+    <div id="scanner-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content scanner-content">
+            <div class="modal-header">
+                <h3>JANコード スキャン</h3>
+                <button type="button" id="stop-scan-btn" class="close-btn">&times;</button>
+            </div>
+            <div class="scanner-body">
+                <div id="qr-reader"></div>
+                <p class="scanner-hint">カメラをバーコードに合わせてください</p>
+            </div>
+        </div>
     </div>
 
     <!-- 印刷用コンテナ (画面上では非表示。印刷時にここに複数ラベルをクローンする) -->

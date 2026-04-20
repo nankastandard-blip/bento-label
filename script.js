@@ -1410,6 +1410,60 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // 四、バーコードスキャン機能
+        let html5QrCode = null;
+        const scannerModal = document.getElementById('scanner-modal');
+        const startScanBtn = document.getElementById('start-scan-btn');
+        const stopScanBtn = document.getElementById('stop-scan-btn');
+
+        const stopScanner = async () => {
+            if (html5QrCode && html5QrCode.isScanning) {
+                await html5QrCode.stop();
+            }
+            scannerModal.style.display = 'none';
+        };
+
+        const startScanner = async () => {
+            scannerModal.style.display = 'flex';
+            if (!html5QrCode) {
+                html5QrCode = new Html5Qrcode("qr-reader");
+            }
+            
+            const config = { fps: 10, qrbox: { width: 250, height: 150 } };
+            
+            try {
+                await html5QrCode.start(
+                    { facingMode: "environment" }, 
+                    config, 
+                    (decodedText) => {
+                        // スキャン成功
+                        elements.inputs.jancodeValue.value = decodedText;
+                        elements.inputs.useJancode.checked = true;
+                        document.getElementById('jancode-wrapper').style.display = 'block';
+                        updatePreview();
+                        stopScanner();
+                        // 成功バイブレーション（モバイルのみ）
+                        if (navigator.vibrate) navigator.vibrate(100);
+                    },
+                    (errorMessage) => {
+                        // スキャン中（エラーは無視）
+                    }
+                );
+            } catch (err) {
+                console.error("Camera access error:", err);
+                alert("カメラの起動に失敗しました。カメラの使用許可を確認してください。");
+                stopScanner();
+            }
+        };
+
+        if (startScanBtn) startScanBtn.addEventListener('click', startScanner);
+        if (stopScanBtn) stopScanBtn.addEventListener('click', stopScanner);
+
+        // モーダル外クリックで閉じる
+        scannerModal.addEventListener('click', (e) => {
+            if (e.target === scannerModal) stopScanner();
+        });
+
         // 🏢 パターン切り替え処理
         if (elements.inputs.storeProfile) {
             elements.inputs.storeProfile.addEventListener('change', (e) => {
@@ -2348,8 +2402,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if(pR) pR.checked = true;
 
         elements.inputs.useJancode.checked = data.useJancode || false;
-        document.getElementById('jancode-wrapper').style.display = elements.inputs.useJancode.checked ? 'block' : 'none';
         elements.inputs.jancodeValue.value = data.jancodeValue || '';
+        
+        // UIの表示状態を確実に更新
+        const jancodeWrapper = document.getElementById('jancode-wrapper');
+        if (jancodeWrapper) {
+            jancodeWrapper.style.display = elements.inputs.useJancode.checked ? 'block' : 'none';
+        }
+        
         updatePreview();
     };
 
@@ -2373,6 +2433,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const defaultPack = document.querySelector(`input[name="packaging-mark"][value="プラ"]`);
         if (defaultPack) defaultPack.checked = true;
         document.getElementById('jancode-wrapper').style.display = 'none';
+        // JANコード欄もしっかりクリア
+        elements.inputs.jancodeValue.value = '';
         updatePreview();
     };
 
