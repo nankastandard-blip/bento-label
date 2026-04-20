@@ -1424,6 +1424,17 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const startScanner = async () => {
+            // 診断: セキュアコンテキスト（HTTPS）のチェック
+            if (!window.isSecureContext) {
+                alert("【エラー】カメラ機能を使用するには、HTTPS接続（暗号化された通信）が必要です。\n\n現在の接続は安全ではないため、ブラウザによりカメラがブロックされています。");
+                return;
+            }
+
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                alert("【エラー】お使いのブラウザはカメラ機能をサポートしていないか、機能が制限されています。ChromeやSafariの最新版をお使いください。");
+                return;
+            }
+
             scannerModal.style.display = 'flex';
             if (!html5QrCode) {
                 html5QrCode = new Html5Qrcode("qr-reader");
@@ -1442,16 +1453,23 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.getElementById('jancode-wrapper').style.display = 'block';
                         updatePreview();
                         stopScanner();
-                        // 成功バイブレーション（モバイルのみ）
                         if (navigator.vibrate) navigator.vibrate(100);
                     },
                     (errorMessage) => {
-                        // スキャン中（エラーは無視）
+                        // スキャン中
                     }
                 );
             } catch (err) {
-                console.error("Camera access error:", err);
-                alert("カメラの起動に失敗しました。カメラの使用許可を確認してください。");
+                console.error("Scanner Error:", err);
+                let message = "カメラの起動に失敗しました。";
+                if (err.name === 'NotAllowedError') {
+                    message += "\nカメラの使用許可が拒否されています。ブラウザの設定で許可してください。";
+                } else if (err.name === 'NotFoundError') {
+                    message += "\n背面カメラが見つかりません。";
+                } else {
+                    message += `\n原因: ${err.message || '不明なエラー'}`;
+                }
+                alert(message);
                 stopScanner();
             }
         };
