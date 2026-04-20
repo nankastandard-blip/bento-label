@@ -1412,7 +1412,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 四、バーコードスキャン機能
         let html5QrCode = null;
-        const scannerModal = document.getElementById('scanner-modal');
+        const inlineScannerContainer = document.getElementById('inline-scanner-container');
         const startScanBtn = document.getElementById('start-scan-btn');
         const stopScanBtn = document.getElementById('stop-scan-btn');
 
@@ -1420,7 +1420,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (html5QrCode && html5QrCode.isScanning) {
                 await html5QrCode.stop();
             }
-            scannerModal.style.display = 'none';
+            if (inlineScannerContainer) inlineScannerContainer.style.display = 'none';
         };
 
         const startScanner = async () => {
@@ -1435,7 +1435,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            scannerModal.style.display = 'flex';
+            if (inlineScannerContainer) inlineScannerContainer.style.display = 'block';
             if (!html5QrCode) {
                 html5QrCode = new Html5Qrcode("qr-reader");
             }
@@ -1500,11 +1500,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (startScanBtn) startScanBtn.addEventListener('click', startScanner);
         if (stopScanBtn) stopScanBtn.addEventListener('click', stopScanner);
-
-        // モーダル外クリックで閉じる
-        scannerModal.addEventListener('click', (e) => {
-            if (e.target === scannerModal) stopScanner();
-        });
 
         // 🏢 パターン切り替え処理
         if (elements.inputs.storeProfile) {
