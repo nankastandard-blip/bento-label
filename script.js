@@ -1443,34 +1443,58 @@ document.addEventListener('DOMContentLoaded', () => {
             const config = { fps: 10, qrbox: { width: 250, height: 150 } };
             
             try {
+                // まずは背面カメラを試行
                 await html5QrCode.start(
                     { facingMode: "environment" }, 
                     config, 
                     (decodedText) => {
-                        // スキャン成功
                         elements.inputs.jancodeValue.value = decodedText;
                         elements.inputs.useJancode.checked = true;
-                        document.getElementById('jancode-wrapper').style.display = 'block';
+                        if (document.getElementById('jancode-wrapper')) {
+                            document.getElementById('jancode-wrapper').style.display = 'block';
+                        }
                         updatePreview();
                         stopScanner();
                         if (navigator.vibrate) navigator.vibrate(100);
                     },
-                    (errorMessage) => {
-                        // スキャン中
-                    }
+                    () => {}
                 );
             } catch (err) {
-                console.error("Scanner Error:", err);
-                let message = "カメラの起動に失敗しました。";
-                if (err.name === 'NotAllowedError') {
-                    message += "\nカメラの使用許可が拒否されています。ブラウザの設定で許可してください。";
-                } else if (err.name === 'NotFoundError') {
-                    message += "\n背面カメラが見つかりません。";
-                } else {
-                    message += `\n原因: ${err.message || '不明なエラー'}`;
+                console.warn("Primary camera start failed, trying fallback...", err);
+                try {
+                    // 背面カメラ指定がダメな場合、カメラを自動選択して再試行
+                    await html5QrCode.start(
+                        { deviceId: { exact: undefined } }, // カメラ自動選択
+                        config,
+                        (decodedText) => {
+                            elements.inputs.jancodeValue.value = decodedText;
+                            elements.inputs.useJancode.checked = true;
+                            if (document.getElementById('jancode-wrapper')) {
+                                document.getElementById('jancode-wrapper').style.display = 'block';
+                            }
+                            updatePreview();
+                            stopScanner();
+                            if (navigator.vibrate) navigator.vibrate(100);
+                        },
+                        () => {}
+                    );
+                } catch (fallbackErr) {
+                    console.error("Scanner Error:", fallbackErr);
+                    let message = "カメラを起動できませんでした。";
+                    if (fallbackErr.name === 'NotAllowedError' || fallbackErr.message.includes('Permission')) {
+                        message = "【権限エラー】カメラの使用が許可されていません。\n\n" +
+                                 "すでに許可したはずなのにこのメッセージが出る場合は、以下の手順で「設定のリセット」をお試しください：\n\n" +
+                                 "1. アドレスバーの左側にある「南京錠（または設定）」アイコンをタップ\n" +
+                                 "2. 「サイトの設定」または「権限」を選択\n" +
+                                 "3. 「権限をリセット」またはカメラの設定を「削除」して、ページを再読み込みしてください。";
+                    } else if (fallbackErr.name === 'NotFoundError') {
+                        message += "\n利用可能なカメラが見つかりません。";
+                    } else {
+                        message += `\n原因: ${fallbackErr.message || '不明なエラー'}`;
+                    }
+                    alert(message);
+                    stopScanner();
                 }
-                alert(message);
-                stopScanner();
             }
         };
 
