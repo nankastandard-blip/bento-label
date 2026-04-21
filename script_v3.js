@@ -82,22 +82,31 @@ document.addEventListener('DOMContentLoaded', function() {
             // QR Code bypass TDZ
             [1, 2].forEach(function(n) {
                 var useChecked = el.inputs['useQRCode' + n].checked;
-                var val = el.inputs['qrcodeValue' + n].value;
+                var val = (el.inputs['qrcodeValue' + n].value || "https://google.com").trim();
                 var img = el.preview['qrcode' + n];
-                if (useChecked && val && img) {
+                if (useChecked && img) {
                     if (typeof window['QRCode'] !== 'undefined') {
-                        window['QRCode'].toDataURL(val, function(err, url) { if (!err) { img.src = url; img.style.display = 'block'; } });
+                        window['QRCode'].toDataURL(val, { width: 128, margin: 2 }, function(err, url) { 
+                            if (!err) { img.src = url; img.style.display = 'block'; } 
+                        });
                     }
                 } else if (img) img.style.display = 'none';
             });
-        } catch(e) {}
+        } catch(e) { console.error("Update Error:", e); }
     }
 
     el.buttons.autoFill?.addEventListener('click', function() {
-        var name = (el.inputs.name.value || "").trim();
+        var name = (el.inputs.name.value || "").trim().toLowerCase();
+        if (!name) return alert("\u540d\u79f0\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044");
+
+        // Fuzzy Match
         var hit = dict.filter(function(d) {
-            return d.keywords.some(function(k) { return name.indexOf(k) !== -1 || k.indexOf(name) !== -1; });
+            return d.keywords.some(function(k) { 
+                var kw = k.toLowerCase();
+                return name.indexOf(kw) !== -1 || kw.indexOf(name) !== -1; 
+            });
         })[0];
+        
         if (hit) {
             Object.keys(hit.data).forEach(function(k) { if (el.inputs[k]) el.inputs[k].value = hit.data[k]; });
             updatePreview();
@@ -117,6 +126,26 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('active'); document.getElementById(target).style.display = 'block';
         });
     });
+
+    // 6. Populate Quick Presets
+    if (el.inputs.quickPreset) {
+        dict.forEach(function(d, index) {
+            var opt = document.createElement('option');
+            opt.value = index;
+            opt.textContent = d.keywords[0];
+            el.inputs.quickPreset.appendChild(opt);
+        });
+
+        el.inputs.quickPreset.addEventListener('change', function() {
+            var selectedIdx = this.value;
+            if (selectedIdx !== "") {
+                var hit = dict[selectedIdx];
+                el.inputs.name.value = hit.keywords[0];
+                Object.keys(hit.data).forEach(function(k) { if (el.inputs[k]) el.inputs[k].value = hit.data[k]; });
+                updatePreview();
+            }
+        });
+    }
 
     el.buttons.printBtns.forEach(function(btn) { if (btn) btn.addEventListener('click', function() { window.print(); }); });
 

@@ -11,117 +11,140 @@
 </head>
 <body>
     <div class="app-container no-print">
-        <header class="app-header" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: #fff; border-bottom: 3px solid #2563eb;">
-            <h1 style="margin:0;">&#x1f371; &#x304A;&#x5f01;&#x5f53;&#x30e9;&#x30d9;&#x30eb;&#x30e1;&#x30fc;&#x30ab;&#x30fc;</h1>
-            <button id="print-btn-header" class="print-btn primary-btn" style="padding: 1rem 2rem; background: #2563eb; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1.1rem;">&#x1f5a8;&#xfe0f; &#x30e9;&#x30d9;&#x30eb;&#x3092;&#x5370;&#x5237;</button>
+        <header class="app-header">
+            <div class="header-content">
+                <h1>🍱 &#x304A;&#x5f01;&#x5f53;&#x30e9;&#x30d9;&#x30eb;&#x30e1;&#x30fc;&#x30ab;&#x30fc;</h1>
+                <p>&#x30d7;&#x30ed;&#x4ed5;&#x69d8;&#x306e;&#x30e9;&#x30d9;&#x30eb;&#x3092;&#x7c21;&#x5358;&#x4f5c;&#x6210;</p>
+            </div>
+            <button id="print-btn-header" class="print-btn primary-btn">&#x1f5a8;&#xfe0f; &#x30e9;&#x30d9;&#x30eb;&#x3092;&#x5370;&#x5237;</button>
         </header>
 
-        <main class="app-main" style="padding: 20px; max-width: 1200px; margin: auto; display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px;">
+        <div class="tabs-container">
+            <button class="tab-btn active" data-target="tab-editor">&#x2699;&#xfe0f; &#x7ba1;&#x7406;&#x30fb;&#x7de8;&#x96c6;</button>
+            <button class="tab-btn" data-target="tab-quick-print">&#x2728; &#x304b;&#x3093;&#x305f;&#x3093;&#x5370;&#x5237;</button>
+        </div>
+
+        <main class="app-main">
             <!-- Editor Side -->
             <section class="editor-section">
-                <div class="tabs-container" style="margin-bottom: 20px; display: flex; gap: 10px;">
-                    <button class="tab-btn active" data-target="tab-editor" style="padding: 10px 20px; cursor: pointer; border: 1px solid #ddd; background: #fff; border-radius: 8px; font-weight: bold;">&#x2699;&#xfe0f; &#x7ba1;&#x7406;&#x30fb;&#x7de8;&#x96c6;</button>
-                    <button class="tab-btn" data-target="tab-quick-print" style="padding: 10px 20px; cursor: pointer; border: 1px solid #ddd; background: #fff; border-radius: 8px;">&#x2728; &#x304b;&#x3093;&#x305f;&#x3093;&#x5370;&#x5237;</button>
-                </div>
-
-                <div id="tab-editor" class="tab-content card" style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-                    <div style="margin-bottom: 20px;">
-                        <label style="display: block; font-weight: bold; margin-bottom: 8px;">&#x540d;&#x79f0; (&#x5546;&#x54c1;&#x540d;)</label>
-                        <div style="display: flex; gap: 10px;">
-                            <input type="text" id="product-name" class="form-control" style="flex: 1; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem;" placeholder="&#x4f8b;: &#x30c1;&#x30ad;&#x30f3;&#x5357;&#x86ee;&#x5f01;&#x5f53;">
-                            <button id="auto-fill-btn" style="padding: 10px 20px; cursor: pointer; background: #2563eb; color: white; border: none; border-radius: 8px; font-weight: bold;">&#x1f684; &#x81ea;&#x52d5;&#x5165;&#x529b;</button>
+                <div id="tab-editor" class="tab-content active">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>&#x30e9;&#x30d9;&#x30eb;&#x5185;&#x5bb9;&#x306e;&#x7de8;&#x96c6;</h2>
+                            <span class="badge">PRO</span>
                         </div>
-                    </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>&#x540d;&#x79f0; (&#x5546;&#x54c1;&#x540d;) <span class="required">*</span></label>
+                                <div class="form-row">
+                                    <input type="text" id="product-name" class="form-control name-input-large" style="flex:1;" placeholder="&#x4f8b;: &#x30c1;&#x30ad;&#x30f3;&#x5357;&#x86ee;&#x5f01;&#x5f53;">
+                                    <button id="auto-fill-btn" class="action-btn auto-fill-btn" style="margin-top:0; height:100%;">&#x1f684; &#x81ea;&#x52d5;&#x5165;&#x529b;</button>
+                                </div>
+                            </div>
 
-                    <div style="margin-bottom: 20px;">
-                        <label style="display: block; font-weight: bold; margin-bottom: 8px;">&#x539f;&#x6750;&#x6599;&#x540d;</label>
-                        <textarea id="ingredients" style="width: 100%; height: 120px; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; box-sizing: border-box; font-family: inherit;"></textarea>
-                    </div>
+                            <div class="form-group">
+                                <label>&#x539f;&#x6750;&#x6599;&#x540d;</label>
+                                <textarea id="ingredients" class="form-control" rows="4"></textarea>
+                            </div>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
-                        <div>
-                            <label style="display: block; font-weight: bold; margin-bottom: 5px;">&#x6d88;&#x8cbb;&#x671f;&#x9650; (&#x65e5;&#x6570;)</label>
-                            <select id="consume-days" style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px;">
-                                <option value="0">&#x5f53;&#x65e5;</option>
-                                <option value="1" selected>&#x7fcc;&#x65e5;</option>
-                                <option value="2">2&#x65e5;&#x5f8c;</option>
-                            </select>
+                            <div class="form-row">
+                                <div class="form-group half">
+                                    <label>&#x6d88;&#x8cbb;&#x671f;&#x9650; (&#x65e5;&#x6570;)</label>
+                                    <select id="consume-days" class="form-control">
+                                        <option value="0">&#x5f53;&#x65e5;</option>
+                                        <option value="1" selected>&#x7fcc;&#x65e5;</option>
+                                        <option value="2">2&#x65e5;&#x5f8c;</option>
+                                    </select>
+                                </div>
+                                <div class="form-group half">
+                                    <label>&#x4fdd;&#x5b58;&#x65b9;&#x6cd5;</label>
+                                    <input type="text" id="store-method" class="form-control" value="&#x76f4;&#x5c04;&#x65e5;&#x5149;&#x3092;&#x907f;&#x3051;&#x4fdd;&#x5b58;">
+                                </div>
+                            </div>
+
+                            <div class="divider"></div>
+                            
+                            <h3 class="sub-heading">&#x6844;&#x5185;&#x5bb9;&#uff08;&#x88dc;&#x8db3;&#uff09;</h3>
+                            <div class="form-group">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="use-qrcode1">
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-label">QR&#x30b3;&#x30fc;&#x30c9;1&#x3092;&#x8868;&#x793a;</span>
+                                </label>
+                                <div id="qrcode1-wrapper" style="display:none; margin-top:10px;">
+                                    <input type="text" id="qrcode1-value" class="form-control" placeholder="URL&#x306a;&#x3069;">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="toggle-recommendation">
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-label">&#x300c;&#x672c;&#x65e5;&#x4e2d;&#x306b;&#x304a;&#x53ec;&#x3057;&#x4e0a;&#x304c;&#x308a;&#x304f;&#x3060;&#x3055;&#x3044;&#x300d;</span>
+                                </label>
+                            </div>
                         </div>
-                        <div>
-                            <label style="display: block; font-weight: bold; margin-bottom: 5px;">&#x4fdd;&#x5b58;&#x65b9;&#x6cd5;</label>
-                            <input type="text" id="store-method" style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px;" value="&#x76f4;&#x5c04;&#x65e5;&#x5149;&#x3092;&#x907f;&#x3051;&#x4fdd;&#x5b58;">
-                        </div>
-                    </div>
-
-                    <div class="nutrition-grid" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 20px;">
-                        <div><label>&#x7131;&#x91cf;</label><input type="number" id="calories" style="width: 100%; padding: 8px; border: 1px solid #ddd;"></div>
-                        <div><label>&#x86cb;&#x767d;</label><input type="number" id="protein" style="width: 100%; padding: 8px; border: 1px solid #ddd;"></div>
-                        <div><label>&#x8102;&#x8cea;</label><input type="number" id="fat" style="width: 100%; padding: 8px; border: 1px solid #ddd;"></div>
-                        <div><label>&#x70ad;&#x7269;</label><input type="number" id="carb" style="width: 100%; padding: 8px; border: 1px solid #ddd;"></div>
-                        <div><label>&#x98df;&#x5869;</label><input type="number" id="salt" style="width: 100%; padding: 8px; border: 1px solid #ddd;"></div>
-                    </div>
-
-                    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
-
-                    <div style="margin-bottom: 15px;">
-                        <label style="font-weight: bold; cursor: pointer;"><input type="checkbox" id="use-qrcode1"> QR&#x30b3;&#x30fc;&#x30c9;1&#x3092;&#x8868;&#x793a;</label>
-                        <div id="qrcode1-wrapper" style="display: none; margin-top: 5px;">
-                            <input type="text" id="qrcode1-value" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;" placeholder="URL&#x306a;&#x3069;">
-                        </div>
-                    </div>
-
-                    <div style="margin-bottom: 15px;">
-                        <label style="font-weight: bold; cursor: pointer;"><input type="checkbox" id="use-qrcode2"> QR&#x30b3;&#x30fc;&#x30c9;2&#x3092;&#x8868;&#x793a;</label>
-                        <div id="qrcode2-wrapper" style="display: none; margin-top: 5px;">
-                            <input type="text" id="qrcode2-value" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;" placeholder="URL&#x306a;&#x3069;">
-                        </div>
-                    </div>
-                    
-                    <div style="margin-bottom: 15px;">
-                        <label style="font-weight: bold; cursor: pointer;"><input type="checkbox" id="use-jancode"> JAN&#x30b3;&#x30fc;&#x30c9;&#x3092;&#x8868;&#x793a;</label>
-                        <div id="jancode-wrapper" style="display: none; margin-top: 5px;">
-                            <input type="text" id="jancode-value" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;" placeholder="13&#x6841;&#x306e;JAN">
-                        </div>
-                    </div>
-
-                    <div style="margin-bottom: 15px;">
-                        <label style="font-weight: bold; cursor: pointer;"><input type="checkbox" id="toggle-recommendation"> &#x300c;&#x672c;&#x65e5;&#x4e2d;&#x306b;&#x304a;&#x53ec;&#x3057;&#x4e0a;&#x304c;&#x308a;&#x304f;&#x3060;&#x3055;&#x3044;&#x300d;&#x3092;&#x8868;&#x793a;</label>
                     </div>
                 </div>
 
-                <div id="tab-quick-print" class="tab-content card" style="display: none; background: white; padding: 20px; border-radius: 12px;">
-                    <h2>&#x2728; &#x304b;&#x3093;&#x305f;&#x3093;&#x5370;&#x5237;</h2>
-                    <select id="quick-preset-select" class="form-control" style="width: 100%; padding: 15px; font-size: 1.2rem; border-radius: 8px; border: 2px solid #2563eb;">
-                        <option value="">-- &#x30e1;&#x30cb;&#x30e5;&#x30fc;&#x3092;&#x9078;&#x629e; --</option>
-                    </select>
-                    <button id="print-btn-footer" class="print-btn primary-btn" style="width: 100%; margin-top: 20px; padding: 1.5rem; font-size: 1.3rem;">🚀 &#x5370;&#x5237;&#x3059;&#x308b;</button>
+                <div id="tab-quick-print" class="tab-content">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>&#x2728; &#x304b;&#x3093;&#x305f;&#x3093;&#x5370;&#x5237;</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="presets-group">
+                                <label>&#x30e1;&#x30cb;&#x30e5;&#x30fc;&#x9078;&#x629e;</label>
+                                <select id="quick-preset-select" class="form-control name-input-large">
+                                    <option value="">-- &#x9078;&#x629e;&#x3057;&#x3066;&#x304f;&#x3060;&#x3055;&#x3044; --</option>
+                                </select>
+                            </div>
+                            <button id="print-btn-footer" class="print-btn primary-btn full-width" style="margin-top:20px; padding:1.5rem;">&#x1f680; &#x4eca;&#x3059;&#x3050;&#x5370;&#x5237;</button>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- Preview Side -->
             <section class="preview-section">
-                <div style="position: sticky; top: 20px;">
-                    <h3 style="text-align: center; margin-bottom: 15px;">&#x1f440; &#x30d7;&#x30ec;&#x30d3;&#x30e5;&#x30fc;</h3>
-                    <div id="print-target" style="background: white; border: 1px solid #000; padding: 20px; width: 320px; margin: auto; box-shadow: 0 10px 25px rgba(0,0,0,0.1); font-family: 'Noto Sans JP', sans-serif;">
-                        <div id="preview-name" style="font-weight: bold; font-size: 1.1rem; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px; min-height: 1.5rem;"></div>
-                        <div style="font-size: 8pt; margin-bottom: 8px;"><strong>&#x539f;&#x6750;&#x6599;&#x540d;&#uff1a;</strong><span id="preview-ingredients"></span></div>
-                        <div style="font-size: 8pt; display: flex; justify-content: space-between; margin-bottom: 5px;">
-                            <span><strong>&#x6d88;&#x8cbb;&#x671f;&#x9650;&#uff1a;</strong><span id="preview-consume"></span></span>
+                <div class="sticky">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>&#x30d7;&#x30ec;&#x30d3;&#x30e5;&#x30fc;</h2>
                         </div>
-                        <div style="font-size: 8pt; margin-bottom: 10px;"><strong>&#x4fdd;&#x5b58;&#x65b9;&#x6cd5;&#uff1a;</strong><span id="preview-store"></span></div>
-                        
-                        <div style="font-size: 7.5pt; border-top: 1px dashed #ddd; border-bottom: 1px dashed #ddd; padding: 5px 0; margin-bottom: 10px;">
-                            &#x7131;&#x91cf; <span id="preview-calories">-</span>kcal, &#x86cb;&#x767d; <span id="preview-protein">-</span>g, &#x8102;&#x8cea; <span id="preview-fat">-</span>g, &#x70ad;&#x7269; <span id="preview-carb">-</span>g, &#x98df;&#x5869; <span id="preview-salt">-</span>g (&#x63a8;&#x5b9a;&#x5024;)
-                        </div>
-
-                        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-                            <div style="font-size: 0.7rem;">
-                                <div id="preview-recommendation" style="display:none; font-weight:bold; color: #d00;">&#x672c;&#x65e5;&#x4e2d;&#x306b;&#x304a;&#x53ec;&#x3057;&#x4e0a;&#x304c;&#x308a;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;</div>
-                            </div>
-                            <div style="display: flex; gap: 5px;">
-                                <img id="preview-qrcode1" style="width: 60px; height: 60px; display: none; border: 1px solid #f0f0f0;">
-                                <img id="preview-qrcode2" style="width: 60px; height: 60px; display: none; border: 1px solid #f0f0f0;">
-                                <img id="preview-barcode" style="width: 100px; height: 30px; display: none;">
+                        <div class="card-body preview-container">
+                            <div id="print-target" class="label-box">
+                                <div class="label-inner">
+                                    <div class="label-header">
+                                        <div id="preview-recommendation" class="recommendation-badge" style="display:none;">&#x672c;&#x65e5;&#x4e2d;&#x306b;&#x304a;&#x53ec;&#x3057;&#x4e0a;&#x304c;&#x308a;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;</div>
+                                        <div id="preview-name" class="label-title"></div>
+                                    </div>
+                                    <table class="label-table">
+                                        <tr><th class="label-th">&#x539f;&#x6750;&#x6599;&#x540d;</th><td id="preview-ingredients" class="label-td val-ingredients"></td></tr>
+                                        <tr><th class="label-th">&#x6d88;&#x8cbb;&#x671f;&#x9650;</th><td id="preview-consume" class="label-td font-bold"></td></tr>
+                                        <tr><th class="label-th">&#x4fdd;&#x5b58;&#x65b9;&#x6cd5;</th><td id="preview-store" class="label-td val-store"></td></tr>
+                                    </table>
+                                    <div class="nutrition-box">
+                                        <div class="nutrition-grid">
+                                            <span>&#x7131;&#x91cf;<span id="preview-calories">-</span>kcal</span>
+                                            <span>&#x86cb;&#x767d;<span id="preview-protein">-</span>g</span>
+                                            <span>&#x8102;&#x8cea;<span id="preview-fat">-</span>g</span>
+                                            <span>&#x70ad;&#x7269;<span id="preview-carb">-</span>g</span>
+                                            <span>&#x98df;&#x5869;<span id="preview-salt">-</span>g</span>
+                                        </div>
+                                        <div style="font-size: 5pt; text-align: right;">(&#x63a8;&#x5b9a;&#x5024;)</div>
+                                    </div>
+                                    <div class="label-footer">
+                                        <div class="price-box">
+                                            <span class="price-label">&#x672c;&#x4f53;&#x4fa1;&#x683c;</span><br>
+                                            <span class="price-value" id="preview-price-tax">-</span><span class="yen">&#x5186;</span>
+                                        </div>
+                                        <div style="display: flex; gap: 4px;">
+                                            <img id="preview-qrcode1" class="qr-canvas" style="display:none;">
+                                            <img id="preview-barcode" style="display:none; width: 80px; height: 30px;">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -130,7 +153,6 @@
         </main>
     </div>
 
-    <!-- Hidden Print Container -->
     <div id="print-spool" class="print-only"></div>
 
     <script src="script_v3.js"></script>
