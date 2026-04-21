@@ -1302,7 +1302,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         
-        document.getElementById('second-store-wrapper').style.display = elements.inputs.useSecondStore.checked ? 'block' : 'none';
+        const secWrapper = document.getElementById('second-store-wrapper');
+        if (secWrapper && elements.inputs.useSecondStore) {
+            secWrapper.style.display = elements.inputs.useSecondStore.checked ? 'block' : 'none';
+        }
         
 
 
@@ -2374,9 +2377,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // 第2の事業者情報
-        const useSecond = elements.inputs.useSecondStore.checked;
-        if (useSecond) {
-            elements.preview.storeInfo2.style.display = 'block';
+        const useSecond = elements.inputs.useSecondStore ? elements.inputs.useSecondStore.checked : false;
+        if (useSecond && elements.preview.storeInfo2) {
+            elements.preview.storeInfo2.style.display = 'flex';
             elements.preview.manufacturerTitle2.textContent = elements.inputs.manufacturerTitle2.value || '製造者';
             elements.preview.manufacturer2.textContent = elements.inputs.manufacturer2.value || '-';
             elements.preview.address2.textContent = elements.inputs.address2.value || '-';
@@ -2440,34 +2443,46 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // QRコード生成 (1つ目)
-        if (elements.inputs.useQRCode1 && elements.inputs.useQRCode1.checked && elements.inputs.qrcodeValue1 && elements.inputs.qrcodeValue1.value.trim() && elements.preview.qrcode1) {
+        if (elements.inputs.useQRCode1?.checked && elements.inputs.qrcodeValue1?.value.trim() && elements.preview.qrcode1) {
             elements.preview.qrcode1.style.display = 'block';
             if (typeof QRCode !== 'undefined') {
                 QRCode.toDataURL(elements.inputs.qrcodeValue1.value.trim(), {
                     width: 120,
                     margin: 1,
                     color: { dark: "#000000", light: "#ffffff" }
-                }, (error, url) => { 
-                    if (error) console.error("QRCode 1 Error:", error); 
-                    else elements.preview.qrcode1.src = url;
+                })
+                .then(url => {
+                    elements.preview.qrcode1.src = url;
+                    console.log("[QR1] Generation success");
+                })
+                .catch(err => {
+                    console.error("[QR1] Generation error:", err);
                 });
+            } else {
+                console.warn("[QR1] QRCode library not found");
             }
         } else if (elements.preview.qrcode1) {
             elements.preview.qrcode1.style.display = 'none';
         }
 
         // QRコード生成 (2つ目)
-        if (elements.inputs.useSecondStore && elements.inputs.useSecondStore.checked && elements.inputs.useQRCode2 && elements.inputs.useQRCode2.checked && elements.inputs.qrcodeValue2 && elements.inputs.qrcodeValue2.value.trim() && elements.preview.qrcode2) {
+        if (useSecond && elements.inputs.useQRCode2?.checked && elements.inputs.qrcodeValue2?.value.trim() && elements.preview.qrcode2) {
             elements.preview.qrcode2.style.display = 'block';
             if (typeof QRCode !== 'undefined') {
                 QRCode.toDataURL(elements.inputs.qrcodeValue2.value.trim(), {
                     width: 120,
                     margin: 1,
                     color: { dark: "#000000", light: "#ffffff" }
-                }, (error, url) => { 
-                    if (error) console.error("QRCode 2 Error:", error); 
-                    else elements.preview.qrcode2.src = url;
+                })
+                .then(url => {
+                    elements.preview.qrcode2.src = url;
+                    console.log("[QR2] Generation success");
+                })
+                .catch(err => {
+                    console.error("[QR2] Generation error:", err);
                 });
+            } else {
+                console.warn("[QR2] QRCode library not found");
             }
         } else if (elements.preview.qrcode2) {
             elements.preview.qrcode2.style.display = 'none';
