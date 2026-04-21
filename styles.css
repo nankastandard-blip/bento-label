@@ -704,3 +704,13 @@ input:checked + .toggle-slider:before {
     display: block;
 }
 
+/* QRコードプレビュー用スタイル */
+.qr-canvas {
+    width: 13mm !important;
+    height: 13mm !important;
+    background: #fff;
+    padding: 1px;
+    border: 1px solid #eee;
+    flex-shrink: 0;
+}
+

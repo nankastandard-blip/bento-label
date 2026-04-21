@@ -1220,19 +1220,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const saveStoreInfo = () => {
         const info = {
-            title: elements.inputs.manufacturerTitle.value,
-            name: elements.inputs.manufacturer.value,
-            address: elements.inputs.address.value,
-            phone: elements.inputs.phone.value,
-            useQRCode1: elements.inputs.useQRCode1.checked,
-            qrcodeValue1: elements.inputs.qrcodeValue1.value,
-            useSecond: elements.inputs.useSecondStore.checked,
-            title2: elements.inputs.manufacturerTitle2.value,
-            name2: elements.inputs.manufacturer2.value,
-            address2: elements.inputs.address2.value,
-            phone2: elements.inputs.phone2.value,
-            useQRCode2: elements.inputs.useQRCode2.checked,
-            qrcodeValue2: elements.inputs.qrcodeValue2.value
+            title: elements.inputs.manufacturerTitle ? elements.inputs.manufacturerTitle.value : '製造者',
+            name: elements.inputs.manufacturer ? elements.inputs.manufacturer.value : '',
+            address: elements.inputs.address ? elements.inputs.address.value : '',
+            phone: elements.inputs.phone ? elements.inputs.phone.value : '',
+            useQRCode1: elements.inputs.useQRCode1 ? elements.inputs.useQRCode1.checked : false,
+            qrcodeValue1: elements.inputs.qrcodeValue1 ? elements.inputs.qrcodeValue1.value : '',
+            useSecond: elements.inputs.useSecondStore ? elements.inputs.useSecondStore.checked : false,
+            title2: elements.inputs.manufacturerTitle2 ? elements.inputs.manufacturerTitle2.value : '製造者',
+            name2: elements.inputs.manufacturer2 ? elements.inputs.manufacturer2.value : '',
+            address2: elements.inputs.address2 ? elements.inputs.address2.value : '',
+            phone2: elements.inputs.phone2 ? elements.inputs.phone2.value : '',
+            useQRCode2: elements.inputs.useQRCode2 ? elements.inputs.useQRCode2.checked : false,
+            qrcodeValue2: elements.inputs.qrcodeValue2 ? elements.inputs.qrcodeValue2.value : ''
         };
         const profileId = getActiveProfileId();
         localStorage.setItem(`bentoStoreInfo_${profileId}`, JSON.stringify(info));
@@ -1257,30 +1257,30 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (saved) {
             const info = JSON.parse(saved);
-            elements.inputs.manufacturerTitle.value = info.title || '製造者';
-            elements.inputs.manufacturer.value = info.name || '';
-            elements.inputs.address.value = info.address || '';
-            elements.inputs.phone.value = info.phone || '';
-            elements.inputs.useQRCode1.checked = info.useQRCode1 || false;
-            elements.inputs.qrcodeValue1.value = info.qrcodeValue1 || '';
-            elements.inputs.useSecondStore.checked = info.useSecond || false;
-            elements.inputs.manufacturerTitle2.value = info.title2 || '製造者';
-            elements.inputs.manufacturer2.value = info.name2 || '';
-            elements.inputs.address2.value = info.address2 || '';
-            elements.inputs.phone2.value = info.phone2 || '';
-            elements.inputs.useQRCode2.checked = info.useQRCode2 || false;
-            elements.inputs.qrcodeValue2.value = info.qrcodeValue2 || '';
+            if (elements.inputs.manufacturerTitle) elements.inputs.manufacturerTitle.value = info.title || '製造者';
+            if (elements.inputs.manufacturer) elements.inputs.manufacturer.value = info.name || '';
+            if (elements.inputs.address) elements.inputs.address.value = info.address || '';
+            if (elements.inputs.phone) elements.inputs.phone.value = info.phone || '';
+            if (elements.inputs.useQRCode1) elements.inputs.useQRCode1.checked = info.useQRCode1 || false;
+            if (elements.inputs.qrcodeValue1) elements.inputs.qrcodeValue1.value = info.qrcodeValue1 || '';
+            if (elements.inputs.useSecondStore) elements.inputs.useSecondStore.checked = info.useSecond || false;
+            if (elements.inputs.manufacturerTitle2) elements.inputs.manufacturerTitle2.value = info.title2 || '製造者';
+            if (elements.inputs.manufacturer2) elements.inputs.manufacturer2.value = info.name2 || '';
+            if (elements.inputs.address2) elements.inputs.address2.value = info.address2 || '';
+            if (elements.inputs.phone2) elements.inputs.phone2.value = info.phone2 || '';
+            if (elements.inputs.useQRCode2) elements.inputs.useQRCode2.checked = info.useQRCode2 || false;
+            if (elements.inputs.qrcodeValue2) elements.inputs.qrcodeValue2.value = info.qrcodeValue2 || '';
         } else {
             if (profileId === 'A') {
-                elements.inputs.manufacturerTitle.value = '製造者';
-                elements.inputs.manufacturer.value = 'ナンカ食堂';
-                elements.inputs.address.value = '下野市薬師寺1166';
-                elements.inputs.phone.value = '0285-40-5339';
-                elements.inputs.useSecondStore.checked = true;
-                elements.inputs.manufacturerTitle2.value = '販売者';
-                elements.inputs.manufacturer2.value = '株式会社ナンカゴハン';
-                elements.inputs.address2.value = '東京都渋谷区神宮前6-23-4桑野ビル2F';
-                elements.inputs.phone2.value = '';
+                if (elements.inputs.manufacturerTitle) elements.inputs.manufacturerTitle.value = '製造者';
+                if (elements.inputs.manufacturer) elements.inputs.manufacturer.value = 'ナンカ食堂';
+                if (elements.inputs.address) elements.inputs.address.value = '下野市薬師寺1166';
+                if (elements.inputs.phone) elements.inputs.phone.value = '0285-40-5339';
+                if (elements.inputs.useSecondStore) elements.inputs.useSecondStore.checked = true;
+                if (elements.inputs.manufacturerTitle2) elements.inputs.manufacturerTitle2.value = '販売者';
+                if (elements.inputs.manufacturer2) elements.inputs.manufacturer2.value = '株式会社ナンカゴハン';
+                if (elements.inputs.address2) elements.inputs.address2.value = '東京都渋谷区神宮前6-23-4桑野ビル2F';
+                if (elements.inputs.phone2) elements.inputs.phone2.value = '';
                 
                 // 初回アクセス時に設定を保存しておく
                 const info = {
@@ -1412,17 +1412,21 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // 事業者情報の変更監視（保存を同時に行う）
         ['manufacturerTitle', 'manufacturer', 'address', 'phone', 'useSecondStore', 'manufacturerTitle2', 'manufacturer2', 'address2', 'phone2', 'useQRCode1', 'qrcodeValue1', 'useQRCode2', 'qrcodeValue2'].forEach(key => {
-            if(elements.inputs[key]) {
-                elements.inputs[key].addEventListener('input', () => {
+            const input = elements.inputs[key];
+            if(input) {
+                input.addEventListener('input', () => {
                     // UI トグル
-                    if(key === 'useSecondStore') {
-                        document.getElementById('second-store-wrapper').style.display = elements.inputs.useSecondStore.checked ? 'block' : 'none';
+                    if(key === 'useSecondStore' && input) {
+                        const wrapper = document.getElementById('second-store-wrapper');
+                        if (wrapper) wrapper.style.display = input.checked ? 'block' : 'none';
                     }
-                    if(key === 'useQRCode1') {
-                        document.getElementById('qrcode1-wrapper').style.display = elements.inputs.useQRCode1.checked ? 'block' : 'none';
+                    if(key === 'useQRCode1' && input) {
+                        const wrapper = document.getElementById('qrcode1-wrapper');
+                        if (wrapper) wrapper.style.display = input.checked ? 'block' : 'none';
                     }
-                    if(key === 'useQRCode2') {
-                        document.getElementById('qrcode2-wrapper').style.display = elements.inputs.useQRCode2.checked ? 'block' : 'none';
+                    if(key === 'useQRCode2' && input) {
+                        const wrapper = document.getElementById('qrcode2-wrapper');
+                        if (wrapper) wrapper.style.display = input.checked ? 'block' : 'none';
                     }
                     updatePreview();
                     saveStoreInfo();
@@ -2139,12 +2143,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 carb: elements.inputs.carb.value,
                 salt: elements.inputs.salt.value,
                 price: elements.inputs.price.value,
-                useJancode: elements.inputs.useJancode.checked,
-                jancodeValue: elements.inputs.jancodeValue.value,
-                useQRCode1: elements.inputs.useQRCode1.checked,
-                qrcodeValue1: elements.inputs.qrcodeValue1.value,
-                useQRCode2: elements.inputs.useQRCode2.checked,
-                qrcodeValue2: elements.inputs.qrcodeValue2.value,
+                useJancode: elements.inputs.useJancode ? elements.inputs.useJancode.checked : false,
+                jancodeValue: elements.inputs.jancodeValue ? elements.inputs.jancodeValue.value : '',
+                useQRCode1: elements.inputs.useQRCode1 ? elements.inputs.useQRCode1.checked : false,
+                qrcodeValue1: elements.inputs.qrcodeValue1 ? elements.inputs.qrcodeValue1.value : '',
+                useQRCode2: elements.inputs.useQRCode2 ? elements.inputs.useQRCode2.checked : false,
+                qrcodeValue2: elements.inputs.qrcodeValue2 ? elements.inputs.qrcodeValue2.value : '',
                 packagingMark: document.querySelector('input[name="packaging-mark"]:checked')?.value || 'プラ'
             };
         };
@@ -2436,7 +2440,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // QRコード生成 (1つ目)
-        if (elements.inputs.useQRCode1.checked && elements.inputs.qrcodeValue1.value.trim() && elements.preview.qrcode1) {
+        if (elements.inputs.useQRCode1 && elements.inputs.useQRCode1.checked && elements.inputs.qrcodeValue1 && elements.inputs.qrcodeValue1.value.trim() && elements.preview.qrcode1) {
             elements.preview.qrcode1.style.display = 'block';
             if (typeof QRCode !== 'undefined') {
                 QRCode.toCanvas(elements.preview.qrcode1, elements.inputs.qrcodeValue1.value.trim(), {
@@ -2450,7 +2454,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // QRコード生成 (2つ目)
-        if (elements.inputs.useSecondStore.checked && elements.inputs.useQRCode2.checked && elements.inputs.qrcodeValue2.value.trim() && elements.preview.qrcode2) {
+        if (elements.inputs.useSecondStore && elements.inputs.useSecondStore.checked && elements.inputs.useQRCode2 && elements.inputs.useQRCode2.checked && elements.inputs.qrcodeValue2 && elements.inputs.qrcodeValue2.value.trim() && elements.preview.qrcode2) {
             elements.preview.qrcode2.style.display = 'block';
             if (typeof QRCode !== 'undefined') {
                 QRCode.toCanvas(elements.preview.qrcode2, elements.inputs.qrcodeValue2.value.trim(), {
@@ -2493,18 +2497,20 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.inputs.jancodeValue.value = data.jancodeValue || '';
 
         // QRコード
-        elements.inputs.useQRCode1.checked = data.useQRCode1 || false;
-        elements.inputs.qrcodeValue1.value = data.qrcodeValue1 || '';
-        elements.inputs.useQRCode2.checked = data.useQRCode2 || false;
-        elements.inputs.qrcodeValue2.value = data.qrcodeValue2 || '';
+        if (elements.inputs.useQRCode1) elements.inputs.useQRCode1.checked = data.useQRCode1 || false;
+        if (elements.inputs.qrcodeValue1) elements.inputs.qrcodeValue1.value = data.qrcodeValue1 || '';
+        if (elements.inputs.useQRCode2) elements.inputs.useQRCode2.checked = data.useQRCode2 || false;
+        if (elements.inputs.qrcodeValue2) elements.inputs.qrcodeValue2.value = data.qrcodeValue2 || '';
         
         // UIの表示状態を確実に更新
         const jancodeWrapper = document.getElementById('jancode-wrapper');
         const qrcode1Wrapper = document.getElementById('qrcode1-wrapper');
         const qrcode2Wrapper = document.getElementById('qrcode2-wrapper');
-        if (jancodeWrapper) jancodeWrapper.style.display = elements.inputs.useJancode.checked ? 'block' : 'none';
-        if (qrcode1Wrapper) qrcode1Wrapper.style.display = elements.inputs.useQRCode1.checked ? 'block' : 'none';
-        if (qrcode2Wrapper) qrcode2Wrapper.style.display = (elements.inputs.useSecondStore.checked && elements.inputs.useQRCode2.checked) ? 'block' : 'none';
+        if (jancodeWrapper && elements.inputs.useJancode) jancodeWrapper.style.display = elements.inputs.useJancode.checked ? 'block' : 'none';
+        if (qrcode1Wrapper && elements.inputs.useQRCode1) qrcode1Wrapper.style.display = elements.inputs.useQRCode1.checked ? 'block' : 'none';
+        if (qrcode2Wrapper && elements.inputs.useSecondStore && elements.inputs.useQRCode2) {
+            qrcode2Wrapper.style.display = (elements.inputs.useSecondStore.checked && elements.inputs.useQRCode2.checked) ? 'block' : 'none';
+        }
         // ただし useSecondStore 自体は店舗設定依存なので、ここでは QR の wrapper のみを調整する。
         // もし QR2 が ON でも useSecondStore が OFF なら表示されないが、それは loadStoreInfo で制御される。
         
@@ -2528,11 +2534,24 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.inputs.price.value = '';
         elements.inputs.useJancode.checked = false;
         elements.inputs.jancodeValue.value = '';
+        
+        // QRコード (存在する場合のみリセット)
+        if (elements.inputs.useQRCode1) elements.inputs.useQRCode1.checked = false;
+        if (elements.inputs.qrcodeValue1) elements.inputs.qrcodeValue1.value = '';
+        if (elements.inputs.useQRCode2) elements.inputs.useQRCode2.checked = false;
+        if (elements.inputs.qrcodeValue2) elements.inputs.qrcodeValue2.value = '';
+
         const defaultPack = document.querySelector(`input[name="packaging-mark"][value="プラ"]`);
         if (defaultPack) defaultPack.checked = true;
-        document.getElementById('jancode-wrapper').style.display = 'none';
-        // JANコード欄もしっかりクリア
-        elements.inputs.jancodeValue.value = '';
+        
+        // ラッパー要素の表示切り替え
+        const janW = document.getElementById('jancode-wrapper');
+        const q1W = document.getElementById('qrcode1-wrapper');
+        const q2W = document.getElementById('qrcode2-wrapper');
+        if (janW) janW.style.display = 'none';
+        if (q1W) q1W.style.display = 'none';
+        if (q2W) q2W.style.display = 'none';
+
         updatePreview();
     };
 
