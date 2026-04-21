@@ -17,18 +17,20 @@
                 <p>&#x30d6;&#x30e9;&#x30a6;&#x30b6;&#x3067;&#x5165;&#x529b;&#x3001;&#x30ef;&#x30f3;&#x30af;&#x30ea;&#x30c3;&#x30af;&#x3067;&#x5370;&#x5237;</p>
             </div>
             <div style="display: flex; align-items: center; gap: 1rem;">
+                <label>&#x5370;&#x5237;&#x679a;&#x6570;:</label>
+                <input type="number" id="print-count-header" class="form-control" value="1" min="1" style="width: 70px;">
                 <button id="print-btn-header" class="print-btn primary-btn">&#x1f5a8; &#x30e9;&#x30d9;&#x30eb;&#x3092;&#x5370;&#x5237;</button>
             </div>
         </header>
 
         <div class="tabs-container">
             <button class="tab-btn active" data-target="tab-quick-print">&#x2728; &#x304b;&#x3093;&#x305f;&#x3093;&#x5370;&#x5237;</button>
-            <button class="tab-btn" data-target="tab-editor">&#x2699; &#x8a73;&#x7d30;&#x7de8;&#x96c6;</button>
+            <button class="tab-btn" data-target="tab-editor">&#x2699; &#x7ba1;&#x7406;&#x30fb;&#x7de8;&#x96c6;</button>
             <button class="tab-btn" data-target="tab-config">&#x1f3e0; &#x5e97;&#x8217;&#x8a2d;&#x5b9a;</button>
         </div>
 
         <main class="app-main">
-            <!-- Editor Section -->
+            <!-- Left Side: Inputs -->
             <section class="editor-section">
                 <!-- Tab: Quick Print -->
                 <div id="tab-quick-print" class="tab-content active">
@@ -36,16 +38,16 @@
                         <div class="card-header"><h2>&#x2728; &#x304b;&#x3093;&#x305f;&#x3093;&#x5370;&#x5237;</h2></div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label>&#x30e1;&#x30cb;&#x30e5;&#x30fc;&#x3092;&#x907f;&#x629e;</label>
+                                <label>🏪 &#x5e97;&#x8217;&#x30fb;&#x8ca9;&#x58f2;&#x5143;:</label>
+                                <select id="quick-store-profile-select" class="form-control"></select>
+                            </div>
+                            <div class="form-group">
+                                <label>🍱 &#x30e1;&#x30cb;&#x30e5;&#x30fc;&#x3092;&#x907f;&#x629e;</label>
                                 <select id="quick-preset-select" class="form-control name-input-large">
                                     <option value="">-- &#x9078;&#x629e;&#x3057;&#x3066;&#x304f;&#x3060;&#x3055;&#x3044; --</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label>&#x5370;&#x5237;&#x679a;&#x6570;</label>
-                                <input type="number" id="print-count" class="form-control" value="1" min="1">
-                            </div>
-                            <button id="print-btn-footer" class="print-btn primary-btn full-width" style="margin-top:2rem; padding:1.5rem;">&#x1f680; &#x5370;&#x5237;&#x3059;&#x308b;</button>
+                            <button id="print-btn-footer" class="print-btn primary-btn full-width" style="margin-top:2rem; padding:1.5rem;">&#x1f680; &#x3053;&#x306e;&#x5185;&#x5bb9;&#x3067;&#x5370;&#x5237;&#x3059;&#x308b;</button>
                         </div>
                     </div>
                 </div>
@@ -53,27 +55,30 @@
                 <!-- Tab: Editor -->
                 <div id="tab-editor" class="tab-content">
                     <div class="card">
-                        <div class="card-header"><h2>&#x30e9;&#x30d9;&#x30eb;&#x5185;&#x5bb9;&#x306e;&#x7de8;&#x96c6;</h2></div>
+                        <div class="card-header">
+                            <h2>&#x30e9;&#x30d9;&#x30eb;&#x5185;&#x5bb9;&#x306e;&#x7de8;&#x96c6;</h2>
+                            <span class="badge">PRO</span>
+                        </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <label>&#x5546;&#x54c1;&#x540d; <button class="mic-btn" data-target="product-name">&#x1f3a4;</button></label>
                                 <div class="form-row">
                                     <input type="text" id="product-name" class="form-control" placeholder="&#x4f8b;&#xff1a;&#x30c1;&#x30ad;&#x30f3;&#x5357;&#x86ee;&#x5f01;&#x5f53;">
-                                    <button id="auto-fill-btn" class="action-btn auto-fill-btn" style="margin-top:0;">&#x1f684; &#x81ea;&#x52d5;&#x5165;&#x529b;</button>
+                                    <button id="auto-fill-btn" class="action-btn auto-fill-btn" style="margin-top:0;">&#x1fa84; &#x81ea;&#x52d5;&#x5165;&#x529b;</button>
                                 </div>
                             </div>
 
                             <!-- RICE SELECTOR -->
-                            <div class="form-group rice-selector" style="background:#fefce8; padding:10px; border-radius:8px; border:1px solid #fef08a;">
+                            <div class="form-group rice-selector" style="background:#fefce8; padding:12px; border-radius:8px; border:1px solid #fef08a; margin-bottom:1.5rem;">
                                 <label><b>&#x1f35a; &#x304a;&#x7c73;&#x306e;&#x9078;&#x629e;</b></label>
-                                <div class="form-row">
-                                    <label style="display:inline-flex; align-items:center; gap:5px; margin-bottom:0;">
+                                <div class="form-row" style="gap:1.5rem;">
+                                    <label style="display:inline-flex; align-items:center; gap:5px; margin-bottom:0; cursor:pointer;">
                                         <input type="radio" name="rice-type" value="white" checked> &#x767d;&#x7c73;
                                     </label>
-                                    <label style="display:inline-flex; align-items:center; gap:5px; margin-bottom:0;">
+                                    <label style="display:inline-flex; align-items:center; gap:5px; margin-bottom:0; cursor:pointer;">
                                         <input type="radio" name="rice-type" value="brown"> &#x7344;&#x7c73;
                                     </label>
-                                    <label style="display:inline-flex; align-items:center; gap:5px; margin-bottom:0;">
+                                    <label style="display:inline-flex; align-items:center; gap:5px; margin-bottom:0; cursor:pointer;">
                                         <input type="radio" name="rice-type" value="none"> &#x306a;&#x3057;(&#x304a;&#x304b;&#x305a;&#x306e;&#x307f;)
                                     </label>
                                 </div>
@@ -87,7 +92,7 @@
 
                             <div class="form-row">
                                 <div class="form-group half">
-                                    <label>&#x6d88;&#x8cbb;&#x671f;&#x9650;</label>
+                                    <label>&#x6d88;&#x8cbb;&#x671f;&#x9650; (&#x65e5;&#x6570;)</label>
                                     <select id="consume-days" class="form-control">
                                         <option value="0">&#x5f53;&#x65e5;</option>
                                         <option value="1" selected>&#x7fcc;&#x65e5;</option>
@@ -100,23 +105,30 @@
                                 </div>
                             </div>
 
-                            <div class="nutrition-grid" style="display:grid; grid-template-columns: repeat(5, 1fr); gap:10px;">
-                                <div class="form-group"><label>&#x7131;&#x91cf;</label><input type="text" id="calories" class="form-control"></div>
-                                <div class="form-group"><label>&#x86cb;&#x767d;</label><input type="text" id="protein" class="form-control"></div>
-                                <div class="form-group"><label>&#x8102;&#x8cea;</label><input type="text" id="fat" class="form-control"></div>
-                                <div class="form-group"><label>&#x70ad;&#x7269;</label><input type="text" id="carb" class="form-control"></div>
-                                <div class="form-group"><label>&#x98df;&#x5869;</label><input type="text" id="salt" class="form-control"></div>
+                            <div class="divider"></div>
+                            <label>📊 &#x6804;&#x990a;&#x6210;&#x5206;&#x8868;&#x793a; (100g&#x3042;&#x305f;&#x308a;&#x63a8;&#x5b9a;&#x5024;)</label>
+                            <div class="nutrition-grid" style="display:grid; grid-template-columns: repeat(5, 1fr); gap:8px;">
+                                <div class="form-group"><label>&#x7131;&#x91cf;</label><input type="number" id="calories" class="form-control"></div>
+                                <div class="form-group"><label>&#x86cb;&#x767d;</label><input type="number" id="protein" class="form-control" step="0.1"></div>
+                                <div class="form-group"><label>&#x8102;&#x8cea;</label><input type="number" id="fat" class="form-control" step="0.1"></div>
+                                <div class="form-group"><label>&#x70ad;&#x7269;</label><input type="number" id="carb" class="form-control" step="0.1"></div>
+                                <div class="form-group"><label>&#x98df;&#x5869;</label><input type="number" id="salt" class="form-control" step="0.1"></div>
                             </div>
 
                             <div class="divider"></div>
 
                             <div class="form-group">
+                                <label>&#x672c;&#x4f53;&#x4fa1;&#x683c; (&#x5186;)</label>
+                                <input type="number" id="price" class="form-control" placeholder="&#x4f8b;&#xff1a;500">
+                            </div>
+
+                            <div class="form-group">
                                 <label class="toggle-switch">
                                     <input type="checkbox" id="use-qrcode1">
                                     <span class="toggle-slider"></span>
-                                    <span class="toggle-label">QR&#x30b3;&#x30fc;&#x30c9;&#x3092;&#x8868;&#x793a;</span>
+                                    <span class="toggle-label">QR&#x30b3;&#x30fc;&#x30c9;1&#x3092;&#x8868;&#x793a;</span>
                                 </label>
-                                <input type="text" id="qrcode1-value" class="form-control" style="margin-top:5px;" placeholder="URL&#x306a;&#x3069;">
+                                <input type="text" id="qrcode1-value" class="form-control" style="margin-top:5px;" placeholder="URL&#x3001;&#x5e97;&#x540d;&#x306a;&#x3069;">
                             </div>
                         </div>
                     </div>
@@ -128,35 +140,43 @@
                         <div class="card-header"><h2>&#x1f3e0; &#x5e97;&#x8217;&#x8a2d;&#x5b9a;</h2></div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label>&#x30d7;&#x30ed;&#x30d5;&#x30a1;&#x30a4;&#x30eb;</label>
+                                <label>&#x5e97;&#x8217;&#x30d7;&#x30ed;&#x30d5;&#x30a1;&#x30a4;&#x30eb;</label>
                                 <select id="store-profile-select" class="form-control">
-                                    <option value="A">&#x5e97;&#x8217; A</option>
+                                    <option value="A">&#x5e97;&#x8217; A (&#x65e2;&#x5b9a;)</option>
                                     <option value="B">&#x5e97;&#x8217; B</option>
                                     <option value="C">&#x5e97;&#x8217; C</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>&#x8868;&#x793a;&#x540d;</label>
+                                <label>&#x8868;&#x793a;&#x540d; (&#x88fd;&#x9020;&#x8005;&#x30fb;&#x8ca9;&#x58f2;&#x8005;)</label>
                                 <input type="text" id="manufacturer-name" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>&#x6240;&#x5728;&#x5730;</label>
                                 <input type="text" id="address" class="form-control">
                             </div>
+                            <div class="form-group">
+                                <label>&#x96fb;&#x8a71;&#x756a;&#x53f7;</label>
+                                <input type="text" id="phone" class="form-control">
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Preview Section -->
+            <!-- Right Side: Preview -->
             <section class="preview-section">
                 <div class="sticky">
                     <div class="card">
-                        <div class="card-header"><h2>&#x30d7;&#x30ec;&#x30d3;&#x30e5;&#x30fc;</h2></div>
+                        <div class="card-header">
+                            <h2>&#x30e9;&#x30d9;&#x30eb;&#x30d7;&#x30ec;&#x30d3;&#x30e5;&#x30fc;</h2>
+                            <span class="badge">62mm&#x5e45;</span>
+                        </div>
                         <div class="card-body preview-container">
                             <div id="print-target" class="label-box">
                                 <div class="label-inner">
                                     <div class="label-header">
+                                        <div id="preview-recommendation" class="recommendation-badge" style="display:none;">&#x2728; &#x672c;&#x65e5;&#x306e;&#x304a;&#x3059;&#x3059;&#x3081; &#x2728;</div>
                                         <div id="preview-name" class="label-title"></div>
                                     </div>
                                     <table class="label-table">
@@ -172,9 +192,16 @@
                                             <span>&#x70ad;&#x7269;<span id="preview-carb">-</span>g</span>
                                             <span>&#x98df;&#x5869;<span id="preview-salt">-</span>g</span>
                                         </div>
+                                        <div style="text-align:right; font-size:5pt;">(&#x63a8;&#x5b9a;&#x5024;)</div>
+                                    </div>
+                                    <div id="preview-manufacturer" class="manufacturer-info">
+                                        <div id="preview-man-name"></div>
+                                        <div id="preview-man-address" class="address-text"></div>
+                                        <div id="preview-man-phone"></div>
                                     </div>
                                     <div class="label-footer">
                                         <div class="price-box">
+                                            <span class="price-label">&#x672c;&#x4f53;&#x4fa1;&#x683c;</span><br>
                                             <span class="price-value" id="preview-price">-</span><span class="yen">&#x5186;</span>
                                         </div>
                                         <img id="preview-qrcode1" class="qr-canvas" style="display:none;">
@@ -190,7 +217,7 @@
 
     <div id="print-spool" class="print-only"></div>
 
-    <!-- Original script.js contains logic for voice, rice, and dict -->
+    <!-- MAIN SCRIPT LOAD -->
     <script src="script.js"></script>
 </body>
 </html>
