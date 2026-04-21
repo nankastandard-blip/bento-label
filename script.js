@@ -2443,11 +2443,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (elements.inputs.useQRCode1 && elements.inputs.useQRCode1.checked && elements.inputs.qrcodeValue1 && elements.inputs.qrcodeValue1.value.trim() && elements.preview.qrcode1) {
             elements.preview.qrcode1.style.display = 'block';
             if (typeof QRCode !== 'undefined') {
-                QRCode.toCanvas(elements.preview.qrcode1, elements.inputs.qrcodeValue1.value.trim(), {
-                    width: 60,
+                QRCode.toDataURL(elements.inputs.qrcodeValue1.value.trim(), {
+                    width: 120,
                     margin: 1,
                     color: { dark: "#000000", light: "#ffffff" }
-                }, (error) => { if (error) console.error("QRCode 1 Error:", error); });
+                }, (error, url) => { 
+                    if (error) console.error("QRCode 1 Error:", error); 
+                    else elements.preview.qrcode1.src = url;
+                });
             }
         } else if (elements.preview.qrcode1) {
             elements.preview.qrcode1.style.display = 'none';
@@ -2457,11 +2460,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (elements.inputs.useSecondStore && elements.inputs.useSecondStore.checked && elements.inputs.useQRCode2 && elements.inputs.useQRCode2.checked && elements.inputs.qrcodeValue2 && elements.inputs.qrcodeValue2.value.trim() && elements.preview.qrcode2) {
             elements.preview.qrcode2.style.display = 'block';
             if (typeof QRCode !== 'undefined') {
-                QRCode.toCanvas(elements.preview.qrcode2, elements.inputs.qrcodeValue2.value.trim(), {
-                    width: 60,
+                QRCode.toDataURL(elements.inputs.qrcodeValue2.value.trim(), {
+                    width: 120,
                     margin: 1,
                     color: { dark: "#000000", light: "#ffffff" }
-                }, (error) => { if (error) console.error("QRCode 2 Error:", error); });
+                }, (error, url) => { 
+                    if (error) console.error("QRCode 2 Error:", error); 
+                    else elements.preview.qrcode2.src = url;
+                });
             }
         } else if (elements.preview.qrcode2) {
             elements.preview.qrcode2.style.display = 'none';
