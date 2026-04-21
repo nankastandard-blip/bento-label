@@ -130,10 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     })
                     .then(url => {
                         if (elements.preview.qrcode1) elements.preview.qrcode1.src = url;
-                        console.log("[QR1] Generation success");
                     })
                     .catch(err => console.error("[QR1] Generation error:", err));
-                } else { console.warn("[QR1] QRCode library missing"); }
+                }
             } else if (elements.preview.qrcode1) {
                 elements.preview.qrcode1.style.display = 'none';
             }
@@ -147,10 +146,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     })
                     .then(url => {
                         if (elements.preview.qrcode2) elements.preview.qrcode2.src = url;
-                        console.log("[QR2] Generation success");
                     })
                     .catch(err => console.error("[QR2] Generation error:", err));
-                } else { console.warn("[QR2] QRCode library missing"); }
+                }
             } else if (elements.preview.qrcode2) {
                 elements.preview.qrcode2.style.display = 'none';
             }
@@ -167,7 +165,16 @@ document.addEventListener('DOMContentLoaded', () => {
         { keywords: ['チキン南蛮', '南蛮'], data: { ingredients: '麦入り御飯（米（国産）、大麦）、鶏肉（ブラジル産）、タルタルソース、南蛮酢、その他おかず／（一部に小麦・卵・乳成分・鶏肉・大豆を含む）', calories: '850', protein: '25.0', fat: '35.0', carb: '105.0', salt: '3.5', price: '600' } },
         { keywords: ['とんかつ', '豚カツ'], data: { ingredients: '麦入り御飯（米（国産）、大麦）、豚ロースカツ（国産）、とんかつソース、その他おかず／（一部に小麦・卵・乳成分・豚肉・大豆・りんごを含む）', calories: '920', protein: '28.0', fat: '40.0', carb: '110.0', salt: '3.8', price: '650' } },
         { keywords: ['ハンバーグ'], data: { ingredients: '麦入り御飯（米（国産）、大麦）、ハンバーグ（牛肉、豚肉）、デミグラスソース、その他おかず／（一部に小麦・卵・乳成分・牛肉・豚肉・大豆を含む）', calories: '780', protein: '22.0', fat: '30.0', carb: '100.0', salt: '3.2', price: '650' } },
-        { keywords: ['唐揚げ', 'からあげ'], data: { ingredients: '麦入り御飯（米（国産）、大麦）、鶏肉の唐揚げ、その他おかず／（一部に小麦・卵・乳成分・鶏肉・大豆を含む）', calories: '820', protein: '28.5', fat: '32.1', carb: '95.6', salt: '3.5', price: '550' } }
+        { keywords: ['焼肉', '焼き肉', '牛カルビ', 'カルビ'], data: { ingredients: '麦入り御飯（米（国産）、大麦）、牛肉、玉ねぎ、焼肉のたれ、その他おかず／調味料（アミノ酸等）、カラメル色素、酸味料、（一部に小麦・牛肉・ごま・大豆・りんごを含む）', calories: '810', protein: '20.0', fat: '28.0', carb: '115.0', salt: '3.5', price: '700' } },
+        { keywords: ['唐揚げ', 'からあげ'], data: { ingredients: '麦入り御飯（米（国産）、大麦）、鶏肉の唐揚げ、その他おかず／（一部に小麦・卵・乳成分・鶏肉・大豆を含む）', calories: '820', protein: '28.5', fat: '32.1', carb: '95.6', salt: '3.5', price: '550' } },
+        { keywords: ['おにぎり', 'オニギリ', 'おむすび'], data: { ingredients: '塩飯（米（国産）、塩）、鮭フレーク、海苔（国産）／調味料（アミノ酸等）、着色料（紅麹）、（一部にさけ・大豆を含む）', calories: '350', protein: '8.5', fat: '2.0', carb: '72.0', salt: '1.8', price: '200', category: 'おにぎり' } },
+        { keywords: ['チャーハン', '炒飯'], data: { ingredients: '麦入り御飯（米（国産）、大麦）、焼豚、卵、ネギ、植物油脂、中華調味料、醤油、食塩、胡椒／調味料（アミノ酸等）、着色料（カラメル）、（一部に小麦・卵・乳成分・豚肉・大豆・ごまを含む）', calories: '680', protein: '15.0', fat: '22.0', carb: '95.0', salt: '4.2', price: '500' } },
+        { keywords: ['やきそば', '焼きそば'], data: { ingredients: 'ゆで中華めん（国内製造）、キャベツ、豚肉、もやし、人参、濃厚ソース、植物油脂、青のり／調味料（アミノ酸等）、カラメル色素、かんすい、酸味料、（一部に小麦・豚肉・大豆・りんごを含む）', calories: '550', protein: '12.0', fat: '18.0', carb: '75.0', salt: '4.5', price: '400', category: '調理めん' } },
+        { keywords: ['コロッケ', 'じゃがいも'], data: { ingredients: 'じゃがいも（国産）、玉ねぎ、パン粉、小麦粉、砂糖、植物油脂、食塩、香辛料／加工デンプン、調味料（アミノ酸）、（一部に小麦・大豆を含む）', calories: '280', protein: '4.5', fat: '15.0', carb: '32.0', salt: '0.8', price: '150', category: '惣菜' } },
+        { keywords: ['メンチ', 'メンチカツ'], data: { ingredients: '食肉（豚肉（国産）、牛肉（国産））、玉ねぎ、パン粉、小麦粉、卵、砂糖、食塩、香辛料、植物油脂／加工デンプン、調味料（アミノ酸）、（一部に小麦・卵・乳成分・牛肉・豚肉・大豆を含む）', calories: '310', protein: '10.5', fat: '20.0', carb: '22.0', salt: '1.2', price: '180', category: '惣菜' } },
+        { keywords: ['とり天', '鶏天', 'たれ付きとり天'], data: { ingredients: '鶏肉（ブラジル産）、小麦粉、卵、澱粉、植物油脂、醤油、おろしにんにく、おろし生姜、食塩、親潮／調味料（アミノ酸等）、パプリカ色素、（一部に小麦・卵・鶏肉・大豆を含む）', calories: '320', protein: '18.5', fat: '18.0', carb: '15.0', salt: '1.5', price: '350', category: '惣菜' } },
+        { keywords: ['サラダ', 'ポテトサラダ', 'マカロニサラダ'], data: { ingredients: 'じゃがいも（国産）、マヨネーズ、きゅうり、人参、玉ねぎ、ハム、食塩、香辛料／調味料（アミノ酸等）、（一部に卵・大豆・豚肉・りんごを含む）', calories: '150', protein: '2.5', fat: '12.0', carb: '10.0', salt: '0.6', price: '200', category: '惣菜', storeMethod: '10℃以下で保存' } },
+        { keywords: ['パッタイ'], data: { ingredients: 'ビーフン（国内製造）、えび、厚揚げ、もやし、ニラ、卵、おろしにんにく、パッタイソース、ピーナッツ、植物油脂／調味料（アミノ酸等）、酸味料、（一部に小麦・卵・えび・落花生・大豆・ごまを含む）', calories: '580', protein: '15.0', fat: '18.0', carb: '85.0', salt: '4.5', price: '600', category: '調理めん' } }
     ];
 
     // DOM要素の取得
@@ -244,10 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
             barcodeSvg: document.getElementById('preview-barcode')
         },
         buttons: {
-            printBtns: [
-                document.getElementById('print-btn-header'),
-                document.getElementById('print-btn-footer')
-            ],
+            printBtns: [document.getElementById('print-btn-header'), document.getElementById('print-btn-footer')],
             printCountH: document.getElementById('print-count-header'),
             printCountF: document.getElementById('print-count-footer'),
             savePreset: document.getElementById('save-preset-btn'),
@@ -266,6 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let userTemplates = {};
     let userManuallyChangedCategory = false; 
+    let userManuallyChangedStoreMethod = false;
     let html5QrScanner = null;
 
     // --- Core Methods ---
@@ -337,14 +342,13 @@ document.addEventListener('DOMContentLoaded', () => {
         loadTemplates();
         updateProfileDropdown();
         loadStoreInfo(getActiveProfileId());
-        
         const names = getStoreProfileNames();
         if (elements.inputs.storeProfileName) elements.inputs.storeProfileName.value = names[getActiveProfileId()] || '';
     };
 
     // --- Event Listeners ---
     const setupEventListeners = () => {
-        // Tab switching (CRITICAL FIX: data-target)
+        // Tab switching
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const targetId = btn.getAttribute('data-target');
@@ -356,41 +360,52 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Sync Profile Selectors
+        // Smart features (Typing inference)
+        elements.inputs.name?.addEventListener('input', () => {
+            const val = elements.inputs.name.value;
+            const inferred = inferCategory(val);
+            if (inferred && !userManuallyChangedCategory) {
+                elements.inputs.category.value = inferred;
+                if (!userManuallyChangedStoreMethod) {
+                    elements.inputs.storeMethod.value = inferStoreMethod(inferred, val);
+                }
+            }
+            updatePreview();
+        });
+
+        elements.inputs.category?.addEventListener('change', () => userManuallyChangedCategory = true);
+        elements.inputs.storeMethod?.addEventListener('change', () => userManuallyChangedStoreMethod = true);
+
+        elements.buttons.autoFill?.addEventListener('click', () => {
+            const name = elements.inputs.name.value;
+            const hit = bentoDictionary.find(d => d.keywords.some(k => name.includes(k)));
+            if (hit) {
+                Object.keys(hit.data).forEach(k => { if (elements.inputs[k]) elements.inputs[k].value = hit.data[k]; });
+                updatePreview();
+                alert('辞書からデータを入力しました。');
+            }
+        });
+
+        // Profile selectors
         [elements.inputs.storeProfile, elements.inputs.quickStoreProfile].forEach(el => {
             el?.addEventListener('change', (e) => {
                 const val = e.target.value;
                 if (elements.inputs.storeProfile) elements.inputs.storeProfile.value = val;
                 if (elements.inputs.quickStoreProfile) elements.inputs.quickStoreProfile.value = val;
-                const names = getStoreProfileNames();
-                if (elements.inputs.storeProfileName) elements.inputs.storeProfileName.value = names[val] || '';
                 loadStoreInfo(val);
             });
         });
 
-        elements.inputs.storeProfileName?.addEventListener('input', (e) => {
-            const names = getStoreProfileNames();
-            names[getActiveProfileId()] = e.target.value;
-            localStorage.setItem('bentoStoreProfileNames', JSON.stringify(names));
-            updateProfileDropdown();
-        });
-
-        // Toggles & Updates
+        // Toggles
         ['useQRCode1', 'useQRCode2', 'useSecondStore', 'useJancode'].forEach(id => {
-            elements.inputs[id]?.addEventListener('change', () => {
-                syncToggles();
-                saveStoreInfo();
-                updatePreview();
-            });
+            elements.inputs[id]?.addEventListener('change', () => { syncToggles(); saveStoreInfo(); updatePreview(); });
         });
 
-        // Generic inputs
+        // Preview sync
         document.querySelectorAll('input, select, textarea').forEach(el => {
             if (el.id.startsWith('preview')) return;
             el.addEventListener('input', () => {
-                if (el.id.includes('manufacturer') || el.id.includes('address') || el.id.includes('phone') || el.id.includes('qrcode')) {
-                    saveStoreInfo();
-                }
+                if (el.id.includes('manufacturer') || el.id.includes('address')) saveStoreInfo();
                 updatePreview();
             });
         });
@@ -399,77 +414,39 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('input[name="rice-type"]').forEach(radio => {
             radio.addEventListener('change', (e) => {
                 let current = elements.inputs.ingredients.value;
-                const riceTypes = ["御飯（米（国産））", "玄米（米（国産））", "麦入り御飯（米（国産）、大麦）", "もち米（国産）", "五穀米（米（国産）、五穀）"];
-                riceTypes.forEach(t => current = current.replace(t, ""));
-                if (e.target.value !== "なし") {
-                    elements.inputs.ingredients.value = e.target.value + (current.startsWith('、') ? '' : '、') + current;
-                } else {
-                    elements.inputs.ingredients.value = current.replace(/^、/, "");
-                }
+                const rices = ["御飯（米（国産））", "玄米（米（国産））", "麦入り御飯（米（国産）、大麦）", "もち米（国産）", "五穀米（米（国産）、五穀）"];
+                rices.forEach(t => current = current.replace(t, ""));
+                if (e.target.value !== "なし") elements.inputs.ingredients.value = e.target.value + (current.startsWith('、') ? '' : '、') + current;
+                else elements.inputs.ingredients.value = current.replace(/^、/, "");
                 updatePreview();
             });
         });
 
         // Preset Actions
-        elements.inputs.preset?.addEventListener('change', (e) => {
-            const id = e.target.value;
-            if (id && userTemplates[id]) {
-                applyPreset(userTemplates[id]);
-                if (elements.inputs.quickPreset) elements.inputs.quickPreset.value = id;
-            }
-        });
-        elements.inputs.quickPreset?.addEventListener('change', (e) => {
-            const id = e.target.value;
-            if (id && userTemplates[id]) {
-                applyPreset(userTemplates[id]);
-                if (elements.inputs.preset) elements.inputs.preset.value = id;
-            }
+        [elements.inputs.preset, elements.inputs.quickPreset].forEach(el => {
+            el?.addEventListener('change', (e) => {
+                const id = e.target.value;
+                if (id && userTemplates[id]) applyPreset(userTemplates[id]);
+            });
         });
 
         elements.buttons.savePreset?.addEventListener('click', () => {
-            const name = elements.inputs.name.value.trim();
-            if (!name) return alert("商品名を入力してください");
+            if (!elements.inputs.name.value) return alert("商品名を入力してください");
             const id = elements.inputs.preset.value || ('U_' + Date.now());
             userTemplates[id] = getCurrentFormData();
-            saveTemplates();
-            renderPresetOptions();
-            elements.inputs.preset.value = id;
-            alert("保存しました");
-        });
-
-        elements.buttons.copyPreset?.addEventListener('click', () => {
-            const name = elements.inputs.name.value.trim();
-            if (!name) return alert("商品名を入力してください");
-            const id = 'U_' + Date.now();
-            userTemplates[id] = getCurrentFormData();
-            saveTemplates();
-            renderPresetOptions();
-            elements.inputs.preset.value = id;
-            alert("新しいテンプレートとして追加しました");
-        });
-
-        elements.buttons.deletePreset?.addEventListener('click', () => {
-            const id = elements.inputs.preset.value;
-            if (!id) return;
-            if (confirm("削除しますか？")) {
-                delete userTemplates[id];
-                saveTemplates();
-                renderPresetOptions();
-                updatePreview();
-            }
+            saveTemplates(); renderPresetOptions();
+            elements.inputs.preset.value = id; alert("保存しました");
         });
 
         // Print
         const doPrint = () => {
             const count = parseInt(elements.buttons.printCountH.value) || 1;
-            const target = document.getElementById('print-target');
             const spool = document.getElementById('print-spool');
-            if (!target || !spool) return;
+            if (!spool) return;
             spool.innerHTML = '';
             for (let i = 0; i < count; i++) {
-                const clone = target.cloneNode(true);
-                clone.removeAttribute('id');
-                spool.appendChild(clone);
+                const clone = document.getElementById('print-target').cloneNode(true);
+                clone.removeAttribute('id'); spool.appendChild(clone);
             }
             window.print();
         };
@@ -481,30 +458,30 @@ document.addEventListener('DOMContentLoaded', () => {
             if (typeof Html5QrcodeScanner !== 'undefined') {
                 html5QrScanner = new Html5QrcodeScanner("qr-reader", { fps: 10, qrbox: 250 });
                 html5QrScanner.render((text) => {
-                    if (elements.inputs.jancodeValue) elements.inputs.jancodeValue.value = text;
-                    html5QrScanner.clear();
-                    if (elements.wrappers.inlineScanner) elements.wrappers.inlineScanner.style.display = 'none';
+                    elements.inputs.jancodeValue.value = text;
+                    html5QrScanner.clear(); elements.wrappers.inlineScanner.style.display = 'none';
                     updatePreview();
                 });
             }
         });
-        elements.buttons.stopScan?.addEventListener('click', () => {
-            if (html5QrScanner) html5QrScanner.clear();
-            if (elements.wrappers.inlineScanner) elements.wrappers.inlineScanner.style.display = 'none';
-        });
-
-        // AutoFill
-        elements.buttons.autoFill?.addEventListener('click', () => {
-            const name = elements.inputs.name.value;
-            const hit = bentoDictionary.find(d => d.keywords.some(k => name.includes(k)));
-            if (hit) {
-                Object.keys(hit.data).forEach(k => { if (elements.inputs[k]) elements.inputs[k].value = hit.data[k]; });
-                updatePreview();
-            }
-        });
+        elements.buttons.stopScan?.addEventListener('click', () => { if (html5QrScanner) html5QrScanner.clear(); elements.wrappers.inlineScanner.style.display = 'none'; });
     };
 
     // --- Helpers ---
+    const inferCategory = (name) => {
+        if (!name) return null;
+        const n = name.toLowerCase();
+        if (n.includes('弁当')) return '弁当';
+        if (n.includes('おにぎり')) return 'おにぎり';
+        if (n.includes('惣菜') || n.includes('サラダ')) return '惣菜';
+        if (n.includes('うどん') || n.includes('そば') || n.includes('パスタ')) return '調理めん';
+        return null;
+    };
+    const inferStoreMethod = (cat, name='') => {
+        if (name.includes('冷凍')) return '-18℃以下で保存';
+        if (['弁当','惣菜','調理めん','おにぎり'].includes(cat)) return '10℃以下で保存';
+        return '直射日光・高温多湿を避け保存';
+    };
     const formatIngredientsWithOrigin = (t) => t;
     const getCurrentFormData = () => {
         const d = {};
@@ -520,8 +497,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 else elements.inputs[k].value = d[k] || '';
             }
         });
-        syncToggles();
-        updatePreview();
+        syncToggles(); updatePreview();
     };
 
     init();
